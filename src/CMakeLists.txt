@@ -1,2 +1,2 @@
-add_subdirectory(scratch)
+add_subdirectory(fingertree)
 add_subdirectory(examples)

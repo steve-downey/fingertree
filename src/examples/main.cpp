@@ -1,10 +1,10 @@
-#include <scratch/scratch.h>
+#include <fingertree/fingertree.h>
 
 #include <iostream>
 
 int main(int /*argc*/, char** /*argv*/)
 {
-    using namespace scratch;
+    using namespace fingertree;
 
 
 }

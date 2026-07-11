@@ -1,0 +1,18 @@
+[project]
+name = "beman-fingertree"
+version = "0.1.0"
+description = "A Persistent Sequence Container"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "cmake==4.3.2",
+    "clang-format==22.1.5",
+    "gcovr>=8.6",
+    "pre-commit>=4.5.1",
+]
+
+[tool.codespell]
+ignore-words-list = ''

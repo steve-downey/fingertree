@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+[codespell]
+# "nd" is a local variable name (short for "node") in the finger-tree code.
+ignore-words-list = nd

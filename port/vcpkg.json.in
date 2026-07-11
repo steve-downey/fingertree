@@ -12,7 +12,8 @@
     {
       "name": "vcpkg-cmake-config",
       "host": true
-    }
+    },
+    "beman-optional"
   ],
   "features": {
     "modules": {

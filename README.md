@@ -22,6 +22,9 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 `beman.fingertree` is licensed under the Apache License v2.0 with LLVM Exceptions.
 
+The design notes under [`docs/`](docs/) are licensed under
+[CC BY-SA 4.0](LICENSE.CC-BY-SA-4.0); each carries its own SPDX identifier.
+
 ## Usage
 
 TODO
@@ -54,6 +57,20 @@ You can disable building tests by setting CMake option `BEMAN_FINGERTREE_BUILD_T
 | Clang      | 17      | C++20, C++17  | libstdc++         |
 | AppleClang | latest  | C++26-C++17   | libc++            |
 | MSVC       | latest  | C++23         | MSVC STL          |
+
+## Design notes
+
+The implementation choices are documented under [`docs/`](docs/):
+
+* [Compile-time design](docs/compile-time-design.md) --- why the spine is a
+  uniform type and a runtime variant rather than the textbook nested type, and
+  the probe test that keeps it that way.
+* [Allocator design](docs/allocator-design.md) --- how structural sharing and
+  the Lakos coherency rule are reconciled, and how the PMR layer stays
+  zero-global-allocation.
+* [Measure-based splitting](docs/measure-based-splitting.md) --- splitting on
+  accumulated measures, the three split methods, and how the split walks the
+  spine.
 
 ## Development
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value_5ftype_0',['value_type',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree5.html#acb78524470c538a089ad04ee6a19339a',1,'beman::fingertree::tree::FingerTree5::value_type()'],['../classbeman_1_1fingertree_1_1tree_1_1FingerTree5Iterator.html#ae8f5b2ab0d2ee2e2287c9335c495d0f9',1,'beman::fingertree::tree::FingerTree5Iterator::value_type()']]]
+  ['value_5ftype_0',['value_type',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ade22f5208c56d2fd5765d1d80a8c9975',1,'beman::fingertree::tree::FingerTree::value_type()'],['../classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html#afcee768e4edeeb99aa37bbb03a043e90',1,'beman::fingertree::tree::FingerTreeIterator::value_type()']]]
 ];

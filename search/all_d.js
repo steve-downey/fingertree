@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pointer_0',['pointer',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree5Iterator.html#a4342b91516b127e6cd388cdb86a15d20',1,'beman::fingertree::tree::FingerTree5Iterator']]],
+  ['pointer_0',['pointer',['../classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html#af12c0804d94d90df33d63bf044486d74',1,'beman::fingertree::tree::FingerTreeIterator']]],
   ['pop_5fmax_1',['pop_max',['../classbeman_1_1fingertree_1_1tree_1_1FingerTreePriorityQueue.html#a99435b5d9b42e82a69fc098e0b15e184',1,'beman::fingertree::tree::FingerTreePriorityQueue']]],
   ['pop_5fmin_2',['pop_min',['../classbeman_1_1fingertree_1_1tree_1_1FingerTreePriorityQueue.html#a85236f761476911a4cd6f50b7ea47383',1,'beman::fingertree::tree::FingerTreePriorityQueue']]],
   ['prioritymeasure_3',['PriorityMeasure',['../structbeman_1_1fingertree_1_1tree_1_1PriorityMeasure.html',1,'beman::fingertree::tree']]],

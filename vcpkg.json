@@ -5,7 +5,6 @@
     {
       "name": "catch2",
       "host": true
-    },
-    "beman-optional"
+    }
   ]
 }

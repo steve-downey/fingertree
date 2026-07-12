@@ -22,22 +22,23 @@ jobs:
   preset-test:
     uses: bemanproject/infra-workflows/.github/workflows/reusable-beman-preset-test.yml@1.7.3
     with:
-      # AppleClang and MSVC are omitted: the container requires C++26 with
-      # std::inplace_vector, which those toolchains do not yet provide.
+      # Only gcc >= 16 ships <inplace_vector>, which the container requires at
+      # C++26. AppleClang, MSVC, and the clang containers (whose libstdc++
+      # predates <inplace_vector>, and whose libc++ lacks it) are omitted.
       matrix_config: >
         [
           {"preset": "gcc-debug", "image": "ghcr.io/bemanproject/infra-containers-gcc:latest"},
-          {"preset": "gcc-release", "image": "ghcr.io/bemanproject/infra-containers-gcc:latest"},
-          {"preset": "llvm-debug", "image": "ghcr.io/bemanproject/infra-containers-clang:latest"},
-          {"preset": "llvm-release", "image": "ghcr.io/bemanproject/infra-containers-clang:latest"}
+          {"preset": "gcc-release", "image": "ghcr.io/bemanproject/infra-containers-gcc:latest"}
         ]
 
   build-and-test:
     uses: bemanproject/infra-workflows/.github/workflows/reusable-beman-build-and-test.yml@1.7.3
     with:
-      # Only C++26 on toolchains that ship <inplace_vector>: gcc >= 16 and
-      # clang with libstdc++ (libc++ lacks the header). Modules are omitted
-      # because the beman.optional dependency is not import-std clean.
+      # Only gcc >= 16 ships std::inplace_vector, which finger_tree5 requires
+      # at C++26 (no fallback). The clang CI containers pair clang with a
+      # libstdc++ that predates <inplace_vector> (and libc++ lacks it), so
+      # clang, AppleClang, MSVC, lower standards, and the C++ modules jobs are
+      # all omitted.
       matrix_config: >
         {
           "gcc": [
@@ -55,22 +56,6 @@ jobs:
                 }
               ]
             }
-          ],
-          "clang": [
-            { "versions": ["22"],
-              "tests": [
-                { "cxxversions": ["c++26"],
-                  "tests": [
-                    { "stdlibs": ["libstdc++"],
-                      "tests": [
-                        "Debug.Default", "Release.Default", "Release.TSan",
-                        "Release.MaxSan", "Debug.Werror"
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
           ]
         }
 
@@ -78,8 +63,9 @@ jobs:
     uses: bemanproject/infra-workflows/.github/workflows/reusable-beman-vcpkg-ci.yml@1.7.3
     with:
       port_name: beman-fingertree
-      # The modules feature is omitted: the beman.optional dependency is not
-      # import-std clean, so the C++ module cannot be built.
+      # The modules feature is omitted: the finger-tree headers include many
+      # standard headers, which conflict with `import std` in the module
+      # interface unit, so the C++ module cannot be built yet.
       feature_combinations: |
         [
           {"features": {}}

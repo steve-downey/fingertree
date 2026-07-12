@@ -45,10 +45,6 @@ configure_file(
 include(infra/cmake/beman-install-library.cmake)
 include(infra/cmake/BuildTelemetryConfig.cmake)
 
-# beman.optional supplies the Applicative/Functor typeclass instances that the
-# finger-tree wrappers specialize against.
-find_package(beman.optional REQUIRED)
-
 if(BEMAN_FINGERTREE_USE_MODULES)
     add_library(beman.fingertree STATIC)
 else()
@@ -101,22 +97,7 @@ endif()
 
 add_subdirectory(include/beman/fingertree)
 
-if(BEMAN_FINGERTREE_USE_MODULES)
-    target_link_libraries(beman.fingertree PUBLIC beman::optional)
-else()
-    target_link_libraries(beman.fingertree INTERFACE beman::optional)
-endif()
-
-# find_package(beman.optional) above pulls in the dependency as a subproject,
-# which re-includes its own (possibly older) beman_install_library definition.
-# Re-include ours so the DEPENDENCIES argument below is understood.
-include(infra/cmake/beman-install-library.cmake)
-
-beman_install_library(
-    beman.fingertree
-    TARGETS beman.fingertree
-    DEPENDENCIES "beman.optional"
-)
+beman_install_library(beman.fingertree TARGETS beman.fingertree)
 configure_build_telemetry()
 
 if(BEMAN_FINGERTREE_BUILD_TESTS)
@@ -129,16 +110,12 @@ if(BEMAN_FINGERTREE_BUILD_EXAMPLES)
 endif()
 
 # Coverage
-# A fetched beman dependency (e.g. beman.optional) may already define a global
-# process_coverage target; guard against a duplicate-target configure error.
-if(NOT TARGET process_coverage)
-    configure_file("cmake/gcovr.cfg.in" gcovr.cfg @ONLY)
+configure_file("cmake/gcovr.cfg.in" gcovr.cfg @ONLY)
 
-    add_custom_target(
-        process_coverage
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMENT "Running gcovr to process coverage results"
-        COMMAND mkdir -p coverage
-        COMMAND gcovr --config gcovr.cfg .
-    )
-endif()
+add_custom_target(
+    process_coverage
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Running gcovr to process coverage results"
+    COMMAND mkdir -p coverage
+    COMMAND gcovr --config gcovr.cfg .
+)

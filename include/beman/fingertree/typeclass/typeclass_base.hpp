@@ -2,8 +2,6 @@
 #ifndef BEMAN_FINGERTREE_TYPECLASS_TYPECLASS_BASE_HPP
 #define BEMAN_FINGERTREE_TYPECLASS_TYPECLASS_BASE_HPP
 
-#include <beman/optional/optional.hpp>
-
 #include <optional>
 #include <type_traits>
 
@@ -32,11 +30,6 @@ struct applicative_value<T, std::void_t<typename remove_cvref_t<T>::value_type>>
 
 template <class T>
 struct applicative_value<std::optional<T>, void> {
-    using type = T;
-};
-
-template <class T>
-struct applicative_value<beman::optional::optional<T>, void> {
     using type = T;
 };
 

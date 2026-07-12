@@ -4,8 +4,6 @@
 
 #include <beman/fingertree/typeclass/typeclass_base.hpp>
 
-#include <beman/optional/optional.hpp>
-
 #include <concepts>
 #include <functional>
 #include <optional>
@@ -283,43 +281,9 @@ struct OptionalApplicativeMap : Applicative<OptionalApplicativeImpl<VALUE_TYPE>>
     using OptionalApplicativeImpl<VALUE_TYPE>::pure;
 };
 
-template <class VALUE_TYPE>
-    requires(!std::same_as<beman::optional::optional<VALUE_TYPE>, std::optional<VALUE_TYPE>>)
-struct BemanOptionalApplicativeImpl {
-    template <class VALUE>
-    auto pure(this auto&&, VALUE&& value) -> beman::optional::optional<remove_cvref_t<VALUE>> {
-        return beman::optional::optional<remove_cvref_t<VALUE>>{std::forward<VALUE>(value)};
-    }
-
-    template <class FUNCTION_IN_CONTEXT, class ARGUMENT_IN_CONTEXT>
-    auto apply(this auto&&, FUNCTION_IN_CONTEXT&& function, ARGUMENT_IN_CONTEXT&& argument) {
-        using Result = std::invoke_result_t<decltype(*function), decltype(*argument)>;
-
-        if (!function || !argument) {
-            return beman::optional::optional<remove_cvref_t<Result>>{};
-        }
-
-        return beman::optional::optional<remove_cvref_t<Result>>{
-            std::invoke(*std::forward<FUNCTION_IN_CONTEXT>(function), *std::forward<ARGUMENT_IN_CONTEXT>(argument))};
-    }
-};
-
-template <class VALUE_TYPE>
-    requires(!std::same_as<beman::optional::optional<VALUE_TYPE>, std::optional<VALUE_TYPE>>)
-struct BemanOptionalApplicativeMap : Applicative<BemanOptionalApplicativeImpl<VALUE_TYPE>> {
-    using BemanOptionalApplicativeImpl<VALUE_TYPE>::apply;
-    using BemanOptionalApplicativeImpl<VALUE_TYPE>::pure;
-};
-
 /** Applicative instance for `std::optional<VALUE_TYPE>`. */
 template <class VALUE_TYPE>
 inline constexpr auto applicative_typeclass<std::optional<VALUE_TYPE>> = OptionalApplicativeMap<VALUE_TYPE>{};
-
-/** Applicative instance for `beman::optional::optional<VALUE_TYPE>`. */
-template <class VALUE_TYPE>
-    requires(!std::same_as<beman::optional::optional<VALUE_TYPE>, std::optional<VALUE_TYPE>>)
-inline constexpr auto applicative_typeclass<beman::optional::optional<VALUE_TYPE>> =
-    BemanOptionalApplicativeMap<VALUE_TYPE>{};
 
 } // namespace beman::fingertree
 

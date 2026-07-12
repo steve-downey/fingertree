@@ -5,12 +5,6 @@
       "package_name": "Catch2",
       "git_repository": "https://github.com/catchorg/Catch2.git",
       "git_tag": "25319fd3047c6bdcf3c0170e76fa526c77f99ca9"
-    },
-    {
-      "name": "beman.optional",
-      "package_name": "beman.optional",
-      "git_repository": "https://github.com/bemanproject/optional.git",
-      "git_tag": "5529be44c9c7342fa64c7e09cb334810b5a9b032"
     }
   ]
 }

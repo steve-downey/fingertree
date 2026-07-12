@@ -4,8 +4,6 @@
 
 #include <beman/fingertree/typeclass/typeclass_base.hpp>
 
-#include <beman/optional/optional.hpp>
-
 #include <algorithm>
 #include <concepts>
 #include <functional>
@@ -60,19 +58,6 @@ struct OptionalFunctorImpl {
 };
 
 template <class VALUE_TYPE>
-    requires(!std::same_as<beman::optional::optional<VALUE_TYPE>, std::optional<VALUE_TYPE>>)
-struct BemanOptionalFunctorImpl {
-    template <class F>
-    auto fmap(this auto&&, F&& function, const beman::optional::optional<VALUE_TYPE>& value) {
-        using Result = std::invoke_result_t<F, const VALUE_TYPE&>;
-        if (!value) {
-            return beman::optional::optional<remove_cvref_t<Result>>{};
-        }
-        return beman::optional::optional<remove_cvref_t<Result>>{std::invoke(std::forward<F>(function), *value)};
-    }
-};
-
-template <class VALUE_TYPE>
 struct VectorFunctorImpl {
     template <class F>
     auto fmap(this auto&&, F&& function, const std::vector<VALUE_TYPE>& values) {
@@ -93,12 +78,6 @@ struct OptionalFunctorMap : Functor<OptionalFunctorImpl<VALUE_TYPE>> {
 };
 
 template <class VALUE_TYPE>
-    requires(!std::same_as<beman::optional::optional<VALUE_TYPE>, std::optional<VALUE_TYPE>>)
-struct BemanOptionalFunctorMap : Functor<BemanOptionalFunctorImpl<VALUE_TYPE>> {
-    using BemanOptionalFunctorImpl<VALUE_TYPE>::fmap;
-};
-
-template <class VALUE_TYPE>
 struct VectorFunctorMap : Functor<VectorFunctorImpl<VALUE_TYPE>> {
     using VectorFunctorImpl<VALUE_TYPE>::fmap;
 };
@@ -106,11 +85,6 @@ struct VectorFunctorMap : Functor<VectorFunctorImpl<VALUE_TYPE>> {
 /** Functor instance for `std::optional<VALUE_TYPE>`. */
 template <class VALUE_TYPE>
 inline constexpr auto functor_typeclass<std::optional<VALUE_TYPE>> = OptionalFunctorMap<VALUE_TYPE>{};
-
-/** Functor instance for `beman::optional::optional<VALUE_TYPE>`. */
-template <class VALUE_TYPE>
-    requires(!std::same_as<beman::optional::optional<VALUE_TYPE>, std::optional<VALUE_TYPE>>)
-inline constexpr auto functor_typeclass<beman::optional::optional<VALUE_TYPE>> = BemanOptionalFunctorMap<VALUE_TYPE>{};
 
 /** Functor instance for `std::vector<VALUE_TYPE>`. */
 template <class VALUE_TYPE>

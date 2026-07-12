@@ -2,7 +2,7 @@
 #ifndef BEMAN_FINGERTREE_TREE_FINGER_TREE_PRIORITY_QUEUE_HPP
 #define BEMAN_FINGERTREE_TREE_FINGER_TREE_PRIORITY_QUEUE_HPP
 
-#include <beman/fingertree/tree/finger_tree5.hpp>
+#include <beman/fingertree/tree/finger_tree.hpp>
 #include <beman/fingertree/typeclass/applicative.hpp>
 #include <beman/fingertree/typeclass/foldable.hpp>
 #include <beman/fingertree/typeclass/monoid.hpp>
@@ -48,7 +48,7 @@ struct PriorityMeasure {
  *
  * @tparam T    Element type; must be totally ordered.
  * @tparam Tree Backing finger tree type (must use PriorityTag<T> measure).
- *              Default: FingerTree5 — correct at all sizes.
+ *              Default: FingerTree — correct at all sizes.
  *
  * Complexity:
  * - push:       O(1) amortized
@@ -57,7 +57,7 @@ struct PriorityMeasure {
  * - size:       O(n) — the PriorityTag measure does not cache element count
  * - to_vector:  O(n)
  */
-template <typename T, typename Tree = FingerTree5<T, PriorityTag<T>, PriorityMeasure<T>>>
+template <typename T, typename Tree = FingerTree<T, PriorityTag<T>, PriorityMeasure<T>>>
 class FingerTreePriorityQueue {
     Tree d_tree;
 

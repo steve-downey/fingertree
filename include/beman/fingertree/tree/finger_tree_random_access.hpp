@@ -7,7 +7,7 @@
 // The Tree template parameter accepts any fully-specialised finger tree type
 // whose measure is an element count (size_t, UnitMeasure):
 //
-//   FingerTreeRandomAccess<int>                  // FT5-backed (default,
+//   FingerTreeRandomAccess<int>                  // -backed (default,
 //   correct at all sizes) FingerTreeRandomAccess<int, FingerTree2<int>> //
 //   FT2-backed (kMaxDepth hazard at N > ~2000)
 //
@@ -16,7 +16,7 @@
 // (not template-template): different finger tree variants have different
 // template signatures; taking the complete instantiation is robust to drift.
 
-#include <beman/fingertree/tree/finger_tree5.hpp>
+#include <beman/fingertree/tree/finger_tree.hpp>
 #include <beman/fingertree/typeclass/applicative.hpp>
 #include <beman/fingertree/typeclass/foldable.hpp>
 #include <beman/fingertree/typeclass/traversable.hpp>
@@ -35,7 +35,7 @@ namespace beman::fingertree::tree {
  *
  * @tparam T    Element type.
  * @tparam Tree Backing finger tree type (must use a unit-count measure).
- *              Default: FingerTree5<T> — correct at all sizes.
+ *              Default: FingerTree<T> — correct at all sizes.
  *
  * Complexity:
  * - at / update / insert / erase: O(log n)
@@ -43,7 +43,7 @@ namespace beman::fingertree::tree {
  * - size / empty:                 O(1)
  * - to_vector:                    O(n)
  */
-template <typename T, typename Tree = FingerTree5<T, std::size_t, UnitMeasure5<T, std::size_t>>>
+template <typename T, typename Tree = FingerTree<T, std::size_t, UnitMeasure<T, std::size_t>>>
 class FingerTreeRandomAccess {
     Tree d_tree;
 
@@ -156,7 +156,7 @@ inline constexpr auto foldable_typeclass<beman::fingertree::tree::FingerTreeRand
 /** Traversable typeclass implementation for FingerTreeRandomAccess<T, Tree>.
  *
  * The result of traversal is always FingerTreeRandomAccess<U> (using the
- * default FT5-backed type for U), regardless of the source Tree parameter.
+ * default -backed type for U), regardless of the source Tree parameter.
  * This is the production-correct choice; callers who need a specific backing
  * tree for traversal results can write their own adapter.
  */

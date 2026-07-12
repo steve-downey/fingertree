@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
-// Exercises FingerTreeIntervalIndex with an explicitly FT5-backed tree.
+// Exercises FingerTreeIntervalIndex with an explicitly -backed tree.
 
 #include <beman/fingertree/tree/finger_tree_interval_index.hpp>
 
@@ -13,12 +13,11 @@ using Entry   = beman::fingertree::tree::Interval<std::string>;
 using Tag     = beman::fingertree::tree::IntervalMaxEndTag<std::string>;
 using Measure = beman::fingertree::tree::IntervalMeasure<std::string>;
 
-using FT5Idx =
-    beman::fingertree::tree::FingerTreeIntervalIndex<std::string,
-                                                     beman::fingertree::tree::FingerTree5<Entry, Tag, Measure>>;
+using Idx = beman::fingertree::tree::FingerTreeIntervalIndex<std::string,
+                                                             beman::fingertree::tree::FingerTree<Entry, Tag, Measure>>;
 
-TEST_CASE("IntervalIndexFT5 - QueryPoint") {
-    auto idx = FT5Idx{};
+TEST_CASE("IntervalIndex - QueryPoint") {
+    auto idx = Idx{};
     idx      = idx.insert({0, 10, "A"});
     idx      = idx.insert({5, 15, "B"});
     idx      = idx.insert({12, 20, "C"});
@@ -34,8 +33,8 @@ TEST_CASE("IntervalIndexFT5 - QueryPoint") {
     CHECK(r14[1] == "C");
 }
 
-TEST_CASE("IntervalIndexFT5 - QueryOverlap") {
-    auto idx = FT5Idx{};
+TEST_CASE("IntervalIndex - QueryOverlap") {
+    auto idx = Idx{};
     idx      = idx.insert({0, 5, "A"});
     idx      = idx.insert({3, 8, "B"});
     idx      = idx.insert({7, 12, "C"});

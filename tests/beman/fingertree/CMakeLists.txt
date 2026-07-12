@@ -5,15 +5,15 @@ include(Catch)
 
 # Catch2-based unit tests: one executable per component.
 set(BEMAN_FINGERTREE_TESTS
-    finger_tree5
-    finger_tree5_iterator
-    finger_tree5_pmr
-    finger_tree5_foldable
-    finger_tree5_traversable
-    finger_tree_random_access_ft5
-    finger_tree_rope_ft5
-    finger_tree_priority_queue_ft5
-    finger_tree_interval_index_ft5
+    finger_tree
+    finger_tree_iterator
+    finger_tree_pmr
+    finger_tree_foldable
+    finger_tree_traversable
+    finger_tree_random_access
+    finger_tree_rope
+    finger_tree_priority_queue
+    finger_tree_interval_index
 )
 
 foreach(test ${BEMAN_FINGERTREE_TESTS})
@@ -37,7 +37,7 @@ endforeach()
 add_executable(beman.fingertree.tests.pmr_probe)
 target_sources(
     beman.fingertree.tests.pmr_probe
-    PRIVATE finger_tree5_pmr_probe.test.cpp
+    PRIVATE finger_tree_pmr_probe.test.cpp
 )
 target_link_libraries(
     beman.fingertree.tests.pmr_probe
@@ -58,7 +58,7 @@ add_test(
 add_library(
     beman.fingertree.tests.compile_probe
     OBJECT
-    finger_tree5_compile_probe.test.cpp
+    finger_tree_compile_probe.test.cpp
 )
 target_link_libraries(
     beman.fingertree.tests.compile_probe

@@ -2,7 +2,7 @@
 #ifndef BEMAN_FINGERTREE_TREE_FINGER_TREE_ROPE_HPP
 #define BEMAN_FINGERTREE_TREE_FINGER_TREE_ROPE_HPP
 
-#include <beman/fingertree/tree/finger_tree5.hpp>
+#include <beman/fingertree/tree/finger_tree.hpp>
 #include <beman/fingertree/typeclass/applicative.hpp>
 #include <beman/fingertree/typeclass/foldable.hpp>
 #include <beman/fingertree/typeclass/traversable.hpp>
@@ -27,7 +27,7 @@ struct RopeChunkMeasure {
 /** @brief Persistent text buffer implemented as a rope over string chunks.
  *
  * @tparam Tree Backing finger tree type (must store std::string with a
- *              byte-count measure).  Default: FingerTree5 — correct at all
+ *              byte-count measure).  Default: FingerTree — correct at all
  *              sizes.  Pass FingerTree2<std::string, std::size_t,
  *              RopeChunkMeasure> explicitly if FT2 semantics are required.
  *
@@ -37,7 +37,7 @@ struct RopeChunkMeasure {
  * - to_string / chunks:     O(n)
  * - insert / erase / replace: O(log n)
  */
-template <typename Tree = FingerTree5<std::string, std::size_t, RopeChunkMeasure>>
+template <typename Tree = FingerTree<std::string, std::size_t, RopeChunkMeasure>>
 class FingerTreeRope {
     Tree d_tree;
 
@@ -184,7 +184,7 @@ struct FingerTreeRopeTraversableImpl {
                 std::move(lifted));
         }
 
-        // Result always uses the default (FT5-backed) FingerTreeRope.
+        // Result always uses the default (-backed) FingerTreeRope.
         return applicative.invoke(
             [](std::vector<U> values) {
                 return beman::fingertree::tree::FingerTreeRope<>::from_chunks(std::move(values));

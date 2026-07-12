@@ -34,7 +34,7 @@ jobs:
   build-and-test:
     uses: bemanproject/infra-workflows/.github/workflows/reusable-beman-build-and-test.yml@1.7.3
     with:
-      # Only gcc >= 16 ships std::inplace_vector, which finger_tree5 requires
+      # Only gcc >= 16 ships std::inplace_vector, which finger_tree requires
       # at C++26 (no fallback). The clang CI containers pair clang with a
       # libstdc++ that predates <inplace_vector> (and libc++ lacks it), so
       # clang, AppleClang, MSVC, lower standards, and the C++ modules jobs are

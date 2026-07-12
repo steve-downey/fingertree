@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
-// Standalone PMR allocation probe for FingerTree5.
+// Standalone PMR allocation probe for FingerTree.
 //
 // Purpose:
-//   Verify that FingerTree5 operations with a PMR allocator produce zero
+//   Verify that FingerTree operations with a PMR allocator produce zero
 //   global heap allocations.  This is a standalone executable — no Catch2 —
 //   so the global operator new/delete replacement captures only allocations
-//   from FingerTree5 and the C++ runtime, not from a test framework.
+//   from FingerTree and the C++ runtime, not from a test framework.
 //
 // Two complementary checks per operation:
 //   1. null_memory_resource upstream: the monotonic buffer has no fallback.
@@ -17,7 +17,7 @@
 //
 //   2. Global new counter: replaces operator new/delete with counting
 //      wrappers.  Allocations that bypass the PMR system entirely (e.g. a
-//      direct ::new call inside FingerTree5) are caught here.  The counter
+//      direct ::new call inside FingerTree) are caught here.  The counter
 //      is only tracked inside each check() scope; setup allocations are
 //      excluded.
 //
@@ -35,7 +35,7 @@
 //
 // Exit code: 0 = all checks pass, 1 = one or more unexpected allocations.
 
-#include <beman/fingertree/tree/finger_tree5_pmr.hpp>
+#include <beman/fingertree/tree/finger_tree_pmr.hpp>
 
 #include <array>
 #include <atomic>
@@ -130,7 +130,7 @@ void check(const char* name, F&& fn) {
 // ============================================================================
 
 int main() {
-    using FT = beman::fingertree::tree::pmr::FingerTree5<int>;
+    using FT = beman::fingertree::tree::pmr::FingerTree<int>;
 
     // 4 MB arena; null_memory_resource upstream so any overflow is fatal.
     std::array<std::byte, 4 << 20>      buf{};
@@ -317,7 +317,7 @@ int main() {
     // -----------------------------------------------------------------------
 
     bool all_pass = true;
-    std::fprintf(stdout, "\nFingerTree5 PMR allocation probe\n");
+    std::fprintf(stdout, "\nFingerTree PMR allocation probe\n");
     std::fprintf(stdout, "%-50s  %s\n", "Operation", "Global new() calls");
     std::fprintf(stdout, "%s\n", std::string(70, '-').c_str());
 

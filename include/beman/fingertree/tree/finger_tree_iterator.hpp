@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-#ifndef BEMAN_FINGERTREE_TREE_FINGER_TREE5_ITERATOR_HPP
-#define BEMAN_FINGERTREE_TREE_FINGER_TREE5_ITERATOR_HPP
+#ifndef BEMAN_FINGERTREE_TREE_FINGER_TREE_ITERATOR_HPP
+#define BEMAN_FINGERTREE_TREE_FINGER_TREE_ITERATOR_HPP
 
-// Bidirectional iterator for FingerTree5.
+// Bidirectional iterator for FingerTree.
 //
 // Include this header to obtain iteration support:
 //
-//   #include <beman/fingertree/tree/finger_tree5_iterator.hpp>
+//   #include <beman/fingertree/tree/finger_tree_iterator.hpp>
 //   for (auto x : tree) { ... }           // range-based for via ADL
 //   auto it = beman::fingertree::tree::begin(tree);     // explicit free function
 //
 // Free functions begin(t)/end(t) work for any <T,Tag,Measure> combination.
-// For the default measure <T, std::size_t, UnitMeasure5<T,std::size_t>>,
+// For the default measure <T, std::size_t, UnitMeasure<T,std::size_t>>,
 // tree size is computed in O(1) via measure().  For custom measures the size
 // is computed in O(N) by counting elements through for_each.
 //
@@ -25,7 +25,7 @@
 //
 // Comparing iterators from different trees is undefined behaviour.
 
-#include <beman/fingertree/tree/finger_tree5.hpp>
+#include <beman/fingertree/tree/finger_tree.hpp>
 
 #include <cassert>
 #include <cstddef>
@@ -38,10 +38,10 @@
 namespace beman::fingertree::tree {
 
 template <typename T, typename Tag, typename MP, typename Alloc>
-class FingerTree5Iterator {
-    using FT = FingerTree5<T, Tag, MP, Alloc>;
-    using EP = ft5::ElemPtr<T, Tag>;
-    using E  = ft5::Elem<T, Tag>;
+class FingerTreeIterator {
+    using FT = FingerTree<T, Tag, MP, Alloc>;
+    using EP = ft::ElemPtr<T, Tag>;
+    using E  = ft::Elem<T, Tag>;
 
     // -----------------------------------------------------------------------
     // State
@@ -75,27 +75,27 @@ class FingerTree5Iterator {
     // -----------------------------------------------------------------------
 
     static auto num_children(const EP& ep) -> std::size_t {
-        return std::visit(ft5::overloaded{[](const typename E::Leaf&) -> std::size_t { return 0; },
-                                          [](const typename E::Node2&) -> std::size_t { return 2; },
-                                          [](const typename E::Node3&) -> std::size_t { return 3; }},
+        return std::visit(ft::overloaded{[](const typename E::Leaf&) -> std::size_t { return 0; },
+                                         [](const typename E::Node2&) -> std::size_t { return 2; },
+                                         [](const typename E::Node3&) -> std::size_t { return 3; }},
                           ep->d_data);
     }
 
     static auto nth_child(const EP& ep, std::size_t n) -> EP {
-        return std::visit(ft5::overloaded{[](const typename E::Leaf&) -> EP {
-                                              assert(false && "nth_child called on Leaf");
-                                              std::unreachable();
-                                          },
-                                          [n](const typename E::Node2& nd) -> EP { return n == 0 ? nd.a : nd.b; },
-                                          [n](const typename E::Node3& nd) -> EP {
-                                              return n == 0 ? nd.a : n == 1 ? nd.b : nd.c;
-                                          }},
+        return std::visit(ft::overloaded{[](const typename E::Leaf&) -> EP {
+                                             assert(false && "nth_child called on Leaf");
+                                             std::unreachable();
+                                         },
+                                         [n](const typename E::Node2& nd) -> EP { return n == 0 ? nd.a : nd.b; },
+                                         [n](const typename E::Node3& nd) -> EP {
+                                             return n == 0 ? nd.a : n == 1 ? nd.b : nd.c;
+                                         }},
                           ep->d_data);
     }
 
     // Walk down to the leftmost Leaf within ep, pushing ElemFrames.
     void descend_elem_left(EP ep) {
-        while (!ft5::is_leaf(ep)) {
+        while (!ft::is_leaf(ep)) {
             d_elem_path.push_back({ep, 0});
             ep = nth_child(ep, 0);
         }
@@ -104,7 +104,7 @@ class FingerTree5Iterator {
 
     // Walk down to the rightmost Leaf within ep, pushing ElemFrames.
     void descend_elem_right(EP ep) {
-        while (!ft5::is_leaf(ep)) {
+        while (!ft::is_leaf(ep)) {
             std::size_t last = num_children(ep) - 1;
             d_elem_path.push_back({ep, last});
             ep = nth_child(ep, last);
@@ -129,18 +129,18 @@ class FingerTree5Iterator {
             descend_elem_left(d_spine_path.back().deep->d_right[0]);
             return;
         }
-        std::visit(ft5::overloaded{[](const typename FT::Empty&) {},
-                                   [this](const typename FT::Single& s) {
-                                       // No SpineFrame pushed; descend via
-                                       // ElemFrames only.
-                                       descend_elem_left(s.d_elem);
-                                   },
-                                   [this](const typename FT::DeepPtr& d) {
-                                       // reserve(32) in constructor prevents
-                                       // reallocation.
-                                       d_spine_path.push_back({d, k_left, 0});
-                                       descend_elem_left(d_spine_path.back().deep->d_left[0]);
-                                   }},
+        std::visit(ft::overloaded{[](const typename FT::Empty&) {},
+                                  [this](const typename FT::Single& s) {
+                                      // No SpineFrame pushed; descend via
+                                      // ElemFrames only.
+                                      descend_elem_left(s.d_elem);
+                                  },
+                                  [this](const typename FT::DeepPtr& d) {
+                                      // reserve(32) in constructor prevents
+                                      // reallocation.
+                                      d_spine_path.push_back({d, k_left, 0});
+                                      descend_elem_left(d_spine_path.back().deep->d_left[0]);
+                                  }},
                    sp->d_repr);
     }
 
@@ -157,12 +157,12 @@ class FingerTree5Iterator {
             descend_elem_right(d_spine_path.back().deep->d_left.back());
             return;
         }
-        std::visit(ft5::overloaded{[](const typename FT::Empty&) {},
-                                   [this](const typename FT::Single& s) { descend_elem_right(s.d_elem); },
-                                   [this](const typename FT::DeepPtr& d) {
-                                       d_spine_path.push_back({d, k_right, d->d_right.size() - 1});
-                                       descend_elem_right(d_spine_path.back().deep->d_right.back());
-                                   }},
+        std::visit(ft::overloaded{[](const typename FT::Empty&) {},
+                                  [this](const typename FT::Single& s) { descend_elem_right(s.d_elem); },
+                                  [this](const typename FT::DeepPtr& d) {
+                                      d_spine_path.push_back({d, k_right, d->d_right.size() - 1});
+                                      descend_elem_right(d_spine_path.back().deep->d_right.back());
+                                  }},
                    sp->d_repr);
     }
 
@@ -246,7 +246,7 @@ class FingerTree5Iterator {
             d_spine_path.pop_back();
         }
         // Decremented past begin — undefined behaviour; assert in debug.
-        assert(false && "FingerTree5Iterator: decremented begin iterator");
+        assert(false && "FingerTreeIterator: decremented begin iterator");
         std::unreachable();
     }
 
@@ -255,15 +255,15 @@ class FingerTree5Iterator {
     // -----------------------------------------------------------------------
 
     void descend_right_from_root() {
-        std::visit(ft5::overloaded{[](const typename FT::Empty&) {
-                                       assert(false && "decremented end() of empty tree");
-                                       std::unreachable();
-                                   },
-                                   [this](const typename FT::Single& s) { descend_elem_right(s.d_elem); },
-                                   [this](const typename FT::DeepPtr& d) {
-                                       d_spine_path.push_back({d, k_right, d->d_right.size() - 1});
-                                       descend_elem_right(d_spine_path.back().deep->d_right.back());
-                                   }},
+        std::visit(ft::overloaded{[](const typename FT::Empty&) {
+                                      assert(false && "decremented end() of empty tree");
+                                      std::unreachable();
+                                  },
+                                  [this](const typename FT::Single& s) { descend_elem_right(s.d_elem); },
+                                  [this](const typename FT::DeepPtr& d) {
+                                      d_spine_path.push_back({d, k_right, d->d_right.size() - 1});
+                                      descend_elem_right(d_spine_path.back().deep->d_right.back());
+                                  }},
                    d_root_keepalive->d_repr);
     }
 
@@ -274,7 +274,7 @@ class FingerTree5Iterator {
 
     // Default-constructed iterator is in a singular (unspecified) state.
     // Required by std::default_initializable (via std::weakly_incrementable).
-    FingerTree5Iterator() = default;
+    FingerTreeIterator() = default;
 
     using iterator_category = std::bidirectional_iterator_tag;
     using value_type        = T;
@@ -286,30 +286,30 @@ class FingerTree5Iterator {
     // Static factories
     // -----------------------------------------------------------------------
 
-    static auto make_begin(const FT& tree, std::size_t n) -> FingerTree5Iterator {
-        FingerTree5Iterator it;
+    static auto make_begin(const FT& tree, std::size_t n) -> FingerTreeIterator {
+        FingerTreeIterator it;
         it.d_tree_size      = n;
         it.d_root_keepalive = std::make_shared<const FT>(tree);
         it.d_absolute_index = 0;
         it.d_spine_path.reserve(32); // spine depth ≤ floor(log2(N)) ≤ 30 for N<2^31
         it.d_elem_path.reserve(32);
 
-        std::visit(ft5::overloaded{[&](const typename FT::Empty&) {
-                                       it.d_current_leaf   = nullptr;
-                                       it.d_absolute_index = n; // consistent with end()
-                                   },
-                                   [&](const typename FT::Single& s) { it.descend_elem_left(s.d_elem); },
-                                   [&](const typename FT::DeepPtr& d) {
-                                       it.d_spine_path.push_back({d, k_left, 0});
-                                       it.descend_elem_left(d->d_left[0]);
-                                   }},
+        std::visit(ft::overloaded{[&](const typename FT::Empty&) {
+                                      it.d_current_leaf   = nullptr;
+                                      it.d_absolute_index = n; // consistent with end()
+                                  },
+                                  [&](const typename FT::Single& s) { it.descend_elem_left(s.d_elem); },
+                                  [&](const typename FT::DeepPtr& d) {
+                                      it.d_spine_path.push_back({d, k_left, 0});
+                                      it.descend_elem_left(d->d_left[0]);
+                                  }},
                    tree.d_repr);
 
         return it;
     }
 
-    static auto make_end(const FT& tree, std::size_t n) -> FingerTree5Iterator {
-        FingerTree5Iterator it;
+    static auto make_end(const FT& tree, std::size_t n) -> FingerTreeIterator {
+        FingerTreeIterator it;
         it.d_tree_size      = n;
         it.d_root_keepalive = std::make_shared<const FT>(tree);
         it.d_current_leaf   = nullptr;
@@ -325,19 +325,19 @@ class FingerTree5Iterator {
 
     auto operator*() const -> reference {
         assert(d_current_leaf && "dereferenced end() iterator");
-        return ft5::leaf_value(d_current_leaf);
+        return ft::leaf_value(d_current_leaf);
     }
 
     auto operator->() const -> pointer {
         assert(d_current_leaf && "dereferenced end() iterator");
-        return &ft5::leaf_value(d_current_leaf);
+        return &ft::leaf_value(d_current_leaf);
     }
 
     // -----------------------------------------------------------------------
     // Advance
     // -----------------------------------------------------------------------
 
-    auto operator++() -> FingerTree5Iterator& {
+    auto operator++() -> FingerTreeIterator& {
         assert(d_current_leaf && "incremented end() iterator");
         ++d_absolute_index;
 
@@ -356,7 +356,7 @@ class FingerTree5Iterator {
         return *this;
     }
 
-    auto operator++(int) -> FingerTree5Iterator {
+    auto operator++(int) -> FingerTreeIterator {
         auto copy = *this;
         ++*this;
         return copy;
@@ -366,7 +366,7 @@ class FingerTree5Iterator {
     // Retreat
     // -----------------------------------------------------------------------
 
-    auto operator--() -> FingerTree5Iterator& {
+    auto operator--() -> FingerTreeIterator& {
         if (!d_current_leaf) {
             // end() -- : descend to the rightmost leaf.
             descend_right_from_root();
@@ -390,7 +390,7 @@ class FingerTree5Iterator {
         return *this;
     }
 
-    auto operator--(int) -> FingerTree5Iterator {
+    auto operator--(int) -> FingerTreeIterator {
         auto copy = *this;
         --*this;
         return copy;
@@ -401,7 +401,7 @@ class FingerTree5Iterator {
     // -----------------------------------------------------------------------
 
     // Precondition: both iterators are from the same tree snapshot.
-    auto operator==(const FingerTree5Iterator& other) const -> bool {
+    auto operator==(const FingerTreeIterator& other) const -> bool {
         return d_absolute_index == other.d_absolute_index;
     }
 };
@@ -411,80 +411,80 @@ class FingerTree5Iterator {
 // ============================================================================
 
 template <typename T, typename Tag, typename MP, typename Alloc>
-auto begin(const FingerTree5<T, Tag, MP, Alloc>& t) -> FingerTree5Iterator<T, Tag, MP, Alloc> {
+auto begin(const FingerTree<T, Tag, MP, Alloc>& t) -> FingerTreeIterator<T, Tag, MP, Alloc> {
     // Compute tree size: O(1) for default measure, O(N) otherwise.
     std::size_t n = 0;
-    if constexpr (std::same_as<Tag, std::size_t> && std::same_as<MP, UnitMeasure5<T, std::size_t>>) {
+    if constexpr (std::same_as<Tag, std::size_t> && std::same_as<MP, UnitMeasure<T, std::size_t>>) {
         n = t.measure();
     } else {
         t.for_each([&](const T&) { ++n; });
     }
-    return FingerTree5Iterator<T, Tag, MP, Alloc>::make_begin(t, n);
+    return FingerTreeIterator<T, Tag, MP, Alloc>::make_begin(t, n);
 }
 
 template <typename T, typename Tag, typename MP, typename Alloc>
-auto end(const FingerTree5<T, Tag, MP, Alloc>& t) -> FingerTree5Iterator<T, Tag, MP, Alloc> {
+auto end(const FingerTree<T, Tag, MP, Alloc>& t) -> FingerTreeIterator<T, Tag, MP, Alloc> {
     std::size_t n = 0;
-    if constexpr (std::same_as<Tag, std::size_t> && std::same_as<MP, UnitMeasure5<T, std::size_t>>) {
+    if constexpr (std::same_as<Tag, std::size_t> && std::same_as<MP, UnitMeasure<T, std::size_t>>) {
         n = t.measure();
     } else {
         t.for_each([&](const T&) { ++n; });
     }
-    return FingerTree5Iterator<T, Tag, MP, Alloc>::make_end(t, n);
+    return FingerTreeIterator<T, Tag, MP, Alloc>::make_end(t, n);
 }
 
 } // namespace beman::fingertree::tree
 
 // ============================================================================
-// Out-of-line definitions of FingerTree5::begin() and FingerTree5::end()
-// declared in finger_tree5.hpp.  Placed here so both FingerTree5Iterator and
+// Out-of-line definitions of FingerTree::begin() and FingerTree::end()
+// declared in finger_tree.hpp.  Placed here so both FingerTreeIterator and
 // the free begin/end functions are complete when these bodies are compiled.
 // ============================================================================
 
 namespace beman::fingertree::tree {
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::begin() const
-    -> FingerTree5Iterator<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR> {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::begin() const
+    -> FingerTreeIterator<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR> {
     return beman::fingertree::tree::begin(*this);
 }
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::end() const
-    -> FingerTree5Iterator<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR> {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::end() const
+    -> FingerTreeIterator<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR> {
     return beman::fingertree::tree::end(*this);
 }
 
-// Const and reverse iterator accessors — defined here so FingerTree5Iterator
+// Const and reverse iterator accessors — defined here so FingerTreeIterator
 // is a complete type when std::reverse_iterator is instantiated.
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::cbegin() const -> const_iterator {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::cbegin() const -> const_iterator {
     return begin();
 }
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::cend() const -> const_iterator {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::cend() const -> const_iterator {
     return end();
 }
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::rbegin() const -> reverse_iterator {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::rbegin() const -> reverse_iterator {
     return reverse_iterator(end());
 }
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::rend() const -> reverse_iterator {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::rend() const -> reverse_iterator {
     return reverse_iterator(begin());
 }
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::crbegin() const -> const_reverse_iterator {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::crbegin() const -> const_reverse_iterator {
     return const_reverse_iterator(cend());
 }
 
 template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::crend() const -> const_reverse_iterator {
+auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::crend() const -> const_reverse_iterator {
     return const_reverse_iterator(cbegin());
 }
 

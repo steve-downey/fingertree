@@ -11,11 +11,11 @@ set(BEMAN_FINGERTREE_PUBLIC_HEADERS
     typeclass/traversable.hpp
     typeclass/monoid.hpp
     typeclass/dual_monoid.hpp
-    tree/finger_tree5.hpp
-    tree/finger_tree5_iterator.hpp
-    tree/finger_tree5_pmr.hpp
-    tree/finger_tree5_foldable.hpp
-    tree/finger_tree5_traversable.hpp
+    tree/finger_tree.hpp
+    tree/finger_tree_iterator.hpp
+    tree/finger_tree_pmr.hpp
+    tree/finger_tree_foldable.hpp
+    tree/finger_tree_traversable.hpp
     tree/finger_tree_random_access.hpp
     tree/finger_tree_rope.hpp
     tree/finger_tree_priority_queue.hpp

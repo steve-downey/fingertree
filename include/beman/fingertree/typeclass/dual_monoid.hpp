@@ -8,7 +8,7 @@
 // This is the standard algebraic dual: if (M, ·, e) is a monoid then
 // (M, ·ᵒᵖ, e) where a ·ᵒᵖ b = b · a is also a monoid.
 //
-// Primary use: FingerTree5::reversed() returns a tree whose measure tag is
+// Primary use: FingerTree::reversed() returns a tree whose measure tag is
 // DualMonoid<Tag>, ensuring that prefix-accumulated measures grow from the
 // new left edge (the old right edge) under the correct combine order.
 //

@@ -14,11 +14,11 @@ import beman.fingertree;
     // Persistent measured sequence (Paper C): the container, its
     // iterator/container and PMR/AllocatorAware layers, the typeclass
     // adapters, and the four capability wrappers.
-    #include <beman/fingertree/tree/finger_tree5.hpp>
-    #include <beman/fingertree/tree/finger_tree5_iterator.hpp>
-    #include <beman/fingertree/tree/finger_tree5_pmr.hpp>
-    #include <beman/fingertree/tree/finger_tree5_foldable.hpp>
-    #include <beman/fingertree/tree/finger_tree5_traversable.hpp>
+    #include <beman/fingertree/tree/finger_tree.hpp>
+    #include <beman/fingertree/tree/finger_tree_iterator.hpp>
+    #include <beman/fingertree/tree/finger_tree_pmr.hpp>
+    #include <beman/fingertree/tree/finger_tree_foldable.hpp>
+    #include <beman/fingertree/tree/finger_tree_traversable.hpp>
     #include <beman/fingertree/tree/finger_tree_random_access.hpp>
     #include <beman/fingertree/tree/finger_tree_rope.hpp>
     #include <beman/fingertree/tree/finger_tree_priority_queue.hpp>

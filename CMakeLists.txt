@@ -76,7 +76,7 @@ if(BEMAN_FINGERTREE_USE_MODULES)
                     "${CMAKE_CURRENT_BINARY_DIR}/include"
     )
     set_target_properties(beman.fingertree PROPERTIES CXX_MODULE_STD ON)
-    # finger_tree5 requires std::inplace_vector (C++26); no fallback exists.
+    # finger_tree requires std::inplace_vector (C++26); no fallback exists.
     target_compile_features(beman.fingertree PUBLIC cxx_std_26)
 else()
     target_sources(
@@ -91,7 +91,7 @@ else()
         beman.fingertree
         PROPERTIES VERIFY_INTERFACE_HEADER_SETS ${PROJECT_IS_TOP_LEVEL}
     )
-    # finger_tree5 requires std::inplace_vector (C++26); no fallback exists.
+    # finger_tree requires std::inplace_vector (C++26); no fallback exists.
     target_compile_features(beman.fingertree INTERFACE cxx_std_26)
 endif()
 

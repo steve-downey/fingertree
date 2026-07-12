@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
-#ifndef BEMAN_FINGERTREE_TREE_FINGER_TREE5_FOLDABLE_HPP
-#define BEMAN_FINGERTREE_TREE_FINGER_TREE5_FOLDABLE_HPP
+#ifndef BEMAN_FINGERTREE_TREE_FINGER_TREE_FOLDABLE_HPP
+#define BEMAN_FINGERTREE_TREE_FINGER_TREE_FOLDABLE_HPP
 
-#include <beman/fingertree/tree/finger_tree5.hpp>
+#include <beman/fingertree/tree/finger_tree.hpp>
 #include <beman/fingertree/typeclass/foldable.hpp>
 
 #include <functional>
@@ -11,15 +11,15 @@
 
 namespace beman::fingertree {
 
-/** Foldable typeclass implementation for FingerTree5; uses for_each to
+/** Foldable typeclass implementation for FingerTree; uses for_each to
  * traverse leaves in left-to-right order without heap allocation.
  */
 template <class T, class TAG_TYPE, class MEASURE_POLICY, class ALLOCATOR>
-struct FingerTree5FoldableImpl {
+struct FingerTreeFoldableImpl {
     template <class F>
     auto fold_map(this auto&&,
-                  F&&                                                                                 function,
-                  const beman::fingertree::tree::FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>& tree)
+                  F&&                                                                                function,
+                  const beman::fingertree::tree::FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>& tree)
         -> remove_cvref_t<std::invoke_result_t<F, const T&>> {
         using Result = remove_cvref_t<std::invoke_result_t<F, const T&>>;
 
@@ -31,17 +31,16 @@ struct FingerTree5FoldableImpl {
     }
 };
 
-/** Foldable typeclass map entry for FingerTree5. */
+/** Foldable typeclass map entry for FingerTree. */
 template <class T, class TAG_TYPE, class MEASURE_POLICY, class ALLOCATOR>
-struct FingerTree5FoldableMap : Foldable<FingerTree5FoldableImpl<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>> {
-    using FingerTree5FoldableImpl<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::fold_map;
+struct FingerTreeFoldableMap : Foldable<FingerTreeFoldableImpl<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>> {
+    using FingerTreeFoldableImpl<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::fold_map;
 };
 
-/** Registers FingerTree5 as a Foldable for all tag and measure combinations. */
+/** Registers FingerTree as a Foldable for all tag and measure combinations. */
 template <class T, class TAG_TYPE, class MEASURE_POLICY, class ALLOCATOR>
-inline constexpr auto
-    foldable_typeclass<beman::fingertree::tree::FingerTree5<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>> =
-        FingerTree5FoldableMap<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>{};
+inline constexpr auto foldable_typeclass<beman::fingertree::tree::FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>> =
+    FingerTreeFoldableMap<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>{};
 
 } // namespace beman::fingertree
 

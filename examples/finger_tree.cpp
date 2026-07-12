@@ -10,7 +10,7 @@ int main() {
     namespace ft = beman::fingertree::tree;
 
     // Build a persistent measured sequence 0..9; snoc appends at the back.
-    ft::FingerTree5<int> seq;
+    ft::FingerTree<int> seq;
     for (int i = 0; i < 10; ++i)
         seq = seq.snoc(i);
 

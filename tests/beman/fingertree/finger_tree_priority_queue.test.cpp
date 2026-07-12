@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
-// Exercises FingerTreePriorityQueue with an explicitly FT5-backed tree.
+// Exercises FingerTreePriorityQueue with an explicitly -backed tree.
 
 #include <beman/fingertree/tree/finger_tree_priority_queue.hpp>
 
@@ -9,13 +9,13 @@
 #include <optional>
 #include <vector>
 
-using FT5PQ = beman::fingertree::tree::FingerTreePriorityQueue<
+using PQ = beman::fingertree::tree::FingerTreePriorityQueue<
     int,
     beman::fingertree::tree::
-        FingerTree5<int, beman::fingertree::tree::PriorityTag<int>, beman::fingertree::tree::PriorityMeasure<int>>>;
+        FingerTree<int, beman::fingertree::tree::PriorityTag<int>, beman::fingertree::tree::PriorityMeasure<int>>>;
 
-TEST_CASE("PriorityQueueFT5 - PushAndMinMax") {
-    auto pq = FT5PQ{};
+TEST_CASE("PriorityQueue - PushAndMinMax") {
+    auto pq = PQ{};
     for (int v : {5, 1, 3, 9, 2})
         pq = pq.push(v);
 
@@ -23,8 +23,8 @@ TEST_CASE("PriorityQueueFT5 - PushAndMinMax") {
     CHECK(pq.max() == std::optional{9});
 }
 
-TEST_CASE("PriorityQueueFT5 - PopMin") {
-    auto pq = FT5PQ::from_values({3, 1, 4, 1, 5, 9, 2, 6});
+TEST_CASE("PriorityQueue - PopMin") {
+    auto pq = PQ::from_values({3, 1, 4, 1, 5, 9, 2, 6});
 
     auto r1 = pq.pop_min();
     REQUIRE(r1.has_value());
@@ -35,8 +35,8 @@ TEST_CASE("PriorityQueueFT5 - PopMin") {
     CHECK(r2->first == 1);
 }
 
-TEST_CASE("PriorityQueueFT5 - PopMax") {
-    auto pq = FT5PQ::from_values({3, 1, 4, 1, 5, 9, 2, 6});
+TEST_CASE("PriorityQueue - PopMax") {
+    auto pq = PQ::from_values({3, 1, 4, 1, 5, 9, 2, 6});
 
     auto r = pq.pop_max();
     REQUIRE(r.has_value());

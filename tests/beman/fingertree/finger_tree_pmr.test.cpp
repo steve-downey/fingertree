@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-#include <beman/fingertree/tree/finger_tree5_pmr.hpp>
-#include <beman/fingertree/tree/finger_tree5_pmr.hpp> // Re-inclusion verification
+#include <beman/fingertree/tree/finger_tree_pmr.hpp>
+#include <beman/fingertree/tree/finger_tree_pmr.hpp> // Re-inclusion verification
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -16,7 +16,7 @@
 
 namespace {
 
-using FT = beman::fingertree::tree::pmr::FingerTree5<int>;
+using FT = beman::fingertree::tree::pmr::FingerTree<int>;
 
 } // namespace
 
@@ -24,16 +24,16 @@ static_assert(std::ranges::bidirectional_range<FT>);
 static_assert(std::ranges::sized_range<FT>);
 static_assert(std::same_as<FT::allocator_type, std::pmr::polymorphic_allocator<std::byte>>);
 
-TEST_CASE("pmr::FingerTree5 - HeaderIsIdempotent") { REQUIRE(true); }
+TEST_CASE("pmr::FingerTree - HeaderIsIdempotent") { REQUIRE(true); }
 
-TEST_CASE("pmr::FingerTree5 - default construction uses default resource") {
+TEST_CASE("pmr::FingerTree - default construction uses default resource") {
     FT t;
     CHECK(t.empty());
     CHECK(t.size() == 0U);
     CHECK(t.get_allocator().resource() == std::pmr::get_default_resource());
 }
 
-TEST_CASE("pmr::FingerTree5 - monotonic_buffer_resource") {
+TEST_CASE("pmr::FingerTree - monotonic_buffer_resource") {
     std::array<std::byte, 65536>        buf{};
     std::pmr::monotonic_buffer_resource mr(buf.data(), buf.size());
 
@@ -51,7 +51,7 @@ TEST_CASE("pmr::FingerTree5 - monotonic_buffer_resource") {
         CHECK(flat[static_cast<std::size_t>(i)] == i + 1);
 }
 
-TEST_CASE("pmr::FingerTree5 - cons/snoc use custom resource") {
+TEST_CASE("pmr::FingerTree - cons/snoc use custom resource") {
     std::pmr::monotonic_buffer_resource mr;
     FT                                  t(&mr);
 
@@ -63,7 +63,7 @@ TEST_CASE("pmr::FingerTree5 - cons/snoc use custom resource") {
     CHECK(t.last() == 49);
 }
 
-TEST_CASE("pmr::FingerTree5 - split and append work") {
+TEST_CASE("pmr::FingerTree - split and append work") {
     std::pmr::monotonic_buffer_resource mr;
     auto                                t = FT::from_sequence({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, &mr);
 
@@ -74,7 +74,7 @@ TEST_CASE("pmr::FingerTree5 - split and append work") {
     CHECK(sp->d_right.size() == 5U);
 }
 
-TEST_CASE("pmr::FingerTree5 - Container requirements satisfied") {
+TEST_CASE("pmr::FingerTree - Container requirements satisfied") {
     std::pmr::monotonic_buffer_resource mr;
     auto                                a = FT::from_sequence({1, 2, 3}, &mr);
     auto                                b = FT::from_sequence({1, 2, 3}, &mr);
@@ -92,7 +92,7 @@ TEST_CASE("pmr::FingerTree5 - Container requirements satisfied") {
     CHECK(rev == (std::vector<int>{6, 5, 4}));
 }
 
-TEST_CASE("pmr::FingerTree5 - pool_resource for node reuse") {
+TEST_CASE("pmr::FingerTree - pool_resource for node reuse") {
     std::pmr::unsynchronized_pool_resource pool;
     auto                                   t = FT::from_sequence({}, &pool);
 
@@ -109,7 +109,7 @@ TEST_CASE("pmr::FingerTree5 - pool_resource for node reuse") {
 //              Allocator coherency tests (Lakos rule)
 // ============================================================================
 
-TEST_CASE("pmr::FingerTree5 - extended constructor: same resource shares data") {
+TEST_CASE("pmr::FingerTree - extended constructor: same resource shares data") {
     std::pmr::monotonic_buffer_resource mr;
     auto                                t = FT::from_sequence({1, 2, 3, 4, 5}, &mr);
     CHECK(t.get_allocator().resource() == &mr);
@@ -120,7 +120,7 @@ TEST_CASE("pmr::FingerTree5 - extended constructor: same resource shares data") 
     CHECK(t2.flatten() == (std::vector<int>{1, 2, 3, 4, 5}));
 }
 
-TEST_CASE("pmr::FingerTree5 - extended constructor: different resource rebuilds") {
+TEST_CASE("pmr::FingerTree - extended constructor: different resource rebuilds") {
     std::pmr::monotonic_buffer_resource mr1;
     std::pmr::monotonic_buffer_resource mr2;
 
@@ -133,7 +133,7 @@ TEST_CASE("pmr::FingerTree5 - extended constructor: different resource rebuilds"
     CHECK(t2.flatten() == (std::vector<int>{10, 20, 30}));
 }
 
-TEST_CASE("pmr::FingerTree5 - append: same resource uses structural sharing") {
+TEST_CASE("pmr::FingerTree - append: same resource uses structural sharing") {
     std::pmr::monotonic_buffer_resource mr;
     auto                                a = FT::from_sequence({1, 2, 3}, &mr);
     auto                                b = FT::from_sequence({4, 5, 6}, &mr);
@@ -143,7 +143,7 @@ TEST_CASE("pmr::FingerTree5 - append: same resource uses structural sharing") {
     CHECK(c.flatten() == (std::vector<int>{1, 2, 3, 4, 5, 6}));
 }
 
-TEST_CASE("pmr::FingerTree5 - append: different resources rebuilds right side") {
+TEST_CASE("pmr::FingerTree - append: different resources rebuilds right side") {
     std::pmr::monotonic_buffer_resource mr1;
     std::pmr::monotonic_buffer_resource mr2;
 
@@ -156,7 +156,7 @@ TEST_CASE("pmr::FingerTree5 - append: different resources rebuilds right side") 
     CHECK(c.flatten() == (std::vector<int>{1, 2, 3, 4, 5, 6}));
 }
 
-TEST_CASE("pmr::FingerTree5 - move assignment: same resource fast path") {
+TEST_CASE("pmr::FingerTree - move assignment: same resource fast path") {
     std::pmr::monotonic_buffer_resource mr;
     FT                                  t(&mr);
     auto                                src = FT::from_sequence({7, 8, 9}, &mr);
@@ -166,7 +166,7 @@ TEST_CASE("pmr::FingerTree5 - move assignment: same resource fast path") {
     CHECK(t.flatten() == (std::vector<int>{7, 8, 9}));
 }
 
-TEST_CASE("pmr::FingerTree5 - copy assignment: different resource rebuilds") {
+TEST_CASE("pmr::FingerTree - copy assignment: different resource rebuilds") {
     std::pmr::monotonic_buffer_resource mr1;
     std::pmr::monotonic_buffer_resource mr2;
 
@@ -188,7 +188,7 @@ TEST_CASE("pmr::FingerTree5 - copy assignment: different resource rebuilds") {
 //
 //  Known residual global allocations per operation (documented, not bugs):
 //    - Each SpinePtr creation: 1 global alloc for the shared_ptr control block.
-//      The shell FingerTree5 object itself uses the custom alloc; the control
+//      The shell FingerTree object itself uses the custom alloc; the control
 //      block uses a separate allocation because shared_ptr(ptr, deleter, alloc)
 //      allocates the control block via 'alloc' but 'alloc' here is the rebound
 //      FTA which PMR backends via the monotonic buffer.  Wait — actually with
@@ -268,12 +268,12 @@ struct AllocAwareValue {
     auto operator==(const AllocAwareValue& o) const -> bool { return d_value == o.d_value; }
 };
 
-TEST_CASE("pmr::FingerTree5 - Elem and Deep allocs stay within resource, "
+TEST_CASE("pmr::FingerTree - Elem and Deep allocs stay within resource, "
           "no global heap escape for data nodes") {
     std::array<std::byte, 1 << 20>      buf{}; // 1 MB arena
     std::pmr::monotonic_buffer_resource mr(buf.data(), buf.size(), std::pmr::null_memory_resource());
 
-    using FTI = beman::fingertree::tree::pmr::FingerTree5<int>;
+    using FTI = beman::fingertree::tree::pmr::FingerTree<int>;
 
     // Build a tree of 50 ints — all Elem and Deep nodes should hit the arena.
     {
@@ -299,16 +299,15 @@ TEST_CASE("pmr::FingerTree5 - Elem and Deep allocs stay within resource, "
     }
 }
 
-TEST_CASE("pmr::FingerTree5 - allocator-aware T: allocator propagates into "
+TEST_CASE("pmr::FingerTree - allocator-aware T: allocator propagates into "
           "elements") {
     std::array<std::byte, 1 << 20>      buf{};
     std::pmr::monotonic_buffer_resource mr(buf.data(), buf.size(), std::pmr::null_memory_resource());
 
-    using FTA =
-        beman::fingertree::tree::FingerTree5<AllocAwareValue,
-                                             std::size_t,
-                                             beman::fingertree::tree::UnitMeasure5<AllocAwareValue, std::size_t>,
-                                             std::pmr::polymorphic_allocator<std::byte>>;
+    using FTA = beman::fingertree::tree::FingerTree<AllocAwareValue,
+                                                    std::size_t,
+                                                    beman::fingertree::tree::UnitMeasure<AllocAwareValue, std::size_t>,
+                                                    std::pmr::polymorphic_allocator<std::byte>>;
 
     // Construct values using the arena allocator.
     std::pmr::polymorphic_allocator<std::byte> pa(&mr);
@@ -332,7 +331,7 @@ TEST_CASE("pmr::FingerTree5 - allocator-aware T: allocator propagates into "
     CHECK(flat[2].d_value == 2);
 }
 
-TEST_CASE("pmr::FingerTree5 - allocator propagates through "
+TEST_CASE("pmr::FingerTree - allocator propagates through "
           "view/tail/init/split results") {
     std::pmr::monotonic_buffer_resource mr;
     auto                                t = FT::from_sequence({1, 2, 3, 4, 5}, &mr);

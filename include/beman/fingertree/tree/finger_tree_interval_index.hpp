@@ -2,7 +2,7 @@
 #ifndef BEMAN_FINGERTREE_TREE_FINGER_TREE_INTERVAL_INDEX_HPP
 #define BEMAN_FINGERTREE_TREE_FINGER_TREE_INTERVAL_INDEX_HPP
 
-#include <beman/fingertree/tree/finger_tree5.hpp>
+#include <beman/fingertree/tree/finger_tree.hpp>
 #include <beman/fingertree/typeclass/applicative.hpp>
 #include <beman/fingertree/typeclass/foldable.hpp>
 #include <beman/fingertree/typeclass/monoid.hpp>
@@ -40,7 +40,7 @@ struct IntervalMeasure {
  *
  * @tparam PAYLOAD_TYPE Arbitrary data associated with each interval.
  * @tparam Tree         Backing finger tree type (must use IntervalMaxEndTag
- *                      measure).  Default: FingerTree5 — correct at all sizes.
+ *                      measure).  Default: FingerTree — correct at all sizes.
  *
  * Complexity:
  * - insert:        O(1) amortized
@@ -50,7 +50,7 @@ struct IntervalMeasure {
  */
 template <typename PAYLOAD_TYPE,
           typename Tree =
-              FingerTree5<Interval<PAYLOAD_TYPE>, IntervalMaxEndTag<PAYLOAD_TYPE>, IntervalMeasure<PAYLOAD_TYPE>>>
+              FingerTree<Interval<PAYLOAD_TYPE>, IntervalMaxEndTag<PAYLOAD_TYPE>, IntervalMeasure<PAYLOAD_TYPE>>>
 class FingerTreeIntervalIndex {
     using Entry = Interval<PAYLOAD_TYPE>;
 

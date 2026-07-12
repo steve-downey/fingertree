@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //
-// Compile-time regression probe for FingerTree5.
+// Compile-time regression probe for FingerTree.
 //
-// FingerTree5 uses the uniform-elem design (same as FT4) but replaces the
+// FingerTree uses the uniform-elem design (same as FT4) but replaces the
 // four-way Digit variant with inplace_vector<ElemPtr,4>.  A single
-// <T,Tag,Meas> use produces one FingerTree5 instantiation and one
+// <T,Tag,Meas> use produces one FingerTree instantiation and one
 // Elem<T,Tag> instantiation, regardless of tree depth.
 //
 // This file is the baseline target for the compile-time comparison:
-//   FT2 DWARF count / FT5 DWARF count  ≈  expected template expansion ratio
+//   FT2 DWARF count /  DWARF count  ≈  expected template expansion ratio
 //
 // Any significant increase in this file's DWARF count relative to FT4
 // indicates a regression in the uniform-elem design (e.g., an accidental
@@ -16,20 +16,20 @@
 //
 // Measuring compile time (from .build/build-gcc-16):
 //
-//   touch ../../src/beman/fingertree/tree/finger_tree5_compile_probe.cpp
+//   touch ../../src/beman/fingertree/tree/finger_tree_compile_probe.cpp
 //   time ninja -j1
-//   src/beman/fingertree/tree/CMakeFiles/smd_tree_compile_probes.dir/Debug/finger_tree5_compile_probe.cpp.o
+//   src/beman/fingertree/tree/CMakeFiles/smd_tree_compile_probes.dir/Debug/finger_tree_compile_probe.cpp.o
 //
 // Counting DWARF class-type entries:
 //
 //   readelf --debug-dump=info
-//   src/beman/fingertree/tree/CMakeFiles/smd_tree_compile_probes.dir/Debug/finger_tree5_compile_probe.cpp.o
+//   src/beman/fingertree/tree/CMakeFiles/smd_tree_compile_probes.dir/Debug/finger_tree_compile_probe.cpp.o
 //   | grep -c DW_TAG_class_type
 //
 // GCC per-phase time breakdown (add temporarily; produces verbose output):
 //   target_compile_options(smd_tree_compile_probes PRIVATE -ftime-report)
 
-#include <beman/fingertree/tree/finger_tree5.hpp>
+#include <beman/fingertree/tree/finger_tree.hpp>
 
 #include <cstddef>
 
@@ -55,8 +55,8 @@ struct Monoid<WeightTag> {
 };
 } // namespace beman::fingertree::typeclass
 
-void finger_tree5_probe_unit_measure() {
-    using FT = beman::fingertree::tree::FingerTree5<int>;
+void finger_tree_probe_unit_measure() {
+    using FT = beman::fingertree::tree::FingerTree<int>;
 
     auto t = FT{};
     for (int i = 0; i < 16; ++i)
@@ -96,8 +96,8 @@ void finger_tree5_probe_unit_measure() {
     (void)sum;
 }
 
-void finger_tree5_probe_custom_measure() {
-    using FT = beman::fingertree::tree::FingerTree5<int, WeightTag, WeightMeasure>;
+void finger_tree_probe_custom_measure() {
+    using FT = beman::fingertree::tree::FingerTree<int, WeightTag, WeightMeasure>;
 
     auto t = FT{};
     for (int i = 1; i <= 8; ++i)

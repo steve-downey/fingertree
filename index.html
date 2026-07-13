@@ -81,6 +81,7 @@ $(function() {
 <h1><a class="anchor" id="autotoc_md1"></a>
 License</h1>
 <p><code><a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a></code> is licensed under the Apache License v2.0 with LLVM Exceptions.</p>
+<p>The design notes under <a href="docs/"><code>docs/</code></a> are licensed under <a href="LICENSE.CC-BY-SA-4.0">CC BY-SA 4.0</a>; each carries its own SPDX identifier.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Usage</h1>
 <p>TODO</p>
@@ -121,24 +122,32 @@ Supported Platforms</h2>
 <td class="markdownTableBodyNone">MSVC   </td><td class="markdownTableBodyNone">latest   </td><td class="markdownTableBodyNone">C++23   </td><td class="markdownTableBodyNone">MSVC STL   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md6"></a>
+Design notes</h1>
+<p>The implementation choices are documented under <a href="docs/"><code>docs/</code></a>:</p>
+<ul>
+<li>Compile-time design &mdash; why the spine is a uniform type and a runtime variant rather than the textbook nested type, and the probe test that keeps it that way.</li>
+<li>Allocator design &mdash; how structural sharing and the Lakos coherency rule are reconciled, and how the PMR layer stays zero-global-allocation.</li>
+<li>Measure-based splitting &mdash; splitting on accumulated measures, the three split methods, and how the split walks the spine.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Development</h1>
 <p>See the Contributing Guidelines.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Integrate beman.fingertree into your project</h1>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Build</h2>
 <p>You can build fingertree using a CMake workflow preset:</p>
 <div class="fragment"><div class="line">cmake --workflow --preset gcc-release</div>
 </div><!-- fragment --><p>To list available workflow presets, you can invoke:</p>
 <div class="fragment"><div class="line">cmake --list-presets=workflow</div>
 </div><!-- fragment --><p>For details on building <a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a> without using a CMake preset, refer to the Contributing Guidelines.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 Installation</h2>
-<h3><a class="anchor" id="autotoc_md10"></a>
+<h3><a class="anchor" id="autotoc_md11"></a>
 Vcpkg</h3>
 <p>The preferred way to install fingertree is via vcpkg. To do so, after installing vcpkg itself, you need to add support for the Beman project's <a href="https://github.com/bemanproject/vcpkg-registry">vcpkg registry</a> by configuring a <code>vcpkg-configuration.json</code> file (which fingertree <a href="vcpkg-configuration.json">provides</a>).</p>
 <p>Then, simply run <code>vcpkg install beman-fingertree</code>.</p>
-<h3><a class="anchor" id="autotoc_md11"></a>
+<h3><a class="anchor" id="autotoc_md12"></a>
 Manual</h3>
 <p>To install <a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a> globally after building with the <code>gcc-release</code> preset, you can run:</p>
 <div class="fragment"><div class="line">sudo cmake --install build/gcc-release</div>
@@ -159,14 +168,14 @@ Manual</h3>
 <div class="line">            └── <a class="code hl_namespace" href="namespacebeman.html">beman</a>.<a class="code hl_namespace" href="namespacebeman_1_1fingertree.html">fingertree</a>-targets.cmake</div>
 <div class="ttc" id="anamespacebeman_1_1fingertree_html"><div class="ttname"><a href="namespacebeman_1_1fingertree.html">beman::fingertree</a></div><div class="ttdef"><b>Definition:</b> overloaded.hpp:22</div></div>
 <div class="ttc" id="anamespacebeman_html"><div class="ttname"><a href="namespacebeman.html">beman</a></div><div class="ttdef"><b>Definition:</b> overloaded.hpp:22</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md12"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
 CMake Configuration</h2>
 <p>If you installed <a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a> to a prefix, you can specify that prefix to your CMake project using <code>CMAKE_PREFIX_PATH</code>; for example, <code>-DCMAKE_PREFIX_PATH=/opt/beman</code>.</p>
 <p>You need to bring in the <code><a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a></code> package to define the <code><a class="el" href="namespacebeman_1_1fingertree.html">beman::fingertree</a></code> CMake target:</p>
 <div class="fragment"><div class="line">find_package(beman.fingertree REQUIRED)</div>
 </div><!-- fragment --><p>You will then need to add <code><a class="el" href="namespacebeman_1_1fingertree.html">beman::fingertree</a></code> to the link libraries of any libraries or executables that include <code><a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a></code> headers.</p>
 <div class="fragment"><div class="line">target_link_libraries(yourlib PUBLIC beman::fingertree)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md14"></a>
 Using beman.fingertree</h2>
 <p>To use <code><a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a></code> in your C++ project, include an appropriate <code><a class="el" href="namespacebeman_1_1fingertree.html">beman.fingertree</a></code> header from your source code.</p>
 <div class="fragment"><div class="line"> {c++}</div>

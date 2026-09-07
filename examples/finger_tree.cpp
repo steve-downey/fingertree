@@ -9,6 +9,7 @@
 int main() {
     namespace ft = beman::fingertree::tree;
 
+    // 78d295c0-0601-4b09-b262-7c18620d3034
     // Build a persistent measured sequence 0..9; snoc appends at the back.
     ft::FingerTree<int> seq;
     for (int i = 0; i < 10; ++i)
@@ -24,6 +25,7 @@ int main() {
 
     // Persistence: the split shares structure and leaves the original intact.
     std::cout << "original still has " << seq.measure() << " elements\n";
+    // 78d295c0-0601-4b09-b262-7c18620d3034 end
 
     // A rope is a capability wrapper over the same tree, measured in bytes.
     auto rope   = ft::FingerTreeRope<>::from_text("hello world", 4);

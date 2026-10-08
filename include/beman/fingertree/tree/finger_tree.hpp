@@ -5,17 +5,16 @@
 // Hinze-Paterson 2-3 finger tree — uniform-elem, unified-digit implementation.
 //
 // Like finger_tree4, the spine is the same FingerTree type at every depth
-// (shared_ptr<const FingerTree>), and Elem<T,Tag> is the self-recursive
+// (shared_ptr<const FingerTree>), and Elem<T,MONOID> is the self-recursive
 // variant<Leaf, Node2, Node3> carrying its cached measure.
 //
 // The structural change vs finger_tree4 is the digit representation:
-// std::inplace_vector<ElemPtr<T,Tag>, 4> with an explicit size, replacing
+// std::inplace_vector<ElemPtr<T,MONOID>, 4> with an explicit size, replacing
 // finger_tree4's variant<One, Two, Three, Four>.  Cons/snoc/view/split/concat
 // branch on size() rather than dispatching through a four-way std::visit at
 // every level.
 
 #include <beman/fingertree/fixpoint/overloaded.hpp>
-#include <beman/fingertree/typeclass/dual_monoid.hpp>
 #include <beman/fingertree/typeclass/monoid.hpp>
 
 #include <algorithm>
@@ -41,92 +40,96 @@ namespace ft {
 
 using beman::fingertree::fixpoint::overloaded;
 
-// -- Tag operations ----------------------------------------------------------
+// -- Measure vocabulary -------------------------------------------------------
+//
+// The tree is keyed on a monoid *instance* type MONOID, not on the measure
+// value type: a cached measure is valid only under the monoid that computed
+// it, so two trees over the same value type under different monoids (count
+// and max over std::size_t, say) must not share Elem nodes. The value type is
+// derived from the instance; the instance itself is stored on the tree and
+// passed down to every helper that combines. See beman.transpose
+// docs/decisions.md#monoid-selection.
 
-template <typename Tag>
-constexpr auto tag_id() -> Tag {
-    return beman::fingertree::typeclass::monoid_v<Tag>.identity();
-}
-
-template <typename Tag>
-constexpr auto tag_op(const Tag& a, const Tag& b) -> Tag {
-    return beman::fingertree::typeclass::monoid_v<Tag>.combine(a, b);
-}
+template <typename MONOID>
+using tag_t = beman::fingertree::typeclass::monoid_value_t<MONOID>;
 
 // -- Elem: self-recursive element type ---------------------------------------
 
-template <typename T, typename Tag>
+template <typename T, typename MONOID>
 struct Elem;
 
-template <typename T, typename Tag>
-using ElemPtr = std::shared_ptr<const Elem<T, Tag>>;
+template <typename T, typename MONOID>
+using ElemPtr = std::shared_ptr<const Elem<T, MONOID>>;
 
-template <typename T, typename Tag>
+template <typename T, typename MONOID>
 struct Elem {
-    Tag d_measure;
+    tag_t<MONOID> d_measure;
 
     struct Leaf {
         T d_value;
     };
     struct Node2 {
-        ElemPtr<T, Tag> a;
-        ElemPtr<T, Tag> b;
+        ElemPtr<T, MONOID> a;
+        ElemPtr<T, MONOID> b;
     };
     struct Node3 {
-        ElemPtr<T, Tag> a;
-        ElemPtr<T, Tag> b;
-        ElemPtr<T, Tag> c;
+        ElemPtr<T, MONOID> a;
+        ElemPtr<T, MONOID> b;
+        ElemPtr<T, MONOID> c;
     };
 
     std::variant<Leaf, Node2, Node3> d_data;
 };
 
-template <typename T, typename Tag>
-auto elem_measure(const ElemPtr<T, Tag>& ep) -> Tag {
+template <typename T, typename MONOID>
+auto elem_measure(const ElemPtr<T, MONOID>& ep) -> tag_t<MONOID> {
     return ep->d_measure;
 }
 
-template <typename T, typename Tag>
-auto is_leaf(const ElemPtr<T, Tag>& ep) -> bool {
-    return std::holds_alternative<typename Elem<T, Tag>::Leaf>(ep->d_data);
+template <typename T, typename MONOID>
+auto is_leaf(const ElemPtr<T, MONOID>& ep) -> bool {
+    return std::holds_alternative<typename Elem<T, MONOID>::Leaf>(ep->d_data);
 }
 
-template <typename T, typename Tag>
-auto leaf_value(const ElemPtr<T, Tag>& ep) -> const T& {
-    return std::get<typename Elem<T, Tag>::Leaf>(ep->d_data).d_value;
+template <typename T, typename MONOID>
+auto leaf_value(const ElemPtr<T, MONOID>& ep) -> const T& {
+    return std::get<typename Elem<T, MONOID>::Leaf>(ep->d_data).d_value;
 }
 
-template <typename T, typename Tag, typename Alloc, typename MeasFn>
-auto make_leaf(const Alloc& alloc, MeasFn&& mf, T value) -> ElemPtr<T, Tag> {
+template <typename T, typename MONOID, typename Alloc, typename MeasFn>
+auto make_leaf(const Alloc& alloc, MeasFn&& mf, T value) -> ElemPtr<T, MONOID> {
     // value is taken by-value: measured first (lvalue), then moved into Leaf.
-    using EA = typename std::allocator_traits<Alloc>::template rebind_alloc<Elem<T, Tag>>;
+    using EA = typename std::allocator_traits<Alloc>::template rebind_alloc<Elem<T, MONOID>>;
     EA   ea(alloc);
     auto m = mf(value);
-    return std::allocate_shared<const Elem<T, Tag>>(
-        ea, Elem<T, Tag>{std::move(m), typename Elem<T, Tag>::Leaf{std::move(value)}});
+    return std::allocate_shared<const Elem<T, MONOID>>(
+        ea, Elem<T, MONOID>{std::move(m), typename Elem<T, MONOID>::Leaf{std::move(value)}});
 }
 
-template <typename T, typename Tag, typename Alloc>
-auto make_node2(const Alloc& alloc, ElemPtr<T, Tag> a, ElemPtr<T, Tag> b) -> ElemPtr<T, Tag> {
-    using EA = typename std::allocator_traits<Alloc>::template rebind_alloc<Elem<T, Tag>>;
+template <typename T, typename MONOID, typename Alloc>
+auto make_node2(const Alloc& alloc, const MONOID& monoid, ElemPtr<T, MONOID> a, ElemPtr<T, MONOID> b)
+    -> ElemPtr<T, MONOID> {
+    using EA = typename std::allocator_traits<Alloc>::template rebind_alloc<Elem<T, MONOID>>;
     EA   ea(alloc);
-    auto m = tag_op<Tag>(a->d_measure, b->d_measure);
-    return std::allocate_shared<const Elem<T, Tag>>(
-        ea, Elem<T, Tag>{std::move(m), typename Elem<T, Tag>::Node2{std::move(a), std::move(b)}});
+    auto m = monoid.combine(a->d_measure, b->d_measure);
+    return std::allocate_shared<const Elem<T, MONOID>>(
+        ea, Elem<T, MONOID>{std::move(m), typename Elem<T, MONOID>::Node2{std::move(a), std::move(b)}});
 }
 
-template <typename T, typename Tag, typename Alloc>
-auto make_node3(const Alloc& alloc, ElemPtr<T, Tag> a, ElemPtr<T, Tag> b, ElemPtr<T, Tag> c) -> ElemPtr<T, Tag> {
-    using EA = typename std::allocator_traits<Alloc>::template rebind_alloc<Elem<T, Tag>>;
+template <typename T, typename MONOID, typename Alloc>
+auto make_node3(
+    const Alloc& alloc, const MONOID& monoid, ElemPtr<T, MONOID> a, ElemPtr<T, MONOID> b, ElemPtr<T, MONOID> c)
+    -> ElemPtr<T, MONOID> {
+    using EA = typename std::allocator_traits<Alloc>::template rebind_alloc<Elem<T, MONOID>>;
     EA   ea(alloc);
-    auto m = tag_op<Tag>(tag_op<Tag>(a->d_measure, b->d_measure), c->d_measure);
-    return std::allocate_shared<const Elem<T, Tag>>(
-        ea, Elem<T, Tag>{std::move(m), typename Elem<T, Tag>::Node3{std::move(a), std::move(b), std::move(c)}});
+    auto m = monoid.combine(monoid.combine(a->d_measure, b->d_measure), c->d_measure);
+    return std::allocate_shared<const Elem<T, MONOID>>(
+        ea, Elem<T, MONOID>{std::move(m), typename Elem<T, MONOID>::Node3{std::move(a), std::move(b), std::move(c)}});
 }
 
-template <typename T, typename Tag>
-void flatten_elem(const ElemPtr<T, Tag>& ep, std::vector<T>& out) {
-    using E = Elem<T, Tag>;
+template <typename T, typename MONOID>
+void flatten_elem(const ElemPtr<T, MONOID>& ep, std::vector<T>& out) {
+    using E = Elem<T, MONOID>;
     std::visit(overloaded{[&](const typename E::Leaf& lf) { out.push_back(lf.d_value); },
                           [&](const typename E::Node2& n) {
                               flatten_elem(n.a, out);
@@ -140,9 +143,9 @@ void flatten_elem(const ElemPtr<T, Tag>& ep, std::vector<T>& out) {
                ep->d_data);
 }
 
-template <typename T, typename Tag, typename F>
-void for_each_elem(const ElemPtr<T, Tag>& ep, const F& fn) {
-    using E = Elem<T, Tag>;
+template <typename T, typename MONOID, typename F>
+void for_each_elem(const ElemPtr<T, MONOID>& ep, const F& fn) {
+    using E = Elem<T, MONOID>;
     std::visit(overloaded{[&](const typename E::Leaf& lf) { fn(lf.d_value); },
                           [&](const typename E::Node2& n) {
                               for_each_elem(n.a, fn);
@@ -161,50 +164,50 @@ void for_each_elem(const ElemPtr<T, Tag>& ep, const F& fn) {
 // Invariant: when a Digit appears inside a Deep node, 1 <= size() <= 4.
 // An empty Digit is only a transient construction artifact in helpers.
 
-template <typename T, typename Tag>
-using Digit = std::inplace_vector<ElemPtr<T, Tag>, 4>;
+template <typename T, typename MONOID>
+using Digit = std::inplace_vector<ElemPtr<T, MONOID>, 4>;
 
-template <typename T, typename Tag>
-auto digit_measure(const Digit<T, Tag>& d) -> Tag {
-    Tag m = tag_id<Tag>();
+template <typename T, typename MONOID>
+auto digit_measure(const MONOID& monoid, const Digit<T, MONOID>& d) -> tag_t<MONOID> {
+    tag_t<MONOID> m = monoid.identity();
     for (const auto& ep : d)
-        m = tag_op<Tag>(m, ep->d_measure);
+        m = monoid.combine(m, ep->d_measure);
     return m;
 }
 
-template <typename T, typename Tag>
-auto digit_with_pushed_front(const Digit<T, Tag>& d, ElemPtr<T, Tag> x) -> Digit<T, Tag> {
+template <typename T, typename MONOID>
+auto digit_with_pushed_front(const Digit<T, MONOID>& d, ElemPtr<T, MONOID> x) -> Digit<T, MONOID> {
     assert(d.size() < 4);
-    Digit<T, Tag> out;
+    Digit<T, MONOID> out;
     out.push_back(std::move(x));
     for (const auto& e : d)
         out.push_back(e);
     return out;
 }
 
-template <typename T, typename Tag>
-auto digit_with_pushed_back(const Digit<T, Tag>& d, ElemPtr<T, Tag> x) -> Digit<T, Tag> {
+template <typename T, typename MONOID>
+auto digit_with_pushed_back(const Digit<T, MONOID>& d, ElemPtr<T, MONOID> x) -> Digit<T, MONOID> {
     assert(d.size() < 4);
-    Digit<T, Tag> out;
+    Digit<T, MONOID> out;
     for (const auto& e : d)
         out.push_back(e);
     out.push_back(std::move(x));
     return out;
 }
 
-template <typename T, typename Tag>
-auto digit_tail(const Digit<T, Tag>& d) -> Digit<T, Tag> {
+template <typename T, typename MONOID>
+auto digit_tail(const Digit<T, MONOID>& d) -> Digit<T, MONOID> {
     assert(!d.empty());
-    Digit<T, Tag> out;
+    Digit<T, MONOID> out;
     for (std::size_t i = 1; i < d.size(); ++i)
         out.push_back(d[i]);
     return out;
 }
 
-template <typename T, typename Tag>
-auto digit_init(const Digit<T, Tag>& d) -> Digit<T, Tag> {
+template <typename T, typename MONOID>
+auto digit_init(const Digit<T, MONOID>& d) -> Digit<T, MONOID> {
     assert(!d.empty());
-    Digit<T, Tag> out;
+    Digit<T, MONOID> out;
     for (std::size_t i = 0; i + 1 < d.size(); ++i)
         out.push_back(d[i]);
     return out;
@@ -216,28 +219,28 @@ auto digit_init(const Digit<T, Tag>& d) -> Digit<T, Tag> {
 // Input capacity is bounded by 12 (4 right-digit + 4 middle + 4 left-digit
 // in app3's Deep-Deep path).  Output has at most 4 nodes from 12 inputs;
 // capacity 6 gives a safety margin.
-template <typename T, typename Tag, typename Alloc>
-auto nodes_from(const Alloc& alloc, std::inplace_vector<ElemPtr<T, Tag>, 12> elems)
-    -> std::inplace_vector<ElemPtr<T, Tag>, 6> {
-    std::inplace_vector<ElemPtr<T, Tag>, 6> result;
-    auto                                    n = elems.size();
-    std::size_t                             i = 0;
+template <typename T, typename MONOID, typename Alloc>
+auto nodes_from(const Alloc& alloc, const MONOID& monoid, std::inplace_vector<ElemPtr<T, MONOID>, 12> elems)
+    -> std::inplace_vector<ElemPtr<T, MONOID>, 6> {
+    std::inplace_vector<ElemPtr<T, MONOID>, 6> result;
+    auto                                       n = elems.size();
+    std::size_t                                i = 0;
     while (n - i > 4) {
-        result.push_back(
-            make_node3<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
+        result.push_back(make_node3<T, MONOID>(
+            alloc, monoid, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
         i += 3;
     }
     switch (n - i) {
     case 2:
-        result.push_back(make_node2<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1])));
+        result.push_back(make_node2<T, MONOID>(alloc, monoid, std::move(elems[i]), std::move(elems[i + 1])));
         break;
     case 3:
-        result.push_back(
-            make_node3<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
+        result.push_back(make_node3<T, MONOID>(
+            alloc, monoid, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
         break;
     case 4:
-        result.push_back(make_node2<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1])));
-        result.push_back(make_node2<T, Tag>(alloc, std::move(elems[i + 2]), std::move(elems[i + 3])));
+        result.push_back(make_node2<T, MONOID>(alloc, monoid, std::move(elems[i]), std::move(elems[i + 1])));
+        result.push_back(make_node2<T, MONOID>(alloc, monoid, std::move(elems[i + 2]), std::move(elems[i + 3])));
         break;
     default:
         assert(false && "nodes_from: invalid count");
@@ -247,10 +250,10 @@ auto nodes_from(const Alloc& alloc, std::inplace_vector<ElemPtr<T, Tag>, 12> ele
 }
 
 // Unwrap a Node elem into a 2-or-3 element digit.
-template <typename T, typename Tag>
-auto elem_to_digit(const ElemPtr<T, Tag>& ep) -> Digit<T, Tag> {
-    using E = Elem<T, Tag>;
-    Digit<T, Tag> out;
+template <typename T, typename MONOID>
+auto elem_to_digit(const ElemPtr<T, MONOID>& ep) -> Digit<T, MONOID> {
+    using E = Elem<T, MONOID>;
+    Digit<T, MONOID> out;
     std::visit(overloaded{[&](const typename E::Leaf&) {
                               assert(false && "elem_to_digit called on Leaf");
                               std::unreachable();
@@ -279,44 +282,38 @@ struct UnitMeasure {
     auto operator()(const T&) const -> TAG_TYPE { return TAG_TYPE{1}; }
 };
 
-// ReversedMeasure wraps an existing measure policy and lifts its output into
-// DualMonoid<Tag>.  Used by FingerTree::reversed() to build a tree whose
-// prefix measures accumulate under the flipped combine order.
-template <typename Policy>
-struct ReversedMeasure {
-    Policy d_inner;
-    template <typename T>
-    auto operator()(const T& x) const {
-        return beman::fingertree::typeclass::DualMonoid{d_inner(x)};
-    }
-};
-
 // Forward declaration so FingerTree can declare begin()/end() members
 // whose return type is FingerTreeIterator.  The full definition is in
 // finger_tree_iterator.hpp, included at the bottom of this file.
-template <typename T, typename Tag, typename MP, typename Alloc = std::allocator<std::byte>>
+template <typename T, typename MONOID, typename MP, typename Alloc = std::allocator<std::byte>>
 class FingerTreeIterator;
 
+// MONOID is a monoid instance type over the measure value type (the tag);
+// MEASURE_POLICY maps an element to a tag. The default is the element count:
+// every element measures 1 under addition. A tree with a different monoid
+// names its instance -- `FingerTree<int, typeclass::max_monoid<std::size_t>,
+// MaxMeasure>` -- and the instance may carry state, in which case it is
+// passed to the constructor or to from_sequence and stored on the tree.
 template <typename T,
-          typename TAG_TYPE       = std::size_t,
-          typename MEASURE_POLICY = UnitMeasure<T, TAG_TYPE>,
+          typename MONOID         = beman::fingertree::typeclass::sum_monoid<std::size_t>,
+          typename MEASURE_POLICY = UnitMeasure<T, ft::tag_t<MONOID>>,
           typename ALLOCATOR      = std::allocator<std::byte>>
 class FingerTree {
     template <typename, typename, typename, typename>
     friend class FingerTreeIterator; // iterator needs access to Deep, Repr,
                                      // etc.
 
-    using Tag  = TAG_TYPE;
+    using Tag  = ft::tag_t<MONOID>;
     using Meas = MEASURE_POLICY;
-    using E    = ft::Elem<T, Tag>;
-    using EP   = ft::ElemPtr<T, Tag>;
+    using E    = ft::Elem<T, MONOID>;
+    using EP   = ft::ElemPtr<T, MONOID>;
 
     // ElemPtr vector using the rebind-allocated allocator so temporary
     // scaffolding vectors (from_sequence, from_elems_impl) don't hit the
     // global heap when a custom allocator is in use.
     using EpAlloc = typename std::allocator_traits<ALLOCATOR>::template rebind_alloc<EP>;
     using EpVec   = std::vector<EP, EpAlloc>;
-    using Digit   = ft::Digit<T, Tag>;
+    using Digit   = ft::Digit<T, MONOID>;
 
     using SpinePtr = std::shared_ptr<const FingerTree>;
 
@@ -341,11 +338,14 @@ class FingerTree {
     using Repr    = std::variant<Empty, Single, DeepPtr>;
     Repr                            d_repr;
     [[no_unique_address]] ALLOCATOR d_alloc;
+    [[no_unique_address]] MONOID    d_monoid;
 
-    // Private constructor used by factory helpers; sets both repr and alloc.
-    FingerTree(Repr r, const ALLOCATOR& alloc) : d_repr(std::move(r)), d_alloc(alloc) {}
-
-    explicit FingerTree(Repr r) : d_repr(std::move(r)) {}
+    // Private constructor used by factory helpers; sets repr, alloc and
+    // monoid together. Every tree a helper builds inherits the instance of
+    // the tree it was built from, so a stateful instance travels with its
+    // nodes.
+    FingerTree(Repr r, const ALLOCATOR& alloc, const MONOID& monoid)
+        : d_repr(std::move(r)), d_alloc(alloc), d_monoid(monoid) {}
 
     // -- Allocation helpers --------------------------------------------------
 
@@ -404,28 +404,30 @@ class FingerTree {
 
     auto allocate_spine(FingerTree t) const -> SpinePtr { return allocate_spine(d_alloc, std::move(t)); }
 
-    auto wrap_leaf(T value) const -> EP { return ft::make_leaf<T, Tag>(d_alloc, meas_fn(), std::move(value)); }
+    auto wrap_leaf(T value) const -> EP { return ft::make_leaf<T, MONOID>(d_alloc, meas_fn(), std::move(value)); }
 
-    static auto make_single(const ALLOCATOR& alloc, EP elem) -> FingerTree {
-        return FingerTree(Repr{Single{std::move(elem)}}, alloc);
+    static auto make_single(const ALLOCATOR& alloc, const MONOID& monoid, EP elem) -> FingerTree {
+        return FingerTree(Repr{Single{std::move(elem)}}, alloc, monoid);
     }
 
     // Allocator-aware make_deep: uses alloc for the Deep allocation.
-    static auto make_deep(const ALLOCATOR& alloc, Digit left, SpinePtr spine, Digit right) -> FingerTree {
+    static auto make_deep(const ALLOCATOR& alloc, const MONOID& monoid, Digit left, SpinePtr spine, Digit right)
+        -> FingerTree {
         using DA = typename std::allocator_traits<ALLOCATOR>::template rebind_alloc<Deep>;
         DA   da(alloc);
-        auto m =
-            ft::tag_op<Tag>(ft::tag_op<Tag>(ft::digit_measure(left), spine ? spine->measure() : ft::tag_id<Tag>()),
-                            ft::digit_measure(right));
+        auto m = monoid.combine(
+            monoid.combine(ft::digit_measure(monoid, left), spine ? spine->measure() : monoid.identity()),
+            ft::digit_measure(monoid, right));
         return FingerTree(Repr{std::allocate_shared<const Deep>(
                               da, Deep{std::move(m), std::move(left), std::move(spine), std::move(right)})},
-                          alloc);
+                          alloc,
+                          monoid);
     }
 
     // Convenience overload for call sites that already have an allocator in
     // scope.
     auto make_deep(Digit left, SpinePtr spine, Digit right) const -> FingerTree {
-        return make_deep(d_alloc, std::move(left), std::move(spine), std::move(right));
+        return make_deep(d_alloc, d_monoid, std::move(left), std::move(spine), std::move(right));
     }
 
     // -- Rebalancing helpers used by view ------------------------------------
@@ -437,44 +439,44 @@ class FingerTree {
         return d;
     }
 
-    static auto digit_to_tree(const ALLOCATOR& alloc, const Digit& d) -> FingerTree {
+    static auto digit_to_tree(const ALLOCATOR& alloc, const MONOID& monoid, const Digit& d) -> FingerTree {
         assert(!d.empty());
         switch (d.size()) {
         case 1:
-            return make_single(alloc, d[0]);
+            return make_single(alloc, monoid, d[0]);
         case 2:
-            return make_deep(alloc, make_digit({d[0]}), SpinePtr{}, make_digit({d[1]}));
+            return make_deep(alloc, monoid, make_digit({d[0]}), SpinePtr{}, make_digit({d[1]}));
         case 3:
-            return make_deep(alloc, make_digit({d[0], d[1]}), SpinePtr{}, make_digit({d[2]}));
+            return make_deep(alloc, monoid, make_digit({d[0], d[1]}), SpinePtr{}, make_digit({d[2]}));
         case 4:
-            return make_deep(alloc, make_digit({d[0], d[1]}), SpinePtr{}, make_digit({d[2], d[3]}));
+            return make_deep(alloc, monoid, make_digit({d[0], d[1]}), SpinePtr{}, make_digit({d[2], d[3]}));
         default:
             std::unreachable();
         }
     }
 
-    static auto deep_l(const ALLOCATOR& alloc, SpinePtr spine, Digit right) -> FingerTree {
+    static auto deep_l(const ALLOCATOR& alloc, const MONOID& monoid, SpinePtr spine, Digit right) -> FingerTree {
         if (!spine || spine->is_empty())
-            return digit_to_tree(alloc, right);
+            return digit_to_tree(alloc, monoid, right);
         auto vl = spine->view_l_internal();
         assert(vl.has_value());
-        auto     new_left = ft::elem_to_digit<T, Tag>(vl->d_elem);
+        auto     new_left = ft::elem_to_digit<T, MONOID>(vl->d_elem);
         SpinePtr new_spine;
         if (!vl->d_rest.is_empty())
             new_spine = allocate_spine(alloc, std::move(vl->d_rest));
-        return make_deep(alloc, std::move(new_left), std::move(new_spine), std::move(right));
+        return make_deep(alloc, monoid, std::move(new_left), std::move(new_spine), std::move(right));
     }
 
-    static auto deep_r(const ALLOCATOR& alloc, Digit left, SpinePtr spine) -> FingerTree {
+    static auto deep_r(const ALLOCATOR& alloc, const MONOID& monoid, Digit left, SpinePtr spine) -> FingerTree {
         if (!spine || spine->is_empty())
-            return digit_to_tree(alloc, left);
+            return digit_to_tree(alloc, monoid, left);
         auto vr = spine->view_r_internal();
         assert(vr.has_value());
-        auto     new_right = ft::elem_to_digit<T, Tag>(vr->d_elem);
+        auto     new_right = ft::elem_to_digit<T, MONOID>(vr->d_elem);
         SpinePtr new_spine;
         if (!vr->d_rest.is_empty())
             new_spine = allocate_spine(alloc, std::move(vr->d_rest));
-        return make_deep(alloc, std::move(left), std::move(new_spine), std::move(new_right));
+        return make_deep(alloc, monoid, std::move(left), std::move(new_spine), std::move(new_right));
     }
 
     // -- Internal view (works on ElemPtrs) -----------------------------------
@@ -485,76 +487,78 @@ class FingerTree {
     };
 
     auto view_l_internal() const -> std::optional<InternalView> {
-        return std::visit(ft::overloaded{[](const Empty&) -> std::optional<InternalView> { return std::nullopt; },
-                                         [this](const Single& s) -> std::optional<InternalView> {
-                                             return InternalView{s.d_elem, FingerTree(d_alloc)};
-                                         },
-                                         [this](const DeepPtr& d) -> std::optional<InternalView> {
-                                             EP h = d->d_left.front();
-                                             if (d->d_left.size() > 1) {
-                                                 auto t = ft::digit_tail<T, Tag>(d->d_left);
-                                                 return InternalView{
-                                                     h, make_deep(d_alloc, std::move(t), d->d_spine, d->d_right)};
-                                             }
-                                             return InternalView{h, deep_l(d_alloc, d->d_spine, d->d_right)};
-                                         }},
-                          d_repr);
+        return std::visit(
+            ft::overloaded{[](const Empty&) -> std::optional<InternalView> { return std::nullopt; },
+                           [this](const Single& s) -> std::optional<InternalView> {
+                               return InternalView{s.d_elem, FingerTree(d_alloc, d_monoid)};
+                           },
+                           [this](const DeepPtr& d) -> std::optional<InternalView> {
+                               EP h = d->d_left.front();
+                               if (d->d_left.size() > 1) {
+                                   auto t = ft::digit_tail<T, MONOID>(d->d_left);
+                                   return InternalView{
+                                       h, make_deep(d_alloc, d_monoid, std::move(t), d->d_spine, d->d_right)};
+                               }
+                               return InternalView{h, deep_l(d_alloc, d_monoid, d->d_spine, d->d_right)};
+                           }},
+            d_repr);
     }
 
     auto view_r_internal() const -> std::optional<InternalView> {
-        return std::visit(ft::overloaded{[](const Empty&) -> std::optional<InternalView> { return std::nullopt; },
-                                         [this](const Single& s) -> std::optional<InternalView> {
-                                             return InternalView{s.d_elem, FingerTree(d_alloc)};
-                                         },
-                                         [this](const DeepPtr& d) -> std::optional<InternalView> {
-                                             EP l = d->d_right.back();
-                                             if (d->d_right.size() > 1) {
-                                                 auto i = ft::digit_init<T, Tag>(d->d_right);
-                                                 return InternalView{
-                                                     l, make_deep(d_alloc, d->d_left, d->d_spine, std::move(i))};
-                                             }
-                                             return InternalView{l, deep_r(d_alloc, d->d_left, d->d_spine)};
-                                         }},
-                          d_repr);
+        return std::visit(
+            ft::overloaded{[](const Empty&) -> std::optional<InternalView> { return std::nullopt; },
+                           [this](const Single& s) -> std::optional<InternalView> {
+                               return InternalView{s.d_elem, FingerTree(d_alloc, d_monoid)};
+                           },
+                           [this](const DeepPtr& d) -> std::optional<InternalView> {
+                               EP l = d->d_right.back();
+                               if (d->d_right.size() > 1) {
+                                   auto i = ft::digit_init<T, MONOID>(d->d_right);
+                                   return InternalView{
+                                       l, make_deep(d_alloc, d_monoid, d->d_left, d->d_spine, std::move(i))};
+                               }
+                               return InternalView{l, deep_r(d_alloc, d_monoid, d->d_left, d->d_spine)};
+                           }},
+            d_repr);
     }
 
     // -- Internal cons/snoc (works on ElemPtrs) ------------------------------
 
     auto cons_internal(EP x) const -> FingerTree {
         return std::visit(
-            ft::overloaded{[this, &x](const Empty&) { return make_single(d_alloc, std::move(x)); },
-                           [&](const Single& s) {
-                               Digit l;
-                               l.push_back(std::move(x));
-                               Digit r;
-                               r.push_back(s.d_elem);
-                               return make_deep(std::move(l), SpinePtr{}, std::move(r));
-                           },
-                           [&](const DeepPtr& d) -> FingerTree {
-                               if (d->d_left.size() < 4) {
-                                   return make_deep(ft::digit_with_pushed_front<T, Tag>(d->d_left, std::move(x)),
-                                                    d->d_spine,
-                                                    d->d_right);
-                               }
-                               // Left digit is full: take last 3 as a Node3, push down
-                               // spine.
-                               auto node = ft::make_node3<T, Tag>(d_alloc, d->d_left[1], d->d_left[2], d->d_left[3]);
-                               SpinePtr sp;
-                               if (d->d_spine)
-                                   sp = allocate_spine(d->d_spine->cons_internal(std::move(node)));
-                               else
-                                   sp = allocate_spine(make_single(d_alloc, std::move(node)));
-                               Digit new_left;
-                               new_left.push_back(std::move(x));
-                               new_left.push_back(d->d_left[0]);
-                               return make_deep(std::move(new_left), std::move(sp), d->d_right);
-                           }},
+            ft::overloaded{
+                [this, &x](const Empty&) { return make_single(d_alloc, d_monoid, std::move(x)); },
+                [&](const Single& s) {
+                    Digit l;
+                    l.push_back(std::move(x));
+                    Digit r;
+                    r.push_back(s.d_elem);
+                    return make_deep(std::move(l), SpinePtr{}, std::move(r));
+                },
+                [&](const DeepPtr& d) -> FingerTree {
+                    if (d->d_left.size() < 4) {
+                        return make_deep(
+                            ft::digit_with_pushed_front<T, MONOID>(d->d_left, std::move(x)), d->d_spine, d->d_right);
+                    }
+                    // Left digit is full: take last 3 as a Node3, push down
+                    // spine.
+                    auto node = ft::make_node3<T, MONOID>(d_alloc, d_monoid, d->d_left[1], d->d_left[2], d->d_left[3]);
+                    SpinePtr sp;
+                    if (d->d_spine)
+                        sp = allocate_spine(d->d_spine->cons_internal(std::move(node)));
+                    else
+                        sp = allocate_spine(make_single(d_alloc, d_monoid, std::move(node)));
+                    Digit new_left;
+                    new_left.push_back(std::move(x));
+                    new_left.push_back(d->d_left[0]);
+                    return make_deep(std::move(new_left), std::move(sp), d->d_right);
+                }},
             d_repr);
     }
 
     auto snoc_internal(EP x) const -> FingerTree {
         return std::visit(
-            ft::overloaded{[this, &x](const Empty&) { return make_single(d_alloc, std::move(x)); },
+            ft::overloaded{[this, &x](const Empty&) { return make_single(d_alloc, d_monoid, std::move(x)); },
                            [&](const Single& s) {
                                Digit l;
                                l.push_back(s.d_elem);
@@ -566,17 +570,17 @@ class FingerTree {
                                if (d->d_right.size() < 4) {
                                    return make_deep(d->d_left,
                                                     d->d_spine,
-                                                    ft::digit_with_pushed_back<T, Tag>(d->d_right, std::move(x)));
+                                                    ft::digit_with_pushed_back<T, MONOID>(d->d_right, std::move(x)));
                                }
                                // Right digit is full: take first 3 as a Node3, push down
                                // spine.
-                               auto node =
-                                   ft::make_node3<T, Tag>(d_alloc, d->d_right[0], d->d_right[1], d->d_right[2]);
+                               auto node = ft::make_node3<T, MONOID>(
+                                   d_alloc, d_monoid, d->d_right[0], d->d_right[1], d->d_right[2]);
                                SpinePtr sp;
                                if (d->d_spine)
                                    sp = allocate_spine(d->d_spine->snoc_internal(std::move(node)));
                                else
-                                   sp = allocate_spine(make_single(d_alloc, std::move(node)));
+                                   sp = allocate_spine(make_single(d_alloc, d_monoid, std::move(node)));
                                Digit new_right;
                                new_right.push_back(d->d_right[3]);
                                new_right.push_back(std::move(x));
@@ -605,10 +609,10 @@ class FingerTree {
     };
 
     template <typename PRED>
-    static auto split_digit(const PRED& pred, Tag prefix, const Digit& d) -> std::optional<DigitSplit> {
+    auto split_digit(const PRED& pred, Tag prefix, const Digit& d) const -> std::optional<DigitSplit> {
         Tag running = prefix;
         for (std::size_t i = 0; i < d.size(); ++i) {
-            running = ft::tag_op<Tag>(running, d[i]->d_measure);
+            running = d_monoid.combine(running, d[i]->d_measure);
             if (pred(running)) {
                 std::optional<Digit> left_d;
                 std::optional<Digit> right_d;
@@ -631,25 +635,27 @@ class FingerTree {
     }
 
     template <typename PRED>
-    static auto split_within_elem(const PRED& pred, Tag prefix, const EP& node_ep) -> DigitSplit {
-        auto children = ft::elem_to_digit<T, Tag>(node_ep);
+    auto split_within_elem(const PRED& pred, Tag prefix, const EP& node_ep) const -> DigitSplit {
+        auto children = ft::elem_to_digit<T, MONOID>(node_ep);
         auto ds       = split_digit(pred, prefix, children);
         assert(ds.has_value() && "split_within_elem: predicate never triggered");
         return std::move(*ds);
     }
 
-    static auto assemble_l(const ALLOCATOR& alloc, std::optional<Digit> left_d, SpinePtr spine, Digit right)
+    static auto
+    assemble_l(const ALLOCATOR& alloc, const MONOID& monoid, std::optional<Digit> left_d, SpinePtr spine, Digit right)
         -> FingerTree {
         if (left_d.has_value())
-            return make_deep(alloc, std::move(*left_d), std::move(spine), std::move(right));
-        return deep_l(alloc, std::move(spine), std::move(right));
+            return make_deep(alloc, monoid, std::move(*left_d), std::move(spine), std::move(right));
+        return deep_l(alloc, monoid, std::move(spine), std::move(right));
     }
 
-    static auto assemble_r(const ALLOCATOR& alloc, Digit left, SpinePtr spine, std::optional<Digit> right_d)
+    static auto
+    assemble_r(const ALLOCATOR& alloc, const MONOID& monoid, Digit left, SpinePtr spine, std::optional<Digit> right_d)
         -> FingerTree {
         if (right_d.has_value())
-            return make_deep(alloc, std::move(left), std::move(spine), std::move(*right_d));
-        return deep_r(alloc, std::move(left), std::move(spine));
+            return make_deep(alloc, monoid, std::move(left), std::move(spine), std::move(*right_d));
+        return deep_r(alloc, monoid, std::move(left), std::move(spine));
     }
 
     template <typename PRED>
@@ -658,25 +664,26 @@ class FingerTree {
             return std::nullopt;
 
         if (auto* s = std::get_if<Single>(&d_repr)) {
-            if (pred(ft::tag_op<Tag>(prefix, s->d_elem->d_measure)))
-                return InternalSplit{FingerTree(d_alloc), s->d_elem, FingerTree(d_alloc)};
+            if (pred(d_monoid.combine(prefix, s->d_elem->d_measure)))
+                return InternalSplit{FingerTree(d_alloc, d_monoid), s->d_elem, FingerTree(d_alloc, d_monoid)};
             return std::nullopt;
         }
 
         const auto& d = *std::get<DeepPtr>(d_repr);
 
-        auto vl = ft::tag_op<Tag>(prefix, ft::digit_measure(d.d_left));
+        auto vl = d_monoid.combine(prefix, ft::digit_measure(d_monoid, d.d_left));
         if (pred(vl)) {
             auto ds = split_digit(pred, prefix, d.d_left);
             if (!ds.has_value())
                 return std::nullopt;
-            auto lt = ds->d_left.has_value() ? digit_to_tree(d_alloc, *ds->d_left) : FingerTree(d_alloc);
-            auto rt = assemble_l(d_alloc, std::move(ds->d_right), d.d_spine, d.d_right);
+            auto lt =
+                ds->d_left.has_value() ? digit_to_tree(d_alloc, d_monoid, *ds->d_left) : FingerTree(d_alloc, d_monoid);
+            auto rt = assemble_l(d_alloc, d_monoid, std::move(ds->d_right), d.d_spine, d.d_right);
             return InternalSplit{std::move(lt), std::move(ds->d_pivot), std::move(rt)};
         }
 
-        auto spine_m = d.d_spine ? d.d_spine->measure() : ft::tag_id<Tag>();
-        auto vm      = ft::tag_op<Tag>(vl, spine_m);
+        auto spine_m = d.d_spine ? d.d_spine->measure() : d_monoid.identity();
+        auto vm      = d_monoid.combine(vl, spine_m);
         if (pred(vm)) {
             if (!d.d_spine || d.d_spine->is_empty())
                 return std::nullopt;
@@ -685,7 +692,7 @@ class FingerTree {
             if (!ss.has_value())
                 return std::nullopt;
 
-            auto node_prefix = ft::tag_op<Tag>(vl, ss->d_left.measure());
+            auto node_prefix = d_monoid.combine(vl, ss->d_left.measure());
             auto ns          = split_within_elem(pred, node_prefix, ss->d_pivot);
 
             SpinePtr sl;
@@ -695,24 +702,27 @@ class FingerTree {
             if (!ss->d_right.is_empty())
                 sr = allocate_spine(std::move(ss->d_right));
 
-            auto lt = assemble_r(d_alloc, d.d_left, std::move(sl), std::move(ns.d_left));
-            auto rt = assemble_l(d_alloc, std::move(ns.d_right), std::move(sr), d.d_right);
+            auto lt = assemble_r(d_alloc, d_monoid, d.d_left, std::move(sl), std::move(ns.d_left));
+            auto rt = assemble_l(d_alloc, d_monoid, std::move(ns.d_right), std::move(sr), d.d_right);
             return InternalSplit{std::move(lt), std::move(ns.d_pivot), std::move(rt)};
         }
 
         auto ds = split_digit(pred, vm, d.d_right);
         if (!ds.has_value())
             return std::nullopt;
-        auto lt = assemble_r(d_alloc, d.d_left, d.d_spine, std::move(ds->d_left));
-        auto rt = ds->d_right.has_value() ? digit_to_tree(d_alloc, *ds->d_right) : FingerTree(d_alloc);
+        auto lt = assemble_r(d_alloc, d_monoid, d.d_left, d.d_spine, std::move(ds->d_left));
+        auto rt =
+            ds->d_right.has_value() ? digit_to_tree(d_alloc, d_monoid, *ds->d_right) : FingerTree(d_alloc, d_monoid);
         return InternalSplit{std::move(lt), std::move(ds->d_pivot), std::move(rt)};
     }
 
     // -- app3: Hinze-Paterson concatenation ----------------------------------
 
-    static auto
-    app3(const ALLOCATOR& alloc, const FingerTree& left, std::inplace_vector<EP, 6> middle, const FingerTree& right)
-        -> FingerTree {
+    static auto app3(const ALLOCATOR&           alloc,
+                     const MONOID&              monoid,
+                     const FingerTree&          left,
+                     std::inplace_vector<EP, 6> middle,
+                     const FingerTree&          right) -> FingerTree {
         if (left.is_empty()) {
             auto result = right;
             for (auto it = middle.rbegin(); it != middle.rend(); ++it)
@@ -749,15 +759,15 @@ class FingerTree {
             combined.push_back(std::move(ep));
         for (const auto& ep : rd.d_left)
             combined.push_back(ep);
-        auto ns = ft::nodes_from<T, Tag>(alloc, std::move(combined));
+        auto ns = ft::nodes_from<T, MONOID>(alloc, monoid, std::move(combined));
 
-        auto     left_spine  = ld.d_spine ? *ld.d_spine : FingerTree(alloc);
-        auto     right_spine = rd.d_spine ? *rd.d_spine : FingerTree(alloc);
-        auto     new_spine   = FingerTree::app3(alloc, left_spine, std::move(ns), right_spine);
+        auto     left_spine  = ld.d_spine ? *ld.d_spine : FingerTree(alloc, monoid);
+        auto     right_spine = rd.d_spine ? *rd.d_spine : FingerTree(alloc, monoid);
+        auto     new_spine   = FingerTree::app3(alloc, monoid, left_spine, std::move(ns), right_spine);
         SpinePtr sp;
         if (!new_spine.is_empty())
             sp = allocate_spine(alloc, std::move(new_spine));
-        return make_deep(alloc, ld.d_left, std::move(sp), rd.d_right);
+        return make_deep(alloc, monoid, ld.d_left, std::move(sp), rd.d_right);
     }
 
     // -- Bottom-up construction from a flat ElemPtr sequence -----------------
@@ -774,12 +784,12 @@ class FingerTree {
     // Small cases (N ≤ 8) are placed directly into left/right digits with an
     // empty spine, avoiding the node-grouping pass entirely.
 
-    static auto from_elems_impl(const ALLOCATOR& alloc, EpVec elems) -> FingerTree {
+    static auto from_elems_impl(const ALLOCATOR& alloc, const MONOID& monoid, EpVec elems) -> FingerTree {
         const auto n = elems.size();
         if (n == 0)
-            return FingerTree(alloc);
+            return FingerTree(alloc, monoid);
         if (n == 1)
-            return make_single(alloc, std::move(elems[0]));
+            return make_single(alloc, monoid, std::move(elems[0]));
 
         if (n <= 8) {
             const auto lsz = std::min(n / 2, std::size_t{4});
@@ -788,7 +798,7 @@ class FingerTree {
                 left_d.push_back(std::move(elems[i]));
             for (std::size_t i = lsz; i < n; ++i)
                 right_d.push_back(std::move(elems[i]));
-            return make_deep(alloc, std::move(left_d), SpinePtr{}, std::move(right_d));
+            return make_deep(alloc, monoid, std::move(left_d), SpinePtr{}, std::move(right_d));
         }
 
         // n >= 9: 2 left, 2 right, group middle (n-4) into nodes.
@@ -803,28 +813,29 @@ class FingerTree {
         std::size_t i   = 2;
         const auto  end = n - 2;
         while (end - i > 4) {
-            nodes.push_back(
-                ft::make_node3<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
+            nodes.push_back(ft::make_node3<T, MONOID>(
+                alloc, monoid, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
             i += 3;
         }
         switch (end - i) {
         case 2:
-            nodes.push_back(ft::make_node2<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1])));
+            nodes.push_back(ft::make_node2<T, MONOID>(alloc, monoid, std::move(elems[i]), std::move(elems[i + 1])));
             break;
         case 3:
-            nodes.push_back(
-                ft::make_node3<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
+            nodes.push_back(ft::make_node3<T, MONOID>(
+                alloc, monoid, std::move(elems[i]), std::move(elems[i + 1]), std::move(elems[i + 2])));
             break;
         case 4:
-            nodes.push_back(ft::make_node2<T, Tag>(alloc, std::move(elems[i]), std::move(elems[i + 1])));
-            nodes.push_back(ft::make_node2<T, Tag>(alloc, std::move(elems[i + 2]), std::move(elems[i + 3])));
+            nodes.push_back(ft::make_node2<T, MONOID>(alloc, monoid, std::move(elems[i]), std::move(elems[i + 1])));
+            nodes.push_back(
+                ft::make_node2<T, MONOID>(alloc, monoid, std::move(elems[i + 2]), std::move(elems[i + 3])));
             break;
         default:
             std::unreachable();
         }
-        auto     spine = from_elems_impl(alloc, std::move(nodes));
+        auto     spine = from_elems_impl(alloc, monoid, std::move(nodes));
         SpinePtr sp    = spine.is_empty() ? SpinePtr{} : allocate_spine(alloc, std::move(spine));
-        return make_deep(alloc, std::move(left_d), std::move(sp), std::move(right_d));
+        return make_deep(alloc, monoid, std::move(left_d), std::move(sp), std::move(right_d));
     }
 
     // -- Internal flatten / for_each -----------------------------------------
@@ -867,11 +878,12 @@ class FingerTree {
     // -----------------------------------------------------------------------
 
     using value_type             = T;
-    using tag_type               = Tag;      // non-standard, -specific
+    using tag_type               = Tag;      // non-standard: the measure value type
+    using monoid_type            = MONOID;   // non-standard: the monoid instance type
     using reference              = const T&; // immutable: all access is const
     using const_reference        = const T&;
     using allocator_type         = ALLOCATOR;
-    using iterator               = FingerTreeIterator<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>;
+    using iterator               = FingerTreeIterator<T, MONOID, MEASURE_POLICY, ALLOCATOR>;
     using const_iterator         = iterator; // immutable: no mutable iteration
     using reverse_iterator       = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
@@ -883,7 +895,7 @@ class FingerTree {
     // Default constructor: variant value-initialises to its first alternative
     // (Empty), so FingerTree{} is a valid empty tree — no factory call needed.
     FingerTree() = default;
-    explicit FingerTree(const ALLOCATOR& alloc) : d_alloc(alloc) {}
+    explicit FingerTree(const ALLOCATOR& alloc, const MONOID& monoid = MONOID{}) : d_alloc(alloc), d_monoid(monoid) {}
 
     FingerTree(const FingerTree&) = default;
     FingerTree(FingerTree&&)      = default;
@@ -897,11 +909,11 @@ class FingerTree {
     // resource, its nodes are shared (O(1)).  If from a different resource,
     // every node is rebuilt using alloc (O(N)) — no dangling cross-resource
     // pointers are ever created silently.
-    FingerTree(FingerTree other, ALLOCATOR alloc) : d_alloc(std::move(alloc)) {
+    FingerTree(FingerTree other, ALLOCATOR alloc) : d_alloc(std::move(alloc)), d_monoid(other.d_monoid) {
         if (alloc_equal(d_alloc, other.d_alloc))
             d_repr = std::move(other.d_repr);
         else
-            *this = from_sequence(other.flatten(), d_alloc);
+            *this = from_sequence(other.flatten(), d_alloc, d_monoid);
     }
 
     // Copy assignment.
@@ -916,7 +928,7 @@ class FingerTree {
         } else if (alloc_equal(d_alloc, other.d_alloc)) {
             d_repr = other.d_repr;
         } else {
-            *this = from_sequence(other.flatten(), d_alloc);
+            *this = from_sequence(other.flatten(), d_alloc, d_monoid);
         }
         return *this;
     }
@@ -932,16 +944,26 @@ class FingerTree {
         } else if (alloc_equal(d_alloc, other.d_alloc)) {
             d_repr = std::move(other.d_repr);
         } else {
-            *this = from_sequence(other.flatten(), d_alloc);
+            *this = from_sequence(other.flatten(), d_alloc, d_monoid);
         }
         return *this;
     }
 
     [[nodiscard]] auto get_allocator() const noexcept -> allocator_type { return d_alloc; }
 
+    // The monoid instance this tree's cached measures were computed under.
+    [[nodiscard]] auto get_monoid() const noexcept -> monoid_type { return d_monoid; }
+
+    // True for the default count measure, where measure() is the element
+    // count and size(), operator== and flatten() take O(1) shortcuts.
+    static constexpr bool has_unit_count_measure =
+        std::same_as<MONOID, beman::fingertree::typeclass::sum_monoid<std::size_t>> &&
+        std::same_as<Meas, UnitMeasure<T, std::size_t>>;
+
     [[nodiscard]] static auto leaf(T value) -> FingerTree {
         ALLOCATOR alloc{};
-        return make_single(alloc, ft::make_leaf<T, Tag>(alloc, meas_fn(), std::move(value)));
+        MONOID    monoid{};
+        return make_single(alloc, monoid, ft::make_leaf<T, MONOID>(alloc, meas_fn(), std::move(value)));
     }
 
     // -- Container query members ---------------------------------------------
@@ -953,7 +975,7 @@ class FingerTree {
 
     // size() is O(1) for the default unit measure; O(N) for custom measures.
     [[nodiscard]] auto size() const -> size_type {
-        if constexpr (std::same_as<Tag, std::size_t> && std::same_as<Meas, UnitMeasure<T, std::size_t>>) {
+        if constexpr (has_unit_count_measure) {
             return measure();
         } else {
             size_type n = 0;
@@ -964,7 +986,10 @@ class FingerTree {
 
     [[nodiscard]] auto max_size() const noexcept -> size_type { return std::numeric_limits<size_type>::max(); }
 
-    void swap(FingerTree& other) noexcept { std::swap(d_repr, other.d_repr); }
+    void swap(FingerTree& other) noexcept {
+        std::swap(d_repr, other.d_repr);
+        std::swap(d_monoid, other.d_monoid);
+    }
 
     friend void swap(FingerTree& a, FingerTree& b) noexcept { a.swap(b); }
 
@@ -972,7 +997,7 @@ class FingerTree {
     // Hidden friend: element-wise equality via flatten() avoids requiring the
     // iterator to be complete at class-body parse time.
     friend auto operator==(const FingerTree& lhs, const FingerTree& rhs) -> bool {
-        if constexpr (std::same_as<Tag, std::size_t> && std::same_as<Meas, UnitMeasure<T, std::size_t>>) {
+        if constexpr (has_unit_count_measure) {
             if (lhs.measure() != rhs.measure())
                 return false;
         }
@@ -988,7 +1013,7 @@ class FingerTree {
     [[nodiscard]] auto is_branch() const -> bool { return std::holds_alternative<DeepPtr>(d_repr); }
 
     [[nodiscard]] auto measure() const -> Tag {
-        return std::visit(ft::overloaded{[](const Empty&) { return ft::tag_id<Tag>(); },
+        return std::visit(ft::overloaded{[this](const Empty&) { return d_monoid.identity(); },
                                          [](const Single& s) -> Tag { return s.d_elem->d_measure; },
                                          [](const DeepPtr& d) -> Tag { return d->d_measure; }},
                           d_repr);
@@ -1093,7 +1118,7 @@ class FingerTree {
 
     [[nodiscard]] auto tail() const -> FingerTree {
         auto v = view_l();
-        return v.has_value() ? std::move(v->d_rest) : FingerTree(d_alloc);
+        return v.has_value() ? std::move(v->d_rest) : FingerTree(d_alloc, d_monoid);
     }
 
     [[nodiscard]] auto last() const -> T {
@@ -1110,7 +1135,7 @@ class FingerTree {
 
     [[nodiscard]] auto init() const -> FingerTree {
         auto v = view_r();
-        return v.has_value() ? std::move(v->d_rest) : FingerTree(d_alloc);
+        return v.has_value() ? std::move(v->d_rest) : FingerTree(d_alloc, d_monoid);
     }
 
     // -- flatten / for_each: O(n) --------------------------------------------
@@ -1120,7 +1145,7 @@ class FingerTree {
         // Reserve when measure() equals element count (unit measure case).
         // For custom measures (rope byte count, interval max-end, etc.) this
         // condition is false and we fall back to push_back reallocation.
-        if constexpr (std::same_as<Tag, std::size_t> && std::same_as<Meas, UnitMeasure<T, std::size_t>>) {
+        if constexpr (has_unit_count_measure) {
             out.reserve(measure());
         }
         flatten_elems(out);
@@ -1132,24 +1157,22 @@ class FingerTree {
         for_each_internal(fn);
     }
 
-    // Build from a vector using the default allocator (static; use the
-    // allocator-extended overload below for a custom allocator).
-    [[nodiscard]] static auto from_sequence(const std::vector<T>& values) -> FingerTree {
-        return from_sequence(values, ALLOCATOR{});
-    }
-
-    // Allocator-extended from_sequence: all node and scaffolding allocations
-    // use alloc.  Takes values by const ref so the input vector is not copied;
-    // each element is individually copied into its Leaf node via make_leaf.
-    [[nodiscard]] static auto from_sequence(const std::vector<T>& values, const ALLOCATOR& alloc) -> FingerTree {
+    // Build from a vector. All node and scaffolding allocations use alloc;
+    // every cached measure is computed under monoid, which the resulting
+    // tree stores. Takes values by const ref so the input vector is not
+    // copied; each element is individually copied into its Leaf node via
+    // make_leaf.
+    [[nodiscard]] static auto from_sequence(const std::vector<T>& values,
+                                            const ALLOCATOR&      alloc  = ALLOCATOR{},
+                                            const MONOID&         monoid = MONOID{}) -> FingerTree {
         if (values.empty())
-            return FingerTree(alloc);
+            return FingerTree(alloc, monoid);
         auto  mf = meas_fn();
         EpVec elems{EpAlloc(alloc)};
         elems.reserve(values.size());
         for (const auto& v : values)
-            elems.push_back(ft::make_leaf<T, Tag>(alloc, mf, v));
-        return from_elems_impl(alloc, std::move(elems));
+            elems.push_back(ft::make_leaf<T, MONOID>(alloc, mf, v));
+        return from_elems_impl(alloc, monoid, std::move(elems));
     }
 
     // -- append / concat: O(log min(n, m)) -----------------------------------
@@ -1161,9 +1184,9 @@ class FingerTree {
     [[nodiscard]] auto append(const FingerTree& right) const -> FingerTree {
         if (!alloc_equal(d_alloc, right.d_alloc)) {
             auto rebuilt = from_sequence(right.flatten(), d_alloc);
-            return app3(d_alloc, *this, {}, rebuilt);
+            return app3(d_alloc, d_monoid, *this, {}, rebuilt);
         }
-        return app3(d_alloc, *this, {}, right);
+        return app3(d_alloc, d_monoid, *this, {}, right);
     }
 
     [[nodiscard]] static auto concat(const FingerTree& left, const FingerTree& right) -> FingerTree {
@@ -1193,7 +1216,7 @@ class FingerTree {
 
     template <typename PRED>
     [[nodiscard]] auto split(PRED&& pred) const -> std::optional<Split> {
-        auto is = split_impl(pred, ft::tag_id<Tag>());
+        auto is = split_impl(pred, d_monoid.identity());
         if (!is.has_value())
             return std::nullopt;
         assert(ft::is_leaf(is->d_pivot));
@@ -1204,7 +1227,7 @@ class FingerTree {
     [[nodiscard]] auto split_at(PRED&& pred) const -> SplitAt {
         auto sp = split(std::forward<PRED>(pred));
         if (!sp.has_value())
-            return SplitAt{*this, FingerTree(d_alloc)};
+            return SplitAt{*this, FingerTree(d_alloc, d_monoid)};
         return SplitAt{std::move(sp->d_left), sp->d_right.cons(std::move(sp->d_pivot))};
     }
 
@@ -1219,9 +1242,11 @@ class FingerTree {
     // -- reversed: O(N) eager rebuild ----------------------------------------
     //
     // Returns a new tree containing the same elements in reverse order.
-    // The tag type of the result is DualMonoid<Tag>; prefix-accumulated
+    // The result is keyed on dual_monoid<MONOID>: the same tag type, the same
+    // measure policy, combine with its arguments flipped -- so prefix
     // measures on the reversed tree grow from the new left edge (old right
-    // edge) under the flipped combine order.
+    // edge), and split_at_measure takes the same plain threshold it takes on
+    // the original.
     //
     // Implementation is Option A from the design doc: flatten, reverse,
     // rebuild. Cost: O(N) time and O(N) space.  A lazy structural reverse is
@@ -1229,11 +1254,11 @@ class FingerTree {
     // wrong); the eager rebuild is always correct.
 
     [[nodiscard]] auto reversed() const
-        -> FingerTree<T, beman::fingertree::typeclass::DualMonoid<Tag>, ReversedMeasure<Meas>, ALLOCATOR> {
-        using DT = FingerTree<T, beman::fingertree::typeclass::DualMonoid<Tag>, ReversedMeasure<Meas>, ALLOCATOR>;
+        -> FingerTree<T, beman::fingertree::typeclass::dual_monoid<MONOID>, Meas, ALLOCATOR> {
+        using DT = FingerTree<T, beman::fingertree::typeclass::dual_monoid<MONOID>, Meas, ALLOCATOR>;
         auto v   = flatten();
         std::reverse(v.begin(), v.end());
-        return DT::from_sequence(std::move(v), d_alloc);
+        return DT::from_sequence(std::move(v), d_alloc, beman::fingertree::typeclass::dual_monoid<MONOID>{d_monoid});
     }
 };
 

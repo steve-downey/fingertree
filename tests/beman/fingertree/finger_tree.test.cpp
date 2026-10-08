@@ -27,10 +27,14 @@ struct WeightedMeasure {
 
 } // namespace
 
-namespace beman::fingertree::typeclass {
+namespace {
 
-template <>
-struct Monoid<Weighted> {
+// A user-written monoid instance over Weighted: the value type stays a plain
+// struct, the instance names the operation, and the tree is keyed on the
+// instance type.
+struct weighted_monoid {
+    using value_type = Weighted;
+
     constexpr auto identity() const -> Weighted { return Weighted{0U}; }
 
     constexpr auto combine(const Weighted& lhs, const Weighted& rhs) const -> Weighted {
@@ -38,7 +42,19 @@ struct Monoid<Weighted> {
     }
 };
 
-} // namespace beman::fingertree::typeclass
+// A stateful instance: addition modulo a runtime value. The tree stores the
+// instance it was built with and threads it through every node it builds.
+struct modular_sum {
+    using value_type = std::size_t;
+
+    std::size_t d_modulus;
+
+    auto identity() const -> std::size_t { return 0U; }
+
+    auto combine(std::size_t lhs, std::size_t rhs) const -> std::size_t { return (lhs + rhs) % d_modulus; }
+};
+
+} // namespace
 
 TEST_CASE("FingerTree - HeaderIsIdempotent") { REQUIRE(true); }
 
@@ -70,6 +86,8 @@ TEST_CASE("FingerTree - DefaultTagIsSizeT") {
 
     static_assert(std::is_same_v<FT::value_type, int>);
     static_assert(std::is_same_v<FT::tag_type, std::size_t>);
+    static_assert(std::is_same_v<FT::monoid_type, beman::fingertree::typeclass::sum_monoid<std::size_t>>);
+    static_assert(FT::has_unit_count_measure);
 }
 
 TEST_CASE("FingerTree - ConsSnoc") {
@@ -452,7 +470,7 @@ TEST_CASE("FingerTree - SplitRoundTripsViaConcat") {
 }
 
 TEST_CASE("FingerTree - WeightedSplitAtMeasure") {
-    using FT = beman::fingertree::tree::FingerTree<int, Weighted, WeightedMeasure>;
+    using FT = beman::fingertree::tree::FingerTree<int, weighted_monoid, WeightedMeasure>;
 
     auto t = FT{};
     for (int i = 1; i <= 10; ++i)
@@ -596,15 +614,15 @@ TEST_CASE("FingerTree - ReversedTwiceIsOriginal") {
 }
 
 TEST_CASE("FingerTree - ReversedMeasureOnCommutative") {
-    // Unit-count measure is commutative: reversed().measure().value ==
-    // measure().
+    // Unit-count measure is commutative: reversed().measure() == measure(),
+    // and the reversed tree's measure is the same plain std::size_t.
     using FT = beman::fingertree::tree::FingerTree<int>;
 
     auto t = FT{};
     for (int i = 0; i < 10; ++i)
         t = t.snoc(i);
 
-    CHECK(t.reversed().measure().value == t.measure());
+    CHECK(t.reversed().measure() == t.measure());
 }
 
 TEST_CASE("FingerTree - ReversedNonCommutativeElementOrder") {
@@ -632,8 +650,8 @@ TEST_CASE("FingerTree - ReversedSplitAtMeasure") {
     for (int i = 1; i <= 10; ++i)
         t = t.snoc(i); // 1 2 3 4 5 6 7 8 9 10
 
-    auto rev = t.reversed();               // 10 9 8 7 6 5 4 3 2 1
-    auto sa  = rev.split_at_measure({3U}); // DualMonoid<size_t> threshold
+    auto rev = t.reversed();             // 10 9 8 7 6 5 4 3 2 1
+    auto sa  = rev.split_at_measure(3U); // same plain threshold as on the original
 
     CHECK(sa.d_left.flatten() == (std::vector<int>{10, 9}));
     CHECK(sa.d_right.flatten() == (std::vector<int>{8, 7, 6, 5, 4, 3, 2, 1}));
@@ -693,6 +711,55 @@ TEST_CASE("FingerTree - empty() is the Container query, FT{} is default "
     auto t2 = FT::leaf(42);
     CHECK(!t2.empty());
     CHECK(t2.size() == 1U);
+}
+
+TEST_CASE("FingerTree - ReversedIsKeyedOnTheDualInstance") {
+    using FT  = beman::fingertree::tree::FingerTree<int>;
+    using Rev = decltype(FT{}.reversed());
+    static_assert(std::is_same_v<Rev::tag_type, std::size_t>);
+    static_assert(std::is_same_v<
+                  Rev::monoid_type,
+                  beman::fingertree::typeclass::dual_monoid<beman::fingertree::typeclass::sum_monoid<std::size_t>>>);
+    static_assert(!Rev::has_unit_count_measure);
+}
+
+TEST_CASE("FingerTree - TwoMonoidsOverOneValueTypeAreDifferentTrees") {
+    // Count and maximum are both monoids on std::size_t. Keying the tree on
+    // the instance, not the value type, keeps their cached measures apart.
+    struct ValueMeasure {
+        auto operator()(int value) const -> std::size_t { return static_cast<std::size_t>(value); }
+    };
+    using Count = beman::fingertree::tree::FingerTree<int>;
+    using Max =
+        beman::fingertree::tree::FingerTree<int, beman::fingertree::typeclass::max_monoid<std::size_t>, ValueMeasure>;
+    static_assert(!std::is_same_v<Count, Max>);
+    static_assert(std::is_same_v<Count::tag_type, Max::tag_type>);
+
+    auto m = Max::from_sequence({3, 9, 4});
+    CHECK(m.measure() == 9U);
+    CHECK(m.size() == 3U);            // O(N) path: not the unit-count measure
+    auto sa = m.split_at_measure(9U); // first prefix whose running max >= 9
+    CHECK(sa.d_left.flatten() == std::vector<int>{3});
+    CHECK(sa.d_right.flatten() == (std::vector<int>{9, 4}));
+}
+
+TEST_CASE("FingerTree - StatefulInstanceTravelsWithTheTree") {
+    using FT = beman::fingertree::tree::FingerTree<int, modular_sum>;
+
+    auto t = FT::from_sequence({1, 2, 3, 4}, std::allocator<std::byte>{}, modular_sum{5});
+    CHECK(t.get_monoid().d_modulus == 5U);
+    CHECK(t.measure() == 4U); // four elements, each measuring 1 under UnitMeasure; 4 mod 5
+
+    auto u = t.snoc(5).cons(6); // every new node combines under the stored instance
+    CHECK(u.get_monoid().d_modulus == 5U);
+    CHECK(u.measure() == 6U % 5U); // six elements
+
+    auto r = u.reversed();
+    CHECK(r.get_monoid().d_inner.d_modulus == 5U);
+    CHECK(r.measure() == u.measure());
+
+    auto sa = u.split_at_measure(1U);
+    CHECK(FT::concat(sa.d_left, sa.d_right).flatten() == u.flatten());
 }
 
 TEST_CASE("FingerTree - size() matches measure() for unit-measure trees") {

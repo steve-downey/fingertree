@@ -7,7 +7,9 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <optional>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 TEST_CASE("FingerTreeFoldableTest - LengthAndToVector") {
@@ -22,7 +24,7 @@ TEST_CASE("FingerTreeFoldableTest - FoldMapAccumulates") {
     using Tree           = beman::fingertree::tree::FingerTree<int>;
     const auto& foldable = beman::fingertree::foldable_typeclass<Tree>;
     auto        t        = Tree::from_sequence({1, 2, 3});
-    auto        sum      = foldable.fold_map([](int x) { return x; }, t);
+    auto        sum = foldable.fold_map([](int x) { return x; }, t, beman::fingertree::typeclass::sum_monoid<int>{});
     CHECK(sum == 6);
 }
 
@@ -45,9 +47,28 @@ TEST_CASE("FingerTreeFoldableTest - LargeTreeWalksAllLeaves") {
     for (int i = 1; i <= 100; ++i)
         t = t.snoc(i);
 
-    auto sum = foldable.fold_map([](int x) { return x; }, t);
+    auto sum = foldable.fold_map([](int x) { return x; }, t, beman::fingertree::typeclass::sum_monoid<int>{});
     CHECK(sum == 5050);
     CHECK(foldable.length(t) == 100);
+}
+
+namespace {
+template <class M, class F, class T>
+concept has_fold_map = requires(const M& m, F f, const T& t) { m.fold_map(f, t); };
+} // namespace
+
+TEST_CASE("FingerTreeFoldableTest - IntFoldMapNamesItsMonoid") {
+    // int carries several monoids, so no Monoid<int> is registered and the
+    // two-argument fold_map is not a candidate; the instance is passed.
+    using Tree = beman::fingertree::tree::FingerTree<int>;
+    using Map  = std::remove_cvref_t<decltype(beman::fingertree::foldable_typeclass<Tree>)>;
+    static_assert(!has_fold_map<Map, decltype([](int x) { return x; }), Tree>);
+
+    const auto& foldable = beman::fingertree::foldable_typeclass<Tree>;
+    auto        t        = Tree::from_sequence({3, 1, 4, 1, 5});
+    CHECK(foldable.fold_map([](int x) { return x; }, t, beman::fingertree::typeclass::max_monoid<int>{}) == 5);
+    CHECK(foldable.combine_all(t, beman::fingertree::typeclass::product_monoid<int>{}) == 60);
+    CHECK(foldable.find_first(t, [](int x) { return x > 3; }) == std::optional{4});
 }
 
 TEST_CASE("FingerTreeFoldableTest - StringFoldMap") {

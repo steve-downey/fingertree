@@ -4,8 +4,8 @@
 //
 // FingerTree uses the uniform-elem design (same as FT4) but replaces the
 // four-way Digit variant with inplace_vector<ElemPtr,4>.  A single
-// <T,Tag,Meas> use produces one FingerTree instantiation and one
-// Elem<T,Tag> instantiation, regardless of tree depth.
+// <T,Monoid,Meas> use produces one FingerTree instantiation and one
+// Elem<T,Monoid> instantiation, regardless of tree depth.
 //
 // This file is the baseline target for the compile-time comparison:
 //   FT2 DWARF count /  DWARF count  ≈  expected template expansion ratio
@@ -45,15 +45,13 @@ struct WeightMeasure {
     auto operator()(int x) const -> WeightTag { return WeightTag{x}; }
 };
 
-} // namespace
-
-namespace beman::fingertree::typeclass {
-template <>
-struct Monoid<WeightTag> {
+struct weight_monoid {
+    using value_type = WeightTag;
     constexpr auto identity() const -> WeightTag { return WeightTag{0}; }
     constexpr auto combine(WeightTag a, WeightTag b) const -> WeightTag { return WeightTag{a.value + b.value}; }
 };
-} // namespace beman::fingertree::typeclass
+
+} // namespace
 
 void finger_tree_probe_unit_measure() {
     using FT = beman::fingertree::tree::FingerTree<int>;
@@ -97,7 +95,7 @@ void finger_tree_probe_unit_measure() {
 }
 
 void finger_tree_probe_custom_measure() {
-    using FT = beman::fingertree::tree::FingerTree<int, WeightTag, WeightMeasure>;
+    using FT = beman::fingertree::tree::FingerTree<int, weight_monoid, WeightMeasure>;
 
     auto t = FT{};
     for (int i = 1; i <= 8; ++i)

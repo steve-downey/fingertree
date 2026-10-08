@@ -23,24 +23,26 @@ struct Interval {
     PAYLOAD_TYPE d_payload;
 };
 
-template <typename PAYLOAD_TYPE>
-struct IntervalMaxEndTag {
-    std::size_t d_max_end;
-    friend bool operator==(const IntervalMaxEndTag&, const IntervalMaxEndTag&) = default;
-};
-
+/** Measure policy: an interval measures its end point. Under
+ * `max_monoid<std::size_t>` the cached measure of any subtree is its
+ * maximum end point, which is what lets a query skip a subtree whole. The
+ * measure value type is a plain `std::size_t`; the monoid is chosen by the
+ * tree's instance type, not by wrapping the value.
+ */
 template <typename PAYLOAD_TYPE>
 struct IntervalMeasure {
-    auto operator()(const Interval<PAYLOAD_TYPE>& interval) const -> IntervalMaxEndTag<PAYLOAD_TYPE> {
-        return IntervalMaxEndTag<PAYLOAD_TYPE>{interval.d_end};
-    }
+    auto operator()(const Interval<PAYLOAD_TYPE>& interval) const -> std::size_t { return interval.d_end; }
 };
+
+/** The monoid instance the interval index measures under. */
+using IntervalMonoid = beman::fingertree::typeclass::max_monoid<std::size_t>;
 
 /** @brief Persistent interval index supporting stabbing and overlap queries.
  *
  * @tparam PAYLOAD_TYPE Arbitrary data associated with each interval.
- * @tparam Tree         Backing finger tree type (must use IntervalMaxEndTag
- *                      measure).  Default: FingerTree — correct at all sizes.
+ * @tparam Tree         Backing finger tree type (must use IntervalMonoid over
+ *                      IntervalMeasure).  Default: FingerTree — correct at all
+ *                      sizes.
  *
  * Complexity:
  * - insert:        O(1) amortized
@@ -49,8 +51,7 @@ struct IntervalMeasure {
  * - entries:       O(n)
  */
 template <typename PAYLOAD_TYPE,
-          typename Tree =
-              FingerTree<Interval<PAYLOAD_TYPE>, IntervalMaxEndTag<PAYLOAD_TYPE>, IntervalMeasure<PAYLOAD_TYPE>>>
+          typename Tree = FingerTree<Interval<PAYLOAD_TYPE>, IntervalMonoid, IntervalMeasure<PAYLOAD_TYPE>>>
 class FingerTreeIntervalIndex {
     using Entry = Interval<PAYLOAD_TYPE>;
 
@@ -71,8 +72,7 @@ class FingerTreeIntervalIndex {
 
     auto query_point(std::size_t point) const -> std::vector<PAYLOAD_TYPE> {
         std::vector<PAYLOAD_TYPE> out;
-        auto                      parts = d_tree.split_at(
-            [point](const IntervalMaxEndTag<PAYLOAD_TYPE>& prefix) { return prefix.d_max_end > point; });
+        auto                      parts = d_tree.split_at([point](std::size_t max_end) { return max_end > point; });
         parts.d_right.for_each([&](const Entry& e) {
             if (e.d_start <= point && point < e.d_end)
                 out.push_back(e.d_payload);
@@ -82,8 +82,7 @@ class FingerTreeIntervalIndex {
 
     auto query_overlap(std::size_t start, std::size_t end) const -> std::vector<PAYLOAD_TYPE> {
         std::vector<PAYLOAD_TYPE> out;
-        auto                      parts = d_tree.split_at(
-            [start](const IntervalMaxEndTag<PAYLOAD_TYPE>& prefix) { return prefix.d_max_end > start; });
+        auto                      parts = d_tree.split_at([start](std::size_t max_end) { return max_end > start; });
         parts.d_right.for_each([&](const Entry& e) {
             if (e.d_start < end && start < e.d_end)
                 out.push_back(e.d_payload);
@@ -96,43 +95,29 @@ class FingerTreeIntervalIndex {
 
 } // namespace beman::fingertree::tree
 
-namespace beman::fingertree::typeclass {
-
-template <typename PAYLOAD_TYPE>
-struct Monoid<beman::fingertree::tree::IntervalMaxEndTag<PAYLOAD_TYPE>> {
-    auto identity() const -> beman::fingertree::tree::IntervalMaxEndTag<PAYLOAD_TYPE> { return {0U}; }
-    auto combine(const beman::fingertree::tree::IntervalMaxEndTag<PAYLOAD_TYPE>& lhs,
-                 const beman::fingertree::tree::IntervalMaxEndTag<PAYLOAD_TYPE>& rhs) const
-        -> beman::fingertree::tree::IntervalMaxEndTag<PAYLOAD_TYPE> {
-        return {std::max(lhs.d_max_end, rhs.d_max_end)};
-    }
-};
-
-} // namespace beman::fingertree::typeclass
-
 namespace beman::fingertree {
 
 template <class PAYLOAD_TYPE, class Tree>
 struct FingerTreeIntervalIndexFoldableImpl {
-    template <class F>
+    using element_type = PAYLOAD_TYPE;
+
+    // The monoid is an instance object over the result type, passed by
+    // value; the Impl never chooses one (beman.transpose
+    // docs/decisions.md#monoid-selection).
+    template <class F, class RESULT_MONOID>
     auto fold_map(this auto&&,
                   F&&                                                                         function,
-                  const beman::fingertree::tree::FingerTreeIntervalIndex<PAYLOAD_TYPE, Tree>& index)
-        -> remove_cvref_t<std::invoke_result_t<F, const PAYLOAD_TYPE&>> {
-        using Result = remove_cvref_t<std::invoke_result_t<F, const PAYLOAD_TYPE&>>;
-        return std::ranges::fold_left(index.entries(),
-                                      beman::fingertree::typeclass::monoid_v<Result>.identity(),
-                                      [&](Result acc, const auto& entry) {
-                                          return beman::fingertree::typeclass::monoid_v<Result>.combine(
-                                              std::move(acc), std::invoke(function, entry.d_payload));
-                                      });
+                  const beman::fingertree::tree::FingerTreeIntervalIndex<PAYLOAD_TYPE, Tree>& index,
+                  RESULT_MONOID monoid) -> remove_cvref_t<std::invoke_result_t<F&, const PAYLOAD_TYPE&>> {
+        using Result = remove_cvref_t<std::invoke_result_t<F&, const PAYLOAD_TYPE&>>;
+        return std::ranges::fold_left(index.entries(), Result(monoid.identity()), [&](Result acc, const auto& value) {
+            return monoid.combine(std::move(acc), std::invoke(function, value.d_payload));
+        });
     }
 };
 
 template <class PAYLOAD_TYPE, class Tree>
-struct FingerTreeIntervalIndexFoldableMap : Foldable<FingerTreeIntervalIndexFoldableImpl<PAYLOAD_TYPE, Tree>> {
-    using FingerTreeIntervalIndexFoldableImpl<PAYLOAD_TYPE, Tree>::fold_map;
-};
+struct FingerTreeIntervalIndexFoldableMap : Foldable<FingerTreeIntervalIndexFoldableImpl<PAYLOAD_TYPE, Tree>> {};
 
 template <class PAYLOAD_TYPE, class Tree>
 inline constexpr auto foldable_typeclass<beman::fingertree::tree::FingerTreeIntervalIndex<PAYLOAD_TYPE, Tree>> =

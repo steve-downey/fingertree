@@ -305,7 +305,7 @@ TEST_CASE("pmr::FingerTree - allocator-aware T: allocator propagates into "
     std::pmr::monotonic_buffer_resource mr(buf.data(), buf.size(), std::pmr::null_memory_resource());
 
     using FTA = beman::fingertree::tree::FingerTree<AllocAwareValue,
-                                                    std::size_t,
+                                                    beman::fingertree::typeclass::sum_monoid<std::size_t>,
                                                     beman::fingertree::tree::UnitMeasure<AllocAwareValue, std::size_t>,
                                                     std::pmr::polymorphic_allocator<std::byte>>;
 

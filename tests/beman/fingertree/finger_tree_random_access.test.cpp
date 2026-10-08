@@ -13,7 +13,9 @@
 // Explicit -backed type alias.
 using Seq = beman::fingertree::tree::FingerTreeRandomAccess<
     int,
-    beman::fingertree::tree::FingerTree<int, std::size_t, beman::fingertree::tree::UnitMeasure<int, std::size_t>>>;
+    beman::fingertree::tree::FingerTree<int,
+                                        beman::fingertree::typeclass::sum_monoid<std::size_t>,
+                                        beman::fingertree::tree::UnitMeasure<int, std::size_t>>>;
 
 TEST_CASE("RandomAccess - EmptyAndSize") {
     Seq seq;

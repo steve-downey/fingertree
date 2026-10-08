@@ -31,8 +31,9 @@ auto make_tree(int n) -> FT {
 TEST_CASE("FingerTreeIterator - HeaderIsIdempotent") { REQUIRE(true); }
 
 TEST_CASE("FingerTreeIterator - IteratorCategoryIsBidirectional") {
-    using Iter = beman::fingertree::tree::
-        FingerTreeIterator<int, std::size_t, beman::fingertree::tree::UnitMeasure<int, std::size_t>>;
+    using Iter = beman::fingertree::tree::FingerTreeIterator<int,
+                                                             beman::fingertree::typeclass::sum_monoid<std::size_t>,
+                                                             beman::fingertree::tree::UnitMeasure<int, std::size_t>>;
     static_assert(std::bidirectional_iterator<Iter>);
     static_assert(!std::random_access_iterator<Iter>);
     static_assert(std::is_same_v<typename Iter::value_type, int>);

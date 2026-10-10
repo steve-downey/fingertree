@@ -77,6 +77,7 @@ $(function() {
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">beman::fingertree::tree Namespace Reference</div></div>
 </div><!--header-->
@@ -109,69 +110,123 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1Interval.html">Interval</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1IntervalMaxEndTag.html">IntervalMaxEndTag</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1IntervalMeasure.html">IntervalMeasure</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1MaxTag.html">MaxTag</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__max__monoid.html">optional_max_monoid</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1MinTag.html">MinTag</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__min__monoid.html">optional_min_monoid</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1PriorityMeasure.html">PriorityMeasure</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1PriorityTag.html">PriorityTag</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1ReversedMeasure.html">ReversedMeasure</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1RopeChunkMeasure.html">RopeChunkMeasure</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1UnitMeasure.html">UnitMeasure</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ada4e6439d0af6c17224aee5f6c0991f3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#ada4e6439d0af6c17224aee5f6c0991f3">IntervalMonoid</a> = <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1max__monoid.html">beman::fingertree::typeclass::max_monoid</a>&lt; std::size_t &gt;</td></tr>
+<tr class="separator:ada4e6439d0af6c17224aee5f6c0991f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84720d6eef5effca4a233e391399071d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a84720d6eef5effca4a233e391399071d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#a84720d6eef5effca4a233e391399071d">PriorityTag</a> = std::tuple&lt; std::size_t, std::optional&lt; T &gt;, std::optional&lt; T &gt; &gt;</td></tr>
+<tr class="separator:a84720d6eef5effca4a233e391399071d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7078e28f83644c48f78183e907aad45"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa7078e28f83644c48f78183e907aad45"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#aa7078e28f83644c48f78183e907aad45">PriorityMonoid</a> = <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1tuple__monoid.html">beman::fingertree::typeclass::tuple_monoid</a>&lt; <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1sum__monoid.html">beman::fingertree::typeclass::sum_monoid</a>&lt; std::size_t &gt;, <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__min__monoid.html">optional_min_monoid</a>&lt; T &gt;, <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__max__monoid.html">optional_max_monoid</a>&lt; T &gt; &gt;</td></tr>
+<tr class="separator:aa7078e28f83644c48f78183e907aad45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:accd9fbd36eb620652283e865e1cd42dc"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Tag , typename MP , typename Alloc &gt; </td></tr>
-<tr class="memitem:accd9fbd36eb620652283e865e1cd42dc"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#accd9fbd36eb620652283e865e1cd42dc">begin</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, Tag, MP, Alloc &gt; &amp;t) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt; T, Tag, MP, Alloc &gt;</td></tr>
-<tr class="separator:accd9fbd36eb620652283e865e1cd42dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a170b1a0ad1acedbc3782d2a3cb17d5db"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Tag , typename MP , typename Alloc &gt; </td></tr>
-<tr class="memitem:a170b1a0ad1acedbc3782d2a3cb17d5db"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#a170b1a0ad1acedbc3782d2a3cb17d5db">end</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, Tag, MP, Alloc &gt; &amp;t) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt; T, Tag, MP, Alloc &gt;</td></tr>
-<tr class="separator:a170b1a0ad1acedbc3782d2a3cb17d5db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3f18dc65dd1c31a0b610bb5e744feb9"><td class="memTemplParams" colspan="2">template&lt;typename T , typename MONOID , typename MP , typename Alloc &gt; </td></tr>
+<tr class="memitem:ac3f18dc65dd1c31a0b610bb5e744feb9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#ac3f18dc65dd1c31a0b610bb5e744feb9">begin</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MP, Alloc &gt; &amp;t) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt; T, MONOID, MP, Alloc &gt;</td></tr>
+<tr class="separator:ac3f18dc65dd1c31a0b610bb5e744feb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e6fc642d1a43807407075590b44364a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename MONOID , typename MP , typename Alloc &gt; </td></tr>
+<tr class="memitem:a1e6fc642d1a43807407075590b44364a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#a1e6fc642d1a43807407075590b44364a">end</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MP, Alloc &gt; &amp;t) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt; T, MONOID, MP, Alloc &gt;</td></tr>
+<tr class="separator:a1e6fc642d1a43807407075590b44364a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="accd9fbd36eb620652283e865e1cd42dc" name="accd9fbd36eb620652283e865e1cd42dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accd9fbd36eb620652283e865e1cd42dc">&#9670;&#160;</a></span>begin()</h2>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="ada4e6439d0af6c17224aee5f6c0991f3" name="ada4e6439d0af6c17224aee5f6c0991f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada4e6439d0af6c17224aee5f6c0991f3">&#9670;&#160;</a></span>IntervalMonoid</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#ada4e6439d0af6c17224aee5f6c0991f3">beman::fingertree::tree::IntervalMonoid</a> = typedef <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1max__monoid.html">beman::fingertree::typeclass::max_monoid</a>&lt;std::size_t&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The monoid instance the interval index measures under. </p>
+
+</div>
+</div>
+<a id="aa7078e28f83644c48f78183e907aad45" name="aa7078e28f83644c48f78183e907aad45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7078e28f83644c48f78183e907aad45">&#9670;&#160;</a></span>PriorityMonoid</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tag , typename MP , typename Alloc &gt; </div>
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto beman::fingertree::tree::begin </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, Tag, MP, Alloc &gt; &amp;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt;T, Tag, MP, Alloc&gt; </td>
+          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#aa7078e28f83644c48f78183e907aad45">beman::fingertree::tree::PriorityMonoid</a> = typedef <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1tuple__monoid.html">beman::fingertree::typeclass::tuple_monoid</a>&lt;<a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1sum__monoid.html">beman::fingertree::typeclass::sum_monoid</a>&lt;std::size_t&gt;, <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__min__monoid.html">optional_min_monoid</a>&lt;T&gt;, <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__max__monoid.html">optional_max_monoid</a>&lt;T&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a170b1a0ad1acedbc3782d2a3cb17d5db" name="a170b1a0ad1acedbc3782d2a3cb17d5db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a170b1a0ad1acedbc3782d2a3cb17d5db">&#9670;&#160;</a></span>end()</h2>
+<a id="a84720d6eef5effca4a233e391399071d" name="a84720d6eef5effca4a233e391399071d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84720d6eef5effca4a233e391399071d">&#9670;&#160;</a></span>PriorityTag</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tag , typename MP , typename Alloc &gt; </div>
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#a84720d6eef5effca4a233e391399071d">beman::fingertree::tree::PriorityTag</a> = typedef std::tuple&lt;std::size_t, std::optional&lt;T&gt;, std::optional&lt;T&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The priority queue's measure value: element count, minimum, maximum. A plain tuple; the monoid that combines it is <code>PriorityMonoid&lt;T&gt;</code>, a product of three instances, so adding the count cost one more tuple element and one more operand, not a new tag type and specialization. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ac3f18dc65dd1c31a0b610bb5e744feb9" name="ac3f18dc65dd1c31a0b610bb5e744feb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3f18dc65dd1c31a0b610bb5e744feb9">&#9670;&#160;</a></span>begin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename MONOID , typename MP , typename Alloc &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto beman::fingertree::tree::begin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MP, Alloc &gt; &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td> -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt;T, MONOID, MP, Alloc&gt; </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e6fc642d1a43807407075590b44364a" name="a1e6fc642d1a43807407075590b44364a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e6fc642d1a43807407075590b44364a">&#9670;&#160;</a></span>end()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename MONOID , typename MP , typename Alloc &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto beman::fingertree::tree::end </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, Tag, MP, Alloc &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MP, Alloc &gt; &amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt;T, Tag, MP, Alloc&gt; </td>
+          <td> -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt;T, MONOID, MP, Alloc&gt; </td>
         </tr>
       </table>
 </div><div class="memdoc">

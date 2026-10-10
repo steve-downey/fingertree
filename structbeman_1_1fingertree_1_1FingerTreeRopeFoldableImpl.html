@@ -75,6 +75,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="structbeman_1_1fingertree_1_1FingerTreeRopeFoldableImpl-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">beman::fingertree::FingerTreeRopeFoldableImpl&lt; Tree &gt; Struct Template Reference</div></div>
@@ -93,22 +94,44 @@ Inheritance diagram for beman::fingertree::FingerTreeRopeFoldableImpl&lt; Tree &
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:af3b28745f1b27698f1c858c3b87cea21"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreeRopeFoldableImpl.html#af3b28745f1b27698f1c858c3b87cea21">element_type</a> = std::string</td></tr>
+<tr class="separator:af3b28745f1b27698f1c858c3b87cea21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a71fc5fc4e5dcbd05b5745e911d71c2c1"><td class="memTemplParams" colspan="2">template&lt;class F &gt; </td></tr>
-<tr class="memitem:a71fc5fc4e5dcbd05b5745e911d71c2c1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreeRopeFoldableImpl.html#a71fc5fc4e5dcbd05b5745e911d71c2c1">fold_map</a> (this auto &amp;&amp;, F &amp;&amp;function, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeRope.html">beman::fingertree::tree::FingerTreeRope</a>&lt; Tree &gt; &amp;rope) -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt; std::invoke_result_t&lt; F, const std::string &amp; &gt; &gt;</td></tr>
-<tr class="separator:a71fc5fc4e5dcbd05b5745e911d71c2c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0a3ab630482085fd5dc78b9c8da7ea7"><td class="memTemplParams" colspan="2">template&lt;class F , class RESULT_MONOID &gt; </td></tr>
+<tr class="memitem:ae0a3ab630482085fd5dc78b9c8da7ea7"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreeRopeFoldableImpl.html#ae0a3ab630482085fd5dc78b9c8da7ea7">fold_map</a> (this auto &amp;&amp;, F &amp;&amp;function, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeRope.html">beman::fingertree::tree::FingerTreeRope</a>&lt; Tree &gt; &amp;rope, RESULT_MONOID monoid) -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt; std::invoke_result_t&lt; F &amp;, const std::string &amp; &gt; &gt;</td></tr>
+<tr class="separator:ae0a3ab630482085fd5dc78b9c8da7ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="af3b28745f1b27698f1c858c3b87cea21" name="af3b28745f1b27698f1c858c3b87cea21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3b28745f1b27698f1c858c3b87cea21">&#9670;&#160;</a></span>element_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Tree &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structbeman_1_1fingertree_1_1FingerTreeRopeFoldableImpl.html">beman::fingertree::FingerTreeRopeFoldableImpl</a>&lt; Tree &gt;::element_type =  std::string</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a71fc5fc4e5dcbd05b5745e911d71c2c1" name="a71fc5fc4e5dcbd05b5745e911d71c2c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71fc5fc4e5dcbd05b5745e911d71c2c1">&#9670;&#160;</a></span>fold_map()</h2>
+<a id="ae0a3ab630482085fd5dc78b9c8da7ea7" name="ae0a3ab630482085fd5dc78b9c8da7ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0a3ab630482085fd5dc78b9c8da7ea7">&#9670;&#160;</a></span>fold_map()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class Tree &gt; </div>
 <div class="memtemplate">
-template&lt;class F &gt; </div>
+template&lt;class F , class RESULT_MONOID &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -129,12 +152,18 @@ template&lt;class F &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeRope.html">beman::fingertree::tree::FingerTreeRope</a>&lt; Tree &gt; &amp;&#160;</td>
-          <td class="paramname"><em>rope</em>&#160;</td>
+          <td class="paramname"><em>rope</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RESULT_MONOID&#160;</td>
+          <td class="paramname"><em>monoid</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt;std::invoke_result_t&lt;F, const std::string&amp;&gt;&gt; </td>
+          <td></td><td> -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt;std::invoke_result_t&lt;F&amp;, const std::string&amp;&gt;&gt; </td>
         </tr>
       </table>
   </td>

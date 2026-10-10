@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['traversable_5ftypeclass_0',['traversable_typeclass',['../namespacebeman_1_1fingertree.html#abc1b0b280e4a773986cce8f28f58da9d',1,'beman::fingertree']]]
+  ['is_5foptional_5fv_0',['is_optional_v',['../namespacebeman_1_1fingertree_1_1detail.html#a378f639faacde5306e3d3b89b264bf42',1,'beman::fingertree::detail']]]
 ];

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['reversedmeasure_0',['ReversedMeasure',['../structbeman_1_1fingertree_1_1tree_1_1ReversedMeasure.html',1,'beman::fingertree::tree']]],
-  ['rightfoldprogram_1',['RightFoldProgram',['../structbeman_1_1fingertree_1_1detail_1_1RightFoldProgram.html',1,'beman::fingertree::detail']]],
-  ['rightfoldprogramt_2',['RightFoldProgramT',['../structbeman_1_1fingertree_1_1detail_1_1RightFoldProgramT.html',1,'beman::fingertree::detail']]],
-  ['ropechunkmeasure_3',['RopeChunkMeasure',['../structbeman_1_1fingertree_1_1tree_1_1RopeChunkMeasure.html',1,'beman::fingertree::tree']]]
+  ['right_5fcompose_5fmonoid_0',['right_compose_monoid',['../structbeman_1_1fingertree_1_1detail_1_1right__compose__monoid.html',1,'beman::fingertree::detail']]],
+  ['ropechunkmeasure_1',['RopeChunkMeasure',['../structbeman_1_1fingertree_1_1tree_1_1RopeChunkMeasure.html',1,'beman::fingertree::tree']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['back_0',['back',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a464d9fe66df8b5682ffb60a3caa0f809',1,'beman::fingertree::tree::FingerTree']]],
-  ['begin_1',['begin',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a2632de63bc2eb66da6b2e67a572d4daf',1,'beman::fingertree::tree::FingerTree::begin()'],['../namespacebeman_1_1fingertree_1_1tree.html#accd9fbd36eb620652283e865e1cd42dc',1,'beman::fingertree::tree::begin()']]]
+  ['back_0',['back',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5c697d8423f2a0de75c1e6ee780b7039',1,'beman::fingertree::tree::FingerTree']]],
+  ['begin_1',['begin',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#afff3e08310e83cea63209ac9705a5507',1,'beman::fingertree::tree::FingerTree::begin()'],['../namespacebeman_1_1fingertree_1_1tree.html#ac3f18dc65dd1c31a0b610bb5e744feb9',1,'beman::fingertree::tree::begin()']]]
 ];

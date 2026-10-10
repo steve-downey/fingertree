@@ -75,6 +75,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="structbeman_1_1fingertree_1_1FingerTreeIntervalIndexFoldableImpl-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">beman::fingertree::FingerTreeIntervalIndexFoldableImpl&lt; PAYLOAD_TYPE, Tree &gt; Struct Template Reference</div></div>
@@ -93,22 +94,44 @@ Inheritance diagram for beman::fingertree::FingerTreeIntervalIndexFoldableImpl&l
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a07530961a7cf022659310bc73ba835cd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreeIntervalIndexFoldableImpl.html#a07530961a7cf022659310bc73ba835cd">element_type</a> = PAYLOAD_TYPE</td></tr>
+<tr class="separator:a07530961a7cf022659310bc73ba835cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab5a2cd30e5e34dad303787f1e057624a"><td class="memTemplParams" colspan="2">template&lt;class F &gt; </td></tr>
-<tr class="memitem:ab5a2cd30e5e34dad303787f1e057624a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreeIntervalIndexFoldableImpl.html#ab5a2cd30e5e34dad303787f1e057624a">fold_map</a> (this auto &amp;&amp;, F &amp;&amp;function, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIntervalIndex.html">beman::fingertree::tree::FingerTreeIntervalIndex</a>&lt; PAYLOAD_TYPE, Tree &gt; &amp;index) -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt; std::invoke_result_t&lt; F, const PAYLOAD_TYPE &amp; &gt; &gt;</td></tr>
-<tr class="separator:ab5a2cd30e5e34dad303787f1e057624a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a170bf06b4a16fd9037554ececa59483d"><td class="memTemplParams" colspan="2">template&lt;class F , class RESULT_MONOID &gt; </td></tr>
+<tr class="memitem:a170bf06b4a16fd9037554ececa59483d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreeIntervalIndexFoldableImpl.html#a170bf06b4a16fd9037554ececa59483d">fold_map</a> (this auto &amp;&amp;, F &amp;&amp;function, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIntervalIndex.html">beman::fingertree::tree::FingerTreeIntervalIndex</a>&lt; PAYLOAD_TYPE, Tree &gt; &amp;index, RESULT_MONOID monoid) -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt; std::invoke_result_t&lt; F &amp;, const PAYLOAD_TYPE &amp; &gt; &gt;</td></tr>
+<tr class="separator:a170bf06b4a16fd9037554ececa59483d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a07530961a7cf022659310bc73ba835cd" name="a07530961a7cf022659310bc73ba835cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07530961a7cf022659310bc73ba835cd">&#9670;&#160;</a></span>element_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class PAYLOAD_TYPE , class Tree &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structbeman_1_1fingertree_1_1FingerTreeIntervalIndexFoldableImpl.html">beman::fingertree::FingerTreeIntervalIndexFoldableImpl</a>&lt; PAYLOAD_TYPE, Tree &gt;::element_type =  PAYLOAD_TYPE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab5a2cd30e5e34dad303787f1e057624a" name="ab5a2cd30e5e34dad303787f1e057624a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5a2cd30e5e34dad303787f1e057624a">&#9670;&#160;</a></span>fold_map()</h2>
+<a id="a170bf06b4a16fd9037554ececa59483d" name="a170bf06b4a16fd9037554ececa59483d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a170bf06b4a16fd9037554ececa59483d">&#9670;&#160;</a></span>fold_map()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class PAYLOAD_TYPE , class Tree &gt; </div>
 <div class="memtemplate">
-template&lt;class F &gt; </div>
+template&lt;class F , class RESULT_MONOID &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -129,12 +152,18 @@ template&lt;class F &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIntervalIndex.html">beman::fingertree::tree::FingerTreeIntervalIndex</a>&lt; PAYLOAD_TYPE, Tree &gt; &amp;&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RESULT_MONOID&#160;</td>
+          <td class="paramname"><em>monoid</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt;std::invoke_result_t&lt;F, const PAYLOAD_TYPE&amp;&gt;&gt; </td>
+          <td></td><td> -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt;std::invoke_result_t&lt;F&amp;, const PAYLOAD_TYPE&amp;&gt;&gt; </td>
         </tr>
       </table>
   </td>

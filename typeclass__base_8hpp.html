@@ -77,20 +77,38 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">typeclass_base.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;optional&gt;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 </div>
 <p><a href="typeclass__base_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1applicative__value_3_01T_00_01std_1_1void__t_3_01typename_01remove_62cefd443a56c62a01ba3be7e8ce0ce9.html">beman::fingertree::applicative_value&lt; T, std::void_t&lt; typename remove_cvref_t&lt; T &gt;::value_type &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1applicative__value_3_01T_00_01std_1_1void__t_3_01typename_01std_1_1e4cada4e20ef186fd6bde1f255a3134f.html">beman::fingertree::applicative_value&lt; T, std::void_t&lt; typename std::remove_cvref_t&lt; T &gt;::value_type &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1applicative__value_3_01std_1_1optional_3_01T_01_4_00_01void_01_4.html">beman::fingertree::applicative_value&lt; std::optional&lt; T &gt;, void &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1is__optional.html">beman::fingertree::detail::is_optional&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1is__optional_3_01std_1_1optional_3_01U_01_4_01_4.html">beman::fingertree::detail::is_optional&lt; std::optional&lt; U &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1probe__witness.html">beman::fingertree::detail::probe_witness&lt; RESULT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <a href="structbeman_1_1fingertree_1_1detail_1_1probe__witness.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1consuming__probe__witness.html">beman::fingertree::detail::consuming_probe_witness&lt; ARGUMENT, RESULT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <a href="structbeman_1_1fingertree_1_1detail_1_1consuming__probe__witness.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1probe__witness2.html">beman::fingertree::detail::probe_witness2&lt; RESULT &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <a href="structbeman_1_1fingertree_1_1detail_1_1probe__witness2.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -99,15 +117,51 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacebeman_1_1fingertree"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html">beman::fingertree</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacebeman_1_1fingertree_1_1detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html">beman::fingertree::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a9f8d839414c4dab79ac7ef64ee6d7582"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a9f8d839414c4dab79ac7ef64ee6d7582"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">beman::fingertree::remove_cvref_t</a> = std::remove_cvref_t&lt; T &gt;</td></tr>
 <tr class="separator:a9f8d839414c4dab79ac7ef64ee6d7582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec0fd08cf3750c46e4e27b924292fa6d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aec0fd08cf3750c46e4e27b924292fa6d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#aec0fd08cf3750c46e4e27b924292fa6d">beman::fingertree::applicative_value_t</a> = typename applicative_value&lt; remove_cvref_t&lt; T &gt; &gt;::type</td></tr>
-<tr class="separator:aec0fd08cf3750c46e4e27b924292fa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b3863c00ba0688a8380866fafd992a"><td class="memTemplParams" colspan="2">template&lt;class IMPL , class SELF &gt; </td></tr>
+<tr class="memitem:a63b3863c00ba0688a8380866fafd992a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#a63b3863c00ba0688a8380866fafd992a">beman::fingertree::impl_ref_t</a> = std::conditional_t&lt; std::is_const_v&lt; std::remove_reference_t&lt; SELF &gt; &gt;, const IMPL, IMPL &gt; &amp;</td></tr>
+<tr class="separator:a63b3863c00ba0688a8380866fafd992a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d81b5b1329e34d72071cec20b71d031"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a2d81b5b1329e34d72071cec20b71d031"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#a2d81b5b1329e34d72071cec20b71d031">beman::fingertree::applicative_value_t</a> = typename applicative_value&lt; std::remove_cvref_t&lt; T &gt; &gt;::type</td></tr>
+<tr class="memdesc:a2d81b5b1329e34d72071cec20b71d031"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <br /></td></tr>
+<tr class="separator:a2d81b5b1329e34d72071cec20b71d031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee86dbc92d6969ccc1719e2514d39344"><td class="memTemplParams" colspan="2">template&lt;class OPERAND &gt; </td></tr>
+<tr class="memitem:aee86dbc92d6969ccc1719e2514d39344"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html#aee86dbc92d6969ccc1719e2514d39344">beman::fingertree::detail::contained_ref_t</a> = std::conditional_t&lt; std::is_lvalue_reference_v&lt; OPERAND &gt;, const std::remove_reference_t&lt; decltype(*std::declval&lt; OPERAND &amp; &gt;())&gt; &amp;, decltype(*std::declval&lt; OPERAND &gt;())&gt;</td></tr>
+<tr class="memdesc:aee86dbc92d6969ccc1719e2514d39344"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <br /></td></tr>
+<tr class="separator:aee86dbc92d6969ccc1719e2514d39344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c846f8f3ed36787421e92ab69bf2f3"><td class="memTemplParams" colspan="2">template&lt;class CONTAINER &gt; </td></tr>
+<tr class="memitem:a09c846f8f3ed36787421e92ab69bf2f3"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html#a09c846f8f3ed36787421e92ab69bf2f3">beman::fingertree::detail::element_ref_t</a> = decltype(forward_at(std::declval&lt; CONTAINER &gt;(), std::size_t{}))</td></tr>
+<tr class="memdesc:a09c846f8f3ed36787421e92ab69bf2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <br /></td></tr>
+<tr class="separator:a09c846f8f3ed36787421e92ab69bf2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a555a891277f6c5f02cc17b2b320b0332"><td class="memTemplParams" colspan="2">template&lt;class OPERAND &gt; </td></tr>
+<tr class="memitem:a555a891277f6c5f02cc17b2b320b0332"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html#a555a891277f6c5f02cc17b2b320b0332">beman::fingertree::detail::forward_contained</a> (OPERAND &amp;&amp;operand) -&gt; contained_ref_t&lt; OPERAND &gt;</td></tr>
+<tr class="separator:a555a891277f6c5f02cc17b2b320b0332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad11278e145740ce432336d7920f44ba2"><td class="memTemplParams" colspan="2">template&lt;class CONTAINER &gt; </td></tr>
+<tr class="memitem:ad11278e145740ce432336d7920f44ba2"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html#ad11278e145740ce432336d7920f44ba2">beman::fingertree::detail::forward_at</a> (CONTAINER &amp;&amp;container, std::size_t index) -&gt; decltype(auto)</td></tr>
+<tr class="separator:ad11278e145740ce432336d7920f44ba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac407ca8465e9611078748bcfef6f74eb"><td class="memTemplParams" colspan="2">template&lt;class U , std::size_t N, class GENERATOR , std::size_t... INDICES&gt; </td></tr>
+<tr class="memitem:ac407ca8465e9611078748bcfef6f74eb"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html#ac407ca8465e9611078748bcfef6f74eb">beman::fingertree::detail::make_array</a> (GENERATOR &amp;&amp;generator, std::index_sequence&lt; INDICES... &gt;) -&gt; std::array&lt; U, N &gt;</td></tr>
+<tr class="separator:ac407ca8465e9611078748bcfef6f74eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:acffeb743c619ca9bb2caa50bfce0b2e1"><td class="memTemplParams" colspan="2">template&lt;class... &gt; </td></tr>
+<tr class="memitem:acffeb743c619ca9bb2caa50bfce0b2e1"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#acffeb743c619ca9bb2caa50bfce0b2e1">beman::fingertree::always_false_v</a> = false</td></tr>
+<tr class="separator:acffeb743c619ca9bb2caa50bfce0b2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a378f639faacde5306e3d3b89b264bf42"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a378f639faacde5306e3d3b89b264bf42"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html#a378f639faacde5306e3d3b89b264bf42">beman::fingertree::detail::is_optional_v</a> = is_optional&lt;std::remove_cvref_t&lt;T&gt;&gt;::value</td></tr>
+<tr class="memdesc:a378f639faacde5306e3d3b89b264bf42"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <br /></td></tr>
+<tr class="separator:a378f639faacde5306e3d3b89b264bf42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

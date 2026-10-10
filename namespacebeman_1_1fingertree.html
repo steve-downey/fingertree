@@ -77,6 +77,7 @@ $(function() {
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -103,7 +104,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1applicative__value_3_01std_1_1optional_3_01T_01_4_00_01void_01_4.html">applicative_value&lt; std::optional&lt; T &gt;, void &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1applicative__value_3_01T_00_01std_1_1void__t_3_01typename_01remove_62cefd443a56c62a01ba3be7e8ce0ce9.html">applicative_value&lt; T, std::void_t&lt; typename remove_cvref_t&lt; T &gt;::value_type &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1applicative__value_3_01T_00_01std_1_1void__t_3_01typename_01std_1_1e4cada4e20ef186fd6bde1f255a3134f.html">applicative_value&lt; T, std::void_t&lt; typename std::remove_cvref_t&lt; T &gt;::value_type &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreeFoldableImpl.html">FingerTreeFoldableImpl</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,14 +165,25 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1VectorFunctorMap.html">VectorFunctorMap</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptbeman_1_1fingertree_1_1foldable__impl.html">foldable_impl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptbeman_1_1fingertree_1_1foldable__object.html">foldable_object</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a9f8d839414c4dab79ac7ef64ee6d7582"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a9f8d839414c4dab79ac7ef64ee6d7582"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a> = std::remove_cvref_t&lt; T &gt;</td></tr>
 <tr class="separator:a9f8d839414c4dab79ac7ef64ee6d7582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec0fd08cf3750c46e4e27b924292fa6d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aec0fd08cf3750c46e4e27b924292fa6d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#aec0fd08cf3750c46e4e27b924292fa6d">applicative_value_t</a> = typename <a class="el" href="structbeman_1_1fingertree_1_1applicative__value.html">applicative_value</a>&lt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt; T &gt; &gt;::type</td></tr>
-<tr class="separator:aec0fd08cf3750c46e4e27b924292fa6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b3863c00ba0688a8380866fafd992a"><td class="memTemplParams" colspan="2">template&lt;class IMPL , class SELF &gt; </td></tr>
+<tr class="memitem:a63b3863c00ba0688a8380866fafd992a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#a63b3863c00ba0688a8380866fafd992a">impl_ref_t</a> = std::conditional_t&lt; std::is_const_v&lt; std::remove_reference_t&lt; SELF &gt; &gt;, const IMPL, IMPL &gt; &amp;</td></tr>
+<tr class="separator:a63b3863c00ba0688a8380866fafd992a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d81b5b1329e34d72071cec20b71d031"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a2d81b5b1329e34d72071cec20b71d031"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#a2d81b5b1329e34d72071cec20b71d031">applicative_value_t</a> = typename <a class="el" href="structbeman_1_1fingertree_1_1applicative__value.html">applicative_value</a>&lt; std::remove_cvref_t&lt; T &gt; &gt;::type</td></tr>
+<tr class="memdesc:a2d81b5b1329e34d72071cec20b71d031"><td class="mdescLeft">&#160;</td><td class="mdescRight">\expos  <br /></td></tr>
+<tr class="separator:a2d81b5b1329e34d72071cec20b71d031"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -200,10 +212,13 @@ Variables</h2></td></tr>
 <tr class="memitem:abc1b0b280e4a773986cce8f28f58da9d"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:abc1b0b280e4a773986cce8f28f58da9d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#abc1b0b280e4a773986cce8f28f58da9d">traversable_typeclass</a> = std::false_type{}</td></tr>
 <tr class="separator:abc1b0b280e4a773986cce8f28f58da9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acffeb743c619ca9bb2caa50bfce0b2e1"><td class="memTemplParams" colspan="2">template&lt;class... &gt; </td></tr>
+<tr class="memitem:acffeb743c619ca9bb2caa50bfce0b2e1"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree.html#acffeb743c619ca9bb2caa50bfce0b2e1">always_false_v</a> = false</td></tr>
+<tr class="separator:acffeb743c619ca9bb2caa50bfce0b2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="aec0fd08cf3750c46e4e27b924292fa6d" name="aec0fd08cf3750c46e4e27b924292fa6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec0fd08cf3750c46e4e27b924292fa6d">&#9670;&#160;</a></span>applicative_value_t</h2>
+<a id="a2d81b5b1329e34d72071cec20b71d031" name="a2d81b5b1329e34d72071cec20b71d031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d81b5b1329e34d72071cec20b71d031">&#9670;&#160;</a></span>applicative_value_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,11 +226,32 @@ Variables</h2></td></tr>
 template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree.html#aec0fd08cf3750c46e4e27b924292fa6d">beman::fingertree::applicative_value_t</a> = typedef typename <a class="el" href="structbeman_1_1fingertree_1_1applicative__value.html">applicative_value</a>&lt;<a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt;T&gt; &gt;::type</td>
+          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree.html#a2d81b5b1329e34d72071cec20b71d031">beman::fingertree::applicative_value_t</a> = typedef typename <a class="el" href="structbeman_1_1fingertree_1_1applicative__value.html">applicative_value</a>&lt;std::remove_cvref_t&lt;T&gt; &gt;::type</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>\expos </p>
 <p>Convenience alias for <code><a class="el" href="structbeman_1_1fingertree_1_1applicative__value.html">applicative_value</a>&lt;T&gt;::type</code>. </p>
+
+</div>
+</div>
+<a id="a63b3863c00ba0688a8380866fafd992a" name="a63b3863c00ba0688a8380866fafd992a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b3863c00ba0688a8380866fafd992a">&#9670;&#160;</a></span>impl_ref_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class IMPL , class SELF &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree.html#a63b3863c00ba0688a8380866fafd992a">beman::fingertree::impl_ref_t</a> = typedef std::conditional_t&lt;std::is_const_v&lt;std::remove_reference_t&lt;SELF&gt; &gt;, const IMPL, IMPL&gt;&amp;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The <code>Impl</code> sub-object reference a typeclass base's member should address, given the deduced type of its <code>self</code> parameter.</p>
+<p>Every derived operation on a typeclass base takes the same shape: probe <code>Impl</code> for a native version of the operation, forward to it if it is there, derive otherwise. Both halves address <code>Impl</code> rather than <code>self</code>, which is what keeps two mutually-derivable operations from recursing into each other. This spells the const propagation that addressing needs, once.</p>
+<p>The cast itself cannot live here. Each base inherits its <code>Impl</code> protectedly, so only a member of that base may perform the conversion; each base carries a three-line private <code>impl_of</code> that does, and they all name this alias. See <code>beman.transpose docs/decisions.md#impl-access-through-bases</code>. </p>
 
 </div>
 </div>
@@ -232,6 +268,7 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Local spelling of <code>std::remove_cvref_t</code>, kept for the typeclass headers and tree adapters written against it. </p>
 
 </div>
 </div>
@@ -263,7 +300,7 @@ template&lt;class VALUE_TYPE &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Combines two values using the Monoid of VALUE_TYPE. </p>
+<p>Combines two values using the registered Monoid of VALUE_TYPE. </p>
 
 </div>
 </div>
@@ -283,7 +320,7 @@ template&lt;class VALUE_TYPE &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the identity element for the Monoid of VALUE_TYPE. </p>
+<p>Returns the identity element of the registered Monoid of VALUE_TYPE. </p>
 
 </div>
 </div>
@@ -328,6 +365,33 @@ template&lt;class F , class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="acffeb743c619ca9bb2caa50bfce0b2e1" name="acffeb743c619ca9bb2caa50bfce0b2e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acffeb743c619ca9bb2caa50bfce0b2e1">&#9670;&#160;</a></span>always_false_v</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool beman::fingertree::always_false_v = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Always false, but dependent on a template parameter pack.</p>
+<p>A <code>static_assert</code> written directly with <code>false</code> fires as soon as the enclosing template is parsed, even if the member it guards is never called. Making the condition depend on the pack defers the check to instantiation, so it fires only when someone actually calls the guarded operation &ndash; which is what lets a member give a custom "this operation
+does not exist, here is why" diagnostic instead of a bare "no member" error. </p>
+
+</div>
+</div>
 <a id="a65e8705f281ab8dfc54b7ec479736769" name="a65e8705f281ab8dfc54b7ec479736769"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65e8705f281ab8dfc54b7ec479736769">&#9670;&#160;</a></span>applicative_typeclass</h2>
 

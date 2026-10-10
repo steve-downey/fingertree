@@ -77,12 +77,15 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">foldable.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="monoid_8hpp_source.html">beman/fingertree/typeclass/monoid.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="typeclass__base_8hpp_source.html">beman/fingertree/typeclass/typeclass_base.hpp</a>&gt;</code><br />
+<code>#include &lt;concepts&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;optional&gt;</code><br />
@@ -94,37 +97,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1IdentityFoldFunc.html">beman::fingertree::detail::IdentityFoldFunc&lt; STATE &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1left__compose__monoid.html">beman::fingertree::detail::left_compose_monoid&lt; STATE &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1ComposedFoldFunc.html">beman::fingertree::detail::ComposedFoldFunc&lt; F1, F2 &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1right__compose__monoid.html">beman::fingertree::detail::right_compose_monoid&lt; STATE &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1LeftFoldProgram.html">beman::fingertree::detail::LeftFoldProgram&lt; STATE &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1identity__probe__witness.html">beman::fingertree::detail::identity_probe_witness</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1LeftFoldProgramT.html">beman::fingertree::detail::LeftFoldProgramT&lt; F &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1vector__probe__witness.html">beman::fingertree::detail::vector_probe_witness</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1RightFoldProgram.html">beman::fingertree::detail::RightFoldProgram&lt; STATE &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1RightFoldProgramT.html">beman::fingertree::detail::RightFoldProgramT&lt; F &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1Any.html">beman::fingertree::detail::Any</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1All.html">beman::fingertree::detail::All</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1First.html">beman::fingertree::detail::First&lt; VALUE_TYPE &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1detail_1_1LeftFoldProgram_3_01STATE_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::detail::LeftFoldProgram&lt; STATE &gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1detail_1_1LeftFoldProgramT_3_01F_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::detail::LeftFoldProgramT&lt; F &gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1detail_1_1RightFoldProgram_3_01STATE_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::detail::RightFoldProgram&lt; STATE &gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1detail_1_1RightFoldProgramT_3_01F_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::detail::RightFoldProgramT&lt; F &gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1detail_1_1Any_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::detail::Any &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1detail_1_1All_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::detail::All &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1detail_1_1First_3_01VALUE__TYPE_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::detail::First&lt; VALUE_TYPE &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1detail_1_1optional__probe__witness.html">beman::fingertree::detail::optional_probe_witness</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1Foldable.html">beman::fingertree::Foldable&lt; Impl &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,8 +118,19 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacebeman_1_1fingertree_1_1detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html">beman::fingertree::detail</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacebeman_1_1fingertree_1_1typeclass"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1typeclass.html">beman::fingertree::typeclass</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptbeman_1_1fingertree_1_1foldable__impl.html">beman::fingertree::foldable_impl</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptbeman_1_1fingertree_1_1foldable__object.html">beman::fingertree::foldable_object</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ac15f05fe65cf86b47806abdbb6c8a750"><td class="memTemplParams" colspan="2">template&lt;class IMPL , class F &gt; </td></tr>
+<tr class="memitem:ac15f05fe65cf86b47806abdbb6c8a750"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1detail.html#ac15f05fe65cf86b47806abdbb6c8a750">beman::fingertree::detail::fold_result_t</a> = std::remove_cvref_t&lt; std::invoke_result_t&lt; F &amp;, const typename IMPL::element_type &amp; &gt; &gt;</td></tr>
+<tr class="separator:ac15f05fe65cf86b47806abdbb6c8a750"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

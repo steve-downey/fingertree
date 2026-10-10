@@ -114,12 +114,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a1b594aa3fcd6cff26afe2913a4402298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Tree = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Tree = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt;<br />
 class beman::fingertree::tree::FingerTreePriorityQueue&lt; T, Tree &gt;</div><p>Persistent double-ended priority queue backed by a finger tree. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Element type; must be totally ordered. </td></tr>
-    <tr><td class="paramname">Tree</td><td>Backing finger tree type (must use PriorityTag&lt;T&gt; measure). Default: <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> — correct at all sizes.</td></tr>
+    <tr><td class="paramname">Tree</td><td>Backing finger tree type (must use PriorityMonoid&lt;T&gt; over PriorityMeasure&lt;T&gt;). Default: <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> — correct at all sizes.</td></tr>
   </table>
   </dd>
 </dl>
@@ -127,7 +127,7 @@ class beman::fingertree::tree::FingerTreePriorityQueue&lt; T, Tree &gt;</div><p>
 <li>push: O(1) amortized</li>
 <li>min / max: O(1)</li>
 <li>pop_min / pop_max: O(log n)</li>
-<li>size: O(n) — the <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1PriorityTag.html">PriorityTag</a> measure does not cache element count</li>
+<li>size: O(1) — the count is the first component of the measure</li>
 <li>to_vector: O(n) </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -137,7 +137,7 @@ class beman::fingertree::tree::FingerTreePriorityQueue&lt; T, Tree &gt;</div><p>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -165,7 +165,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -192,7 +192,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -220,7 +220,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -247,7 +247,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -274,7 +274,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -301,7 +301,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -328,7 +328,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -356,7 +356,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -374,7 +374,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Returns the number of elements; O(n) — the <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1PriorityTag.html">PriorityTag</a> measure does not cache a count, so we fall back to for_each counting. </p>
+<p>Returns the number of elements; O(1), read off the cached measure. </p>
 
 </div>
 </div>
@@ -384,7 +384,7 @@ template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;,
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityTag&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
+template&lt;typename T , typename Tree  = FingerTree&lt;T, PriorityMonoid&lt;T&gt;, PriorityMeasure&lt;T&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

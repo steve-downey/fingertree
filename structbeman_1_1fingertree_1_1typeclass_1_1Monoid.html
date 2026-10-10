@@ -79,7 +79,7 @@ $(function() {
 <div class="contents">
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class VALUE_TYPE&gt;<br />
-struct beman::fingertree::typeclass::Monoid&lt; VALUE_TYPE &gt;</div><p>Customization point for the <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid.html">Monoid</a> typeclass. Specialize this struct for type <code>VALUE_TYPE</code> and provide <code>identity()</code> and <code>combine(lhs, rhs)</code> to make that type usable wherever a <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid.html">Monoid</a> is required (e.g., as the result type of fold_map). </p>
+struct beman::fingertree::typeclass::Monoid&lt; VALUE_TYPE &gt;</div><p>Customization point for the <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid.html">Monoid</a> registry. Specialize this struct for type <code>VALUE_TYPE</code> and provide <code>identity()</code> and <code>combine(lhs, rhs)</code> to make the canonical monoid of that type available wherever a fold is called without an explicit instance. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>include/beman/fingertree/typeclass/<a class="el" href="monoid_8hpp_source.html">monoid.hpp</a></li>
 </ul>

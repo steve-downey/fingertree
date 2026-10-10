@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>beman::fingertree: beman::fingertree::tree::FingerTree&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt Struct Reference</title>
+<title>beman::fingertree: beman::fingertree::tree::FingerTree&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">beman::fingertree::tree::FingerTree&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt Struct Reference</div></div>
+  <div class="headertitle"><div class="title">beman::fingertree::tree::FingerTree&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -85,38 +85,38 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7d539ea682008e9f76b19d86c8655658"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html#a7d539ea682008e9f76b19d86c8655658">d_left</a></td></tr>
-<tr class="separator:a7d539ea682008e9f76b19d86c8655658"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e08c0778915ef904e1b4ad1b6381026"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html#a9e08c0778915ef904e1b4ad1b6381026">d_right</a></td></tr>
-<tr class="separator:a9e08c0778915ef904e1b4ad1b6381026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bc51ade732afbefa7ddb9ac789de422"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html#a2bc51ade732afbefa7ddb9ac789de422">d_left</a></td></tr>
+<tr class="separator:a2bc51ade732afbefa7ddb9ac789de422"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d26a4944b960bdddd9c14321728bdee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html#a8d26a4944b960bdddd9c14321728bdee">d_right</a></td></tr>
+<tr class="separator:a8d26a4944b960bdddd9c14321728bdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a7d539ea682008e9f76b19d86c8655658" name="a7d539ea682008e9f76b19d86c8655658"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d539ea682008e9f76b19d86c8655658">&#9670;&#160;</a></span>d_left</h2>
+<a id="a2bc51ade732afbefa7ddb9ac789de422" name="a2bc51ade732afbefa7ddb9ac789de422"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bc51ade732afbefa7ddb9ac789de422">&#9670;&#160;</a></span>d_left</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt::d_left</td>
+          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt::d_left</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a9e08c0778915ef904e1b4ad1b6381026" name="a9e08c0778915ef904e1b4ad1b6381026"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e08c0778915ef904e1b4ad1b6381026">&#9670;&#160;</a></span>d_right</h2>
+<a id="a8d26a4944b960bdddd9c14321728bdee" name="a8d26a4944b960bdddd9c14321728bdee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d26a4944b960bdddd9c14321728bdee">&#9670;&#160;</a></span>d_right</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt::d_right</td>
+          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::SplitAt::d_right</td>
         </tr>
       </table>
 </div><div class="memdoc">

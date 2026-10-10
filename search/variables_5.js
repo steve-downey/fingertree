@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['monoid_5fv_0',['monoid_v',['../namespacebeman_1_1fingertree_1_1typeclass.html#a83460d4711bc7a4ecf9c52f69cc3d340',1,'beman::fingertree::typeclass']]]
+  ['has_5funit_5fcount_5fmeasure_0',['has_unit_count_measure',['../classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ac2f89af086c01cedc724e969855d08ba',1,'beman::fingertree::tree::FingerTree']]]
 ];

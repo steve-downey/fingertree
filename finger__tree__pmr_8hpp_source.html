@@ -102,16 +102,20 @@ $(function() {
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html">   24</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html">beman::fingertree::tree::pmr</a> {</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> TAG_TYPE = std::<span class="keywordtype">size_t</span>, <span class="keyword">typename</span> MEASURE_POLICY = UnitMeasure&lt;T, TAG_TYPE&gt;&gt;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html#a576c64b52e9745e57fa809caa06d13e1">   27</a></span><span class="keyword">using </span><a class="code hl_class" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> =</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_class" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree&lt;T, TAG_TYPE, MEASURE_POLICY, std::pmr::polymorphic_allocator&lt;std::byte&gt;</a>&gt;;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>} <span class="comment">// namespace beman::fingertree::tree::pmr</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>          <span class="keyword">typename</span> MONOID         = <a class="code hl_struct" href="structbeman_1_1fingertree_1_1typeclass_1_1sum__monoid.html">beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;</a>,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>          <span class="keyword">typename</span> MEASURE_POLICY = <a class="code hl_struct" href="structbeman_1_1fingertree_1_1tree_1_1UnitMeasure.html">UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;</a>&gt;&gt;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html#a5d993592b0d1f6ab074e1a6f2851babe">   29</a></span><span class="keyword">using </span><a class="code hl_class" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> =</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_class" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree&lt;T, MONOID, MEASURE_POLICY, std::pmr::polymorphic_allocator&lt;std::byte&gt;</a>&gt;;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassbeman_1_1fingertree_1_1tree_1_1FingerTree_html"><div class="ttname"><a href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a></div><div class="ttdef"><b>Definition:</b> finger_tree.hpp:304</div></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>} <span class="comment">// namespace beman::fingertree::tree::pmr</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassbeman_1_1fingertree_1_1tree_1_1FingerTree_html"><div class="ttname"><a href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a></div><div class="ttdef"><b>Definition:</b> finger_tree.hpp:301</div></div>
 <div class="ttc" id="afinger__tree_8hpp_html"><div class="ttname"><a href="finger__tree_8hpp.html">finger_tree.hpp</a></div></div>
 <div class="ttc" id="anamespacebeman_1_1fingertree_1_1tree_1_1pmr_html"><div class="ttname"><a href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html">beman::fingertree::tree::pmr</a></div><div class="ttdef"><b>Definition:</b> finger_tree_pmr.hpp:24</div></div>
+<div class="ttc" id="astructbeman_1_1fingertree_1_1tree_1_1UnitMeasure_html"><div class="ttname"><a href="structbeman_1_1fingertree_1_1tree_1_1UnitMeasure.html">beman::fingertree::tree::UnitMeasure</a></div><div class="ttdef"><b>Definition:</b> finger_tree.hpp:281</div></div>
+<div class="ttc" id="astructbeman_1_1fingertree_1_1typeclass_1_1sum__monoid_html"><div class="ttname"><a href="structbeman_1_1fingertree_1_1typeclass_1_1sum__monoid.html">beman::fingertree::typeclass::sum_monoid</a></div><div class="ttdef"><b>Definition:</b> monoid.hpp:89</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

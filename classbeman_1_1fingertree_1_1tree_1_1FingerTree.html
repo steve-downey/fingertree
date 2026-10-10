@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>beman::fingertree: beman::fingertree::tree::FingerTree&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; Class Template Reference</title>
+<title>beman::fingertree: beman::fingertree::tree::FingerTree&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,9 +79,10 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classbeman_1_1fingertree_1_1tree_1_1FingerTree-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">beman::fingertree::tree::FingerTree&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">beman::fingertree::tree::FingerTree&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -98,138 +99,145 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ade22f5208c56d2fd5765d1d80a8c9975"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ade22f5208c56d2fd5765d1d80a8c9975">value_type</a> = T</td></tr>
-<tr class="separator:ade22f5208c56d2fd5765d1d80a8c9975"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77f6d1ddedfa7e6068b6a256803edecb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a77f6d1ddedfa7e6068b6a256803edecb">tag_type</a> = Tag</td></tr>
-<tr class="separator:a77f6d1ddedfa7e6068b6a256803edecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e3e3bd033408e7b9a03eaca1d2d3c00"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a3e3e3bd033408e7b9a03eaca1d2d3c00">reference</a> = const T &amp;</td></tr>
-<tr class="separator:a3e3e3bd033408e7b9a03eaca1d2d3c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a244bd0f32e88c9b55f29af97955f1b5a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a244bd0f32e88c9b55f29af97955f1b5a">const_reference</a> = const T &amp;</td></tr>
-<tr class="separator:a244bd0f32e88c9b55f29af97955f1b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e3a02d4e8ca84cf6b676121579dcd94"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9e3a02d4e8ca84cf6b676121579dcd94">allocator_type</a> = ALLOCATOR</td></tr>
-<tr class="separator:a9e3a02d4e8ca84cf6b676121579dcd94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62404019d5f8ee73d145e03e5bde7c32"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a62404019d5f8ee73d145e03e5bde7c32">iterator</a> = <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;</td></tr>
-<tr class="separator:a62404019d5f8ee73d145e03e5bde7c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75e24d1bc4284c1326b36e7a1b53dcbb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a75e24d1bc4284c1326b36e7a1b53dcbb">const_iterator</a> = <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a62404019d5f8ee73d145e03e5bde7c32">iterator</a></td></tr>
-<tr class="separator:a75e24d1bc4284c1326b36e7a1b53dcbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f10a464a4836c1ab3c6c243127fbeb4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a6f10a464a4836c1ab3c6c243127fbeb4">reverse_iterator</a> = std::reverse_iterator&lt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a62404019d5f8ee73d145e03e5bde7c32">iterator</a> &gt;</td></tr>
-<tr class="separator:a6f10a464a4836c1ab3c6c243127fbeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f2c993fb7703d4d917139db6b12a5df"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1f2c993fb7703d4d917139db6b12a5df">const_reverse_iterator</a> = std::reverse_iterator&lt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a75e24d1bc4284c1326b36e7a1b53dcbb">const_iterator</a> &gt;</td></tr>
-<tr class="separator:a1f2c993fb7703d4d917139db6b12a5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d2e00d84051c3fc7c5ea667a71c518c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9d2e00d84051c3fc7c5ea667a71c518c">difference_type</a> = std::ptrdiff_t</td></tr>
-<tr class="separator:a9d2e00d84051c3fc7c5ea667a71c518c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a510796e9996969424977e81083d75399"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a510796e9996969424977e81083d75399">size_type</a> = std::size_t</td></tr>
-<tr class="separator:a510796e9996969424977e81083d75399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2708e56115c8a992826a8dcad8d3e898"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a2708e56115c8a992826a8dcad8d3e898">value_type</a> = T</td></tr>
+<tr class="separator:a2708e56115c8a992826a8dcad8d3e898"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1de5c40bfbbce6ab7ffed6946d3d478"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ac1de5c40bfbbce6ab7ffed6946d3d478">tag_type</a> = Tag</td></tr>
+<tr class="separator:ac1de5c40bfbbce6ab7ffed6946d3d478"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addf1fe0dd212d5b39c2177f8f00d01db"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#addf1fe0dd212d5b39c2177f8f00d01db">monoid_type</a> = MONOID</td></tr>
+<tr class="separator:addf1fe0dd212d5b39c2177f8f00d01db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a6bdc0fd2a81330c065d01fa59469d0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a8a6bdc0fd2a81330c065d01fa59469d0">reference</a> = const T &amp;</td></tr>
+<tr class="separator:a8a6bdc0fd2a81330c065d01fa59469d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a521ea39ae9eac2c504fce35129a04735"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a521ea39ae9eac2c504fce35129a04735">const_reference</a> = const T &amp;</td></tr>
+<tr class="separator:a521ea39ae9eac2c504fce35129a04735"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5f09c6bc54a2a30d462c37cbb5e2a44"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ad5f09c6bc54a2a30d462c37cbb5e2a44">allocator_type</a> = ALLOCATOR</td></tr>
+<tr class="separator:ad5f09c6bc54a2a30d462c37cbb5e2a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53e0e8a755e7f48586692d906afea816"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a53e0e8a755e7f48586692d906afea816">iterator</a> = <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;</td></tr>
+<tr class="separator:a53e0e8a755e7f48586692d906afea816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a446bd4b1a3c0e14e8b58fcf1d893f68b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a446bd4b1a3c0e14e8b58fcf1d893f68b">const_iterator</a> = <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a53e0e8a755e7f48586692d906afea816">iterator</a></td></tr>
+<tr class="separator:a446bd4b1a3c0e14e8b58fcf1d893f68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add748447e18a28cd2c20d84a9dd29470"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#add748447e18a28cd2c20d84a9dd29470">reverse_iterator</a> = std::reverse_iterator&lt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a53e0e8a755e7f48586692d906afea816">iterator</a> &gt;</td></tr>
+<tr class="separator:add748447e18a28cd2c20d84a9dd29470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4299eef50011080f030e4c816897acbd"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a4299eef50011080f030e4c816897acbd">const_reverse_iterator</a> = std::reverse_iterator&lt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a446bd4b1a3c0e14e8b58fcf1d893f68b">const_iterator</a> &gt;</td></tr>
+<tr class="separator:a4299eef50011080f030e4c816897acbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a6b28cac89b358d9073c85c041eb5f1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a2a6b28cac89b358d9073c85c041eb5f1">difference_type</a> = std::ptrdiff_t</td></tr>
+<tr class="separator:a2a6b28cac89b358d9073c85c041eb5f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5443502d3ce1b14f3e44e7405b667de7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5443502d3ce1b14f3e44e7405b667de7">size_type</a> = std::size_t</td></tr>
+<tr class="separator:a5443502d3ce1b14f3e44e7405b667de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aef19d9f0179dd01f785e2a7f6a0289e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aef19d9f0179dd01f785e2a7f6a0289e6">FingerTree</a> ()=default</td></tr>
-<tr class="separator:aef19d9f0179dd01f785e2a7f6a0289e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5459b128f243f3ea3a23c9b43893cf1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5459b128f243f3ea3a23c9b43893cf1e">FingerTree</a> (const ALLOCATOR &amp;alloc)</td></tr>
-<tr class="separator:a5459b128f243f3ea3a23c9b43893cf1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1901fec76ef11ad74e46cd01d7fbe704"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1901fec76ef11ad74e46cd01d7fbe704">FingerTree</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;)=default</td></tr>
-<tr class="separator:a1901fec76ef11ad74e46cd01d7fbe704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a134fe9a39633df8d4a8db74ca105b2ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a134fe9a39633df8d4a8db74ca105b2ab">FingerTree</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;&amp;)=default</td></tr>
-<tr class="separator:a134fe9a39633df8d4a8db74ca105b2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf882322422edfcbccf6449c98e57954"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#acf882322422edfcbccf6449c98e57954">FingerTree</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> other, ALLOCATOR alloc)</td></tr>
-<tr class="separator:acf882322422edfcbccf6449c98e57954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0db96c3bea1d6d3c1dda56f495b3e78"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ae0db96c3bea1d6d3c1dda56f495b3e78">operator=</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;other) &amp;-&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;</td></tr>
-<tr class="separator:ae0db96c3bea1d6d3c1dda56f495b3e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93d90d22aac0bcd4bc09876c56292ecd"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a93d90d22aac0bcd4bc09876c56292ecd">operator=</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;&amp;other) &amp;-&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;</td></tr>
-<tr class="separator:a93d90d22aac0bcd4bc09876c56292ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e1898a61ecfa3e2a479ca8fd516f760"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9e1898a61ecfa3e2a479ca8fd516f760">get_allocator</a> () const noexcept -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9e3a02d4e8ca84cf6b676121579dcd94">allocator_type</a></td></tr>
-<tr class="separator:a9e1898a61ecfa3e2a479ca8fd516f760"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcff0822db9c1364de3934ca97b67c64"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#abcff0822db9c1364de3934ca97b67c64">empty</a> () const noexcept -&gt; bool</td></tr>
-<tr class="separator:abcff0822db9c1364de3934ca97b67c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a035add839048a1dc7ffca7f4f243e794"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a035add839048a1dc7ffca7f4f243e794">is_empty</a> () const noexcept -&gt; bool</td></tr>
-<tr class="separator:a035add839048a1dc7ffca7f4f243e794"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06960e9971159c4d99b4900dad8256f2"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a06960e9971159c4d99b4900dad8256f2">size</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a510796e9996969424977e81083d75399">size_type</a></td></tr>
-<tr class="separator:a06960e9971159c4d99b4900dad8256f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3ec8be206f2930ecd9f45eed1a53891"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ac3ec8be206f2930ecd9f45eed1a53891">max_size</a> () const noexcept -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a510796e9996969424977e81083d75399">size_type</a></td></tr>
-<tr class="separator:ac3ec8be206f2930ecd9f45eed1a53891"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08fb8336c12279d25a96670963ec901d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a08fb8336c12279d25a96670963ec901d">swap</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;other) noexcept</td></tr>
-<tr class="separator:a08fb8336c12279d25a96670963ec901d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f16fb14a27ddd0e2bc5934d0c242b81"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1f16fb14a27ddd0e2bc5934d0c242b81">front</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a244bd0f32e88c9b55f29af97955f1b5a">const_reference</a></td></tr>
-<tr class="separator:a1f16fb14a27ddd0e2bc5934d0c242b81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a464d9fe66df8b5682ffb60a3caa0f809"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a464d9fe66df8b5682ffb60a3caa0f809">back</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a244bd0f32e88c9b55f29af97955f1b5a">const_reference</a></td></tr>
-<tr class="separator:a464d9fe66df8b5682ffb60a3caa0f809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91033049392a52d90d0907610719ebef"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a91033049392a52d90d0907610719ebef">is_leaf</a> () const -&gt; bool</td></tr>
-<tr class="separator:a91033049392a52d90d0907610719ebef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade79d61c6048d3f5fcc68fc9488f4d31"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ade79d61c6048d3f5fcc68fc9488f4d31">is_branch</a> () const -&gt; bool</td></tr>
-<tr class="separator:ade79d61c6048d3f5fcc68fc9488f4d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cb2c2dcb1eaa26360528c5b0e16d0ed"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a4cb2c2dcb1eaa26360528c5b0e16d0ed">measure</a> () const -&gt; Tag</td></tr>
-<tr class="separator:a4cb2c2dcb1eaa26360528c5b0e16d0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0141683231041f1bcfdc84ca4e36a25b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a0141683231041f1bcfdc84ca4e36a25b">value</a> () const -&gt; const T &amp;</td></tr>
-<tr class="separator:a0141683231041f1bcfdc84ca4e36a25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9589f263a198deb1d4363582a44a8d91"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9589f263a198deb1d4363582a44a8d91">spine_depth</a> () const -&gt; std::size_t</td></tr>
-<tr class="separator:a9589f263a198deb1d4363582a44a8d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2632de63bc2eb66da6b2e67a572d4daf"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a2632de63bc2eb66da6b2e67a572d4daf">begin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a62404019d5f8ee73d145e03e5bde7c32">iterator</a></td></tr>
-<tr class="separator:a2632de63bc2eb66da6b2e67a572d4daf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b59ebf883c65b6f3ad527ef84ea569b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a8b59ebf883c65b6f3ad527ef84ea569b">end</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a62404019d5f8ee73d145e03e5bde7c32">iterator</a></td></tr>
-<tr class="separator:a8b59ebf883c65b6f3ad527ef84ea569b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ef25edbb8d53d9926edd7eba6897137"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a8ef25edbb8d53d9926edd7eba6897137">cbegin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a75e24d1bc4284c1326b36e7a1b53dcbb">const_iterator</a></td></tr>
-<tr class="separator:a8ef25edbb8d53d9926edd7eba6897137"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d0f0e426a95bae93616639f0d4ead5b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a7d0f0e426a95bae93616639f0d4ead5b">cend</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a75e24d1bc4284c1326b36e7a1b53dcbb">const_iterator</a></td></tr>
-<tr class="separator:a7d0f0e426a95bae93616639f0d4ead5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12803f45dbdfb09b12528b843e3df3cd"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a12803f45dbdfb09b12528b843e3df3cd">rbegin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a6f10a464a4836c1ab3c6c243127fbeb4">reverse_iterator</a></td></tr>
-<tr class="separator:a12803f45dbdfb09b12528b843e3df3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6562efad1caf00b1b17c9ab7d5e9e87"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aa6562efad1caf00b1b17c9ab7d5e9e87">rend</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a6f10a464a4836c1ab3c6c243127fbeb4">reverse_iterator</a></td></tr>
-<tr class="separator:aa6562efad1caf00b1b17c9ab7d5e9e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a244a34edd3741431a9d6bd6395e49015"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a244a34edd3741431a9d6bd6395e49015">crbegin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1f2c993fb7703d4d917139db6b12a5df">const_reverse_iterator</a></td></tr>
-<tr class="separator:a244a34edd3741431a9d6bd6395e49015"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:accd9085c049e10c5f1f20e672a657c2c"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#accd9085c049e10c5f1f20e672a657c2c">crend</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1f2c993fb7703d4d917139db6b12a5df">const_reverse_iterator</a></td></tr>
-<tr class="separator:accd9085c049e10c5f1f20e672a657c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad786cb7f72780e81195c230368d70ab1"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ad786cb7f72780e81195c230368d70ab1">cons</a> (T x) const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:ad786cb7f72780e81195c230368d70ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a711f8ad921b8df3dc222db4c47fe4acf"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a711f8ad921b8df3dc222db4c47fe4acf">snoc</a> (T x) const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:a711f8ad921b8df3dc222db4c47fe4acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bf7f8308af3c8d3808f91b934a6a779"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a0bf7f8308af3c8d3808f91b934a6a779">view_l</a> () const -&gt; std::optional&lt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1View.html">View</a> &gt;</td></tr>
-<tr class="separator:a0bf7f8308af3c8d3808f91b934a6a779"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9326e4a4e554ca262ea07d4a7a5317b4"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9326e4a4e554ca262ea07d4a7a5317b4">view_r</a> () const -&gt; std::optional&lt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1View.html">View</a> &gt;</td></tr>
-<tr class="separator:a9326e4a4e554ca262ea07d4a7a5317b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a900efc4f283fd3bf3a1ceff973938151"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a900efc4f283fd3bf3a1ceff973938151">head</a> () const -&gt; T</td></tr>
-<tr class="separator:a900efc4f283fd3bf3a1ceff973938151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8e5afb086d58bee3e6951df9a455bb0"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ac8e5afb086d58bee3e6951df9a455bb0">head_ref</a> () const -&gt; const T &amp;</td></tr>
-<tr class="separator:ac8e5afb086d58bee3e6951df9a455bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab713db69c8686d2a8372eda1b0c05732"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ab713db69c8686d2a8372eda1b0c05732">tail</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:ab713db69c8686d2a8372eda1b0c05732"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e7d87008df6063bfafa44406c66ba33"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a2e7d87008df6063bfafa44406c66ba33">last</a> () const -&gt; T</td></tr>
-<tr class="separator:a2e7d87008df6063bfafa44406c66ba33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1873b39ecaecf5e8193750b5002df74c"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1873b39ecaecf5e8193750b5002df74c">last_ref</a> () const -&gt; const T &amp;</td></tr>
-<tr class="separator:a1873b39ecaecf5e8193750b5002df74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42bd8302642900c42b5503082dd8abc8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a42bd8302642900c42b5503082dd8abc8">init</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:a42bd8302642900c42b5503082dd8abc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b604784d95bae0ea6e5c49b9083bc89"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5b604784d95bae0ea6e5c49b9083bc89">flatten</a> () const -&gt; std::vector&lt; T &gt;</td></tr>
-<tr class="separator:a5b604784d95bae0ea6e5c49b9083bc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52878521839b625d5114488645d27e37"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:a52878521839b625d5114488645d27e37"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a52878521839b625d5114488645d27e37">for_each</a> (F &amp;&amp;fn) const</td></tr>
-<tr class="separator:a52878521839b625d5114488645d27e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25b7f547c0194f3c4e937b0197a4c46a"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a25b7f547c0194f3c4e937b0197a4c46a">append</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;right) const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:a25b7f547c0194f3c4e937b0197a4c46a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c252de015ce22bcbfc7849f1fc29c48"><td class="memTemplParams" colspan="2">template&lt;typename PRED &gt; </td></tr>
-<tr class="memitem:a2c252de015ce22bcbfc7849f1fc29c48"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a2c252de015ce22bcbfc7849f1fc29c48">search</a> (PRED &amp;&amp;pred) const -&gt; std::optional&lt; T &gt;</td></tr>
-<tr class="separator:a2c252de015ce22bcbfc7849f1fc29c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76e6db596e23999614b5a715e24a8a53"><td class="memTemplParams" colspan="2">template&lt;typename PRED &gt; </td></tr>
-<tr class="memitem:a76e6db596e23999614b5a715e24a8a53"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a76e6db596e23999614b5a715e24a8a53">split</a> (PRED &amp;&amp;pred) const -&gt; std::optional&lt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1Split.html">Split</a> &gt;</td></tr>
-<tr class="separator:a76e6db596e23999614b5a715e24a8a53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bdcfb8049f47d6bb18cb445aef2764f"><td class="memTemplParams" colspan="2">template&lt;typename PRED &gt; </td></tr>
-<tr class="memitem:a7bdcfb8049f47d6bb18cb445aef2764f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a7bdcfb8049f47d6bb18cb445aef2764f">split_at</a> (PRED &amp;&amp;pred) const -&gt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html">SplitAt</a></td></tr>
-<tr class="separator:a7bdcfb8049f47d6bb18cb445aef2764f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82308686e2bda7654dd45f778352a335"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a82308686e2bda7654dd45f778352a335">split_at_measure</a> (const Tag &amp;threshold) const -&gt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html">SplitAt</a></td></tr>
-<tr class="separator:a82308686e2bda7654dd45f778352a335"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27a6838cd2e81ec91a64016c9d28c5fd"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a27a6838cd2e81ec91a64016c9d28c5fd">reversed</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1DualMonoid.html">beman::fingertree::typeclass::DualMonoid</a>&lt; Tag &gt;, <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1ReversedMeasure.html">ReversedMeasure</a>&lt; Meas &gt;, ALLOCATOR &gt;</td></tr>
-<tr class="separator:a27a6838cd2e81ec91a64016c9d28c5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b5352f676e394414c43e2c9ed7210a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5b5352f676e394414c43e2c9ed7210a0">FingerTree</a> ()=default</td></tr>
+<tr class="separator:a5b5352f676e394414c43e2c9ed7210a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a146a4206d0490e618bbb0987b65f2a4c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a146a4206d0490e618bbb0987b65f2a4c">FingerTree</a> (const ALLOCATOR &amp;alloc, const MONOID &amp;monoid=MONOID{})</td></tr>
+<tr class="separator:a146a4206d0490e618bbb0987b65f2a4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74f7f044550465dca63c3b2abe7f98a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#af74f7f044550465dca63c3b2abe7f98a">FingerTree</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;)=default</td></tr>
+<tr class="separator:af74f7f044550465dca63c3b2abe7f98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1898feb5da61c4e4305b3e658f4e1782"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1898feb5da61c4e4305b3e658f4e1782">FingerTree</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a1898feb5da61c4e4305b3e658f4e1782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4e1fb5847ad9fb795ff7eca57edbaa0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ad4e1fb5847ad9fb795ff7eca57edbaa0">FingerTree</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> other, ALLOCATOR alloc)</td></tr>
+<tr class="separator:ad4e1fb5847ad9fb795ff7eca57edbaa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa71b39ebdd7b660b1b7831fa93dbf98b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aa71b39ebdd7b660b1b7831fa93dbf98b">operator=</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;other) &amp;-&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;</td></tr>
+<tr class="separator:aa71b39ebdd7b660b1b7831fa93dbf98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72e332164ff1e9f212471358d66a1927"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a72e332164ff1e9f212471358d66a1927">operator=</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;&amp;other) &amp;-&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;</td></tr>
+<tr class="separator:a72e332164ff1e9f212471358d66a1927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f5e924d4e5b3ef3cc83429935e35bb3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a4f5e924d4e5b3ef3cc83429935e35bb3">get_allocator</a> () const noexcept -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ad5f09c6bc54a2a30d462c37cbb5e2a44">allocator_type</a></td></tr>
+<tr class="separator:a4f5e924d4e5b3ef3cc83429935e35bb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d0200f70ad89e2d7f152117792f51e"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ac1d0200f70ad89e2d7f152117792f51e">get_monoid</a> () const noexcept -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#addf1fe0dd212d5b39c2177f8f00d01db">monoid_type</a></td></tr>
+<tr class="separator:ac1d0200f70ad89e2d7f152117792f51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf843115b5fed2a9950daa6205a3c0a9"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#abf843115b5fed2a9950daa6205a3c0a9">empty</a> () const noexcept -&gt; bool</td></tr>
+<tr class="separator:abf843115b5fed2a9950daa6205a3c0a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fd178321d8a0a5f25be07462860a81a"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a3fd178321d8a0a5f25be07462860a81a">is_empty</a> () const noexcept -&gt; bool</td></tr>
+<tr class="separator:a3fd178321d8a0a5f25be07462860a81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa27e478ffdb3fae79c605ef869a2b889"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aa27e478ffdb3fae79c605ef869a2b889">size</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5443502d3ce1b14f3e44e7405b667de7">size_type</a></td></tr>
+<tr class="separator:aa27e478ffdb3fae79c605ef869a2b889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ec4e33e6e365939ca7891fc3e6ab889"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1ec4e33e6e365939ca7891fc3e6ab889">max_size</a> () const noexcept -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5443502d3ce1b14f3e44e7405b667de7">size_type</a></td></tr>
+<tr class="separator:a1ec4e33e6e365939ca7891fc3e6ab889"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1039d3c53d2c0c13fcc85a0b3065485"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ae1039d3c53d2c0c13fcc85a0b3065485">swap</a> (<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;other) noexcept</td></tr>
+<tr class="separator:ae1039d3c53d2c0c13fcc85a0b3065485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e823446713f77786cc02c6911c4e53"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ae3e823446713f77786cc02c6911c4e53">front</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a521ea39ae9eac2c504fce35129a04735">const_reference</a></td></tr>
+<tr class="separator:ae3e823446713f77786cc02c6911c4e53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c697d8423f2a0de75c1e6ee780b7039"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5c697d8423f2a0de75c1e6ee780b7039">back</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a521ea39ae9eac2c504fce35129a04735">const_reference</a></td></tr>
+<tr class="separator:a5c697d8423f2a0de75c1e6ee780b7039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73d740a900f102e84a4833e81fa37021"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a73d740a900f102e84a4833e81fa37021">is_leaf</a> () const -&gt; bool</td></tr>
+<tr class="separator:a73d740a900f102e84a4833e81fa37021"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f218f2b7d28e5b51d54dc7e68c32e64"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9f218f2b7d28e5b51d54dc7e68c32e64">is_branch</a> () const -&gt; bool</td></tr>
+<tr class="separator:a9f218f2b7d28e5b51d54dc7e68c32e64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63119ba7d89162e8ad64d1344b410211"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a63119ba7d89162e8ad64d1344b410211">measure</a> () const -&gt; Tag</td></tr>
+<tr class="separator:a63119ba7d89162e8ad64d1344b410211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a068d6f948f2721b5cc605a3e7aa4f1ad"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a068d6f948f2721b5cc605a3e7aa4f1ad">value</a> () const -&gt; const T &amp;</td></tr>
+<tr class="separator:a068d6f948f2721b5cc605a3e7aa4f1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a864e574dc7fc3ff7061e32afeb9d49c6"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a864e574dc7fc3ff7061e32afeb9d49c6">spine_depth</a> () const -&gt; std::size_t</td></tr>
+<tr class="separator:a864e574dc7fc3ff7061e32afeb9d49c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afff3e08310e83cea63209ac9705a5507"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#afff3e08310e83cea63209ac9705a5507">begin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a53e0e8a755e7f48586692d906afea816">iterator</a></td></tr>
+<tr class="separator:afff3e08310e83cea63209ac9705a5507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09f555ebbf54feaf0dddde1dd4252409"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a09f555ebbf54feaf0dddde1dd4252409">end</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a53e0e8a755e7f48586692d906afea816">iterator</a></td></tr>
+<tr class="separator:a09f555ebbf54feaf0dddde1dd4252409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80ade3c9c71c0ed3fb96abaa296a17f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#af80ade3c9c71c0ed3fb96abaa296a17f">cbegin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a446bd4b1a3c0e14e8b58fcf1d893f68b">const_iterator</a></td></tr>
+<tr class="separator:af80ade3c9c71c0ed3fb96abaa296a17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a830be1d8fc7d9bc9511a313e99a6d295"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a830be1d8fc7d9bc9511a313e99a6d295">cend</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a446bd4b1a3c0e14e8b58fcf1d893f68b">const_iterator</a></td></tr>
+<tr class="separator:a830be1d8fc7d9bc9511a313e99a6d295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add96ac485aa0de31740f308c649ecc16"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#add96ac485aa0de31740f308c649ecc16">rbegin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#add748447e18a28cd2c20d84a9dd29470">reverse_iterator</a></td></tr>
+<tr class="separator:add96ac485aa0de31740f308c649ecc16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acff30c53bba3b06905a2aa7f3a2e68c9"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#acff30c53bba3b06905a2aa7f3a2e68c9">rend</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#add748447e18a28cd2c20d84a9dd29470">reverse_iterator</a></td></tr>
+<tr class="separator:acff30c53bba3b06905a2aa7f3a2e68c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfee5e3ef6ad2660cc5ec68432ad17f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aacfee5e3ef6ad2660cc5ec68432ad17f">crbegin</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a4299eef50011080f030e4c816897acbd">const_reverse_iterator</a></td></tr>
+<tr class="separator:aacfee5e3ef6ad2660cc5ec68432ad17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6fdfe2176da140664c6aa4519312242"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aa6fdfe2176da140664c6aa4519312242">crend</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a4299eef50011080f030e4c816897acbd">const_reverse_iterator</a></td></tr>
+<tr class="separator:aa6fdfe2176da140664c6aa4519312242"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf952c3088e7a745f7bc80f6e7d65a62"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#acf952c3088e7a745f7bc80f6e7d65a62">cons</a> (T x) const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:acf952c3088e7a745f7bc80f6e7d65a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8c5a3b8ddf5f5d5e8e8648f5972ea94"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ae8c5a3b8ddf5f5d5e8e8648f5972ea94">snoc</a> (T x) const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:ae8c5a3b8ddf5f5d5e8e8648f5972ea94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3f086b0c17b934184be413f1a7f077"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a2b3f086b0c17b934184be413f1a7f077">view_l</a> () const -&gt; std::optional&lt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1View.html">View</a> &gt;</td></tr>
+<tr class="separator:a2b3f086b0c17b934184be413f1a7f077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b50b4b5ae5169e2afa79af55a110657"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a4b50b4b5ae5169e2afa79af55a110657">view_r</a> () const -&gt; std::optional&lt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1View.html">View</a> &gt;</td></tr>
+<tr class="separator:a4b50b4b5ae5169e2afa79af55a110657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33493648cfa07b4c5dc7222f839e82f0"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a33493648cfa07b4c5dc7222f839e82f0">head</a> () const -&gt; T</td></tr>
+<tr class="separator:a33493648cfa07b4c5dc7222f839e82f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a315ab04a562a85eb888dca793c2b4459"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a315ab04a562a85eb888dca793c2b4459">head_ref</a> () const -&gt; const T &amp;</td></tr>
+<tr class="separator:a315ab04a562a85eb888dca793c2b4459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e6dabafd13d30a43ba85f907e8a9e91"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a7e6dabafd13d30a43ba85f907e8a9e91">tail</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:a7e6dabafd13d30a43ba85f907e8a9e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a69bcb5fed8eed14c0893c3a87b8063"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a1a69bcb5fed8eed14c0893c3a87b8063">last</a> () const -&gt; T</td></tr>
+<tr class="separator:a1a69bcb5fed8eed14c0893c3a87b8063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff1e42f06cccb9c435f9c6c73bd4d38f"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aff1e42f06cccb9c435f9c6c73bd4d38f">last_ref</a> () const -&gt; const T &amp;</td></tr>
+<tr class="separator:aff1e42f06cccb9c435f9c6c73bd4d38f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a477f4c0e7bce6fd348b0bd099e91024e"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a477f4c0e7bce6fd348b0bd099e91024e">init</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:a477f4c0e7bce6fd348b0bd099e91024e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eed78bd70483af06b11ab72699f78fd"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a0eed78bd70483af06b11ab72699f78fd">flatten</a> () const -&gt; std::vector&lt; T &gt;</td></tr>
+<tr class="separator:a0eed78bd70483af06b11ab72699f78fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76a0a24f467c1e8d88e7df9302247090"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a76a0a24f467c1e8d88e7df9302247090"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a76a0a24f467c1e8d88e7df9302247090">for_each</a> (F &amp;&amp;fn) const</td></tr>
+<tr class="separator:a76a0a24f467c1e8d88e7df9302247090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0ceb4cb0a7e1b67c50a35596dbec15"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a7e0ceb4cb0a7e1b67c50a35596dbec15">append</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;right) const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:a7e0ceb4cb0a7e1b67c50a35596dbec15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753304b4a077064720fae9c08b9270ff"><td class="memTemplParams" colspan="2">template&lt;typename PRED &gt; </td></tr>
+<tr class="memitem:a753304b4a077064720fae9c08b9270ff"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a753304b4a077064720fae9c08b9270ff">search</a> (PRED &amp;&amp;pred) const -&gt; std::optional&lt; T &gt;</td></tr>
+<tr class="separator:a753304b4a077064720fae9c08b9270ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8989cb46e0eb9e274ccec50b0e028ba"><td class="memTemplParams" colspan="2">template&lt;typename PRED &gt; </td></tr>
+<tr class="memitem:ae8989cb46e0eb9e274ccec50b0e028ba"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ae8989cb46e0eb9e274ccec50b0e028ba">split</a> (PRED &amp;&amp;pred) const -&gt; std::optional&lt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1Split.html">Split</a> &gt;</td></tr>
+<tr class="separator:ae8989cb46e0eb9e274ccec50b0e028ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4811b1140d03c4d1fce0ef62484ba46"><td class="memTemplParams" colspan="2">template&lt;typename PRED &gt; </td></tr>
+<tr class="memitem:ad4811b1140d03c4d1fce0ef62484ba46"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ad4811b1140d03c4d1fce0ef62484ba46">split_at</a> (PRED &amp;&amp;pred) const -&gt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html">SplitAt</a></td></tr>
+<tr class="separator:ad4811b1140d03c4d1fce0ef62484ba46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b6baa5a7ade215443f2a7823b7ef38"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a19b6baa5a7ade215443f2a7823b7ef38">split_at_measure</a> (const Tag &amp;threshold) const -&gt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1SplitAt.html">SplitAt</a></td></tr>
+<tr class="separator:a19b6baa5a7ade215443f2a7823b7ef38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec73e2f3312d43f4f926a16dd8d4158"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#acec73e2f3312d43f4f926a16dd8d4158">reversed</a> () const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1dual__monoid.html">beman::fingertree::typeclass::dual_monoid</a>&lt; MONOID &gt;, Meas, ALLOCATOR &gt;</td></tr>
+<tr class="separator:acec73e2f3312d43f4f926a16dd8d4158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a32525b49bf05e6dd7077c3c1a7eb31bc"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a32525b49bf05e6dd7077c3c1a7eb31bc">leaf</a> (T <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a0141683231041f1bcfdc84ca4e36a25b">value</a>) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:a32525b49bf05e6dd7077c3c1a7eb31bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ee5cff660c393800bcf092dfe4b4e9a"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a0ee5cff660c393800bcf092dfe4b4e9a">from_sequence</a> (const std::vector&lt; T &gt; &amp;values) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:a0ee5cff660c393800bcf092dfe4b4e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54253fdb19ec9ec5553aa305d63f7351"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a54253fdb19ec9ec5553aa305d63f7351">from_sequence</a> (const std::vector&lt; T &gt; &amp;values, const ALLOCATOR &amp;alloc) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:a54253fdb19ec9ec5553aa305d63f7351"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aacb45a924c3778eeb608abd169097e7b"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aacb45a924c3778eeb608abd169097e7b">concat</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;left, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;right) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
-<tr class="separator:aacb45a924c3778eeb608abd169097e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af07d2628cfac2e0e34f0ffbddb567f6e"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#af07d2628cfac2e0e34f0ffbddb567f6e">leaf</a> (T <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a068d6f948f2721b5cc605a3e7aa4f1ad">value</a>) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:af07d2628cfac2e0e34f0ffbddb567f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe67455cd65fa4ed8a114253c6783404"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#abe67455cd65fa4ed8a114253c6783404">from_sequence</a> (const std::vector&lt; T &gt; &amp;values, const ALLOCATOR &amp;alloc=ALLOCATOR{}, const MONOID &amp;monoid=MONOID{}) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:abe67455cd65fa4ed8a114253c6783404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ce43009015682a013cc84c9c528489"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#aa8ce43009015682a013cc84c9c528489">concat</a> (const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;left, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> &amp;right) -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a></td></tr>
+<tr class="separator:aa8ce43009015682a013cc84c9c528489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ac2f89af086c01cedc724e969855d08ba"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ac2f89af086c01cedc724e969855d08ba">has_unit_count_measure</a></td></tr>
+<tr class="separator:ac2f89af086c01cedc724e969855d08ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -242,176 +250,192 @@ Friends</h2></td></tr>
 <tr class="separator:a3f02504d825f04affe86b371787307ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a9e3a02d4e8ca84cf6b676121579dcd94" name="a9e3a02d4e8ca84cf6b676121579dcd94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e3a02d4e8ca84cf6b676121579dcd94">&#9670;&#160;</a></span>allocator_type</h2>
+<a id="ad5f09c6bc54a2a30d462c37cbb5e2a44" name="ad5f09c6bc54a2a30d462c37cbb5e2a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5f09c6bc54a2a30d462c37cbb5e2a44">&#9670;&#160;</a></span>allocator_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::allocator_type =  ALLOCATOR</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::allocator_type =  ALLOCATOR</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a75e24d1bc4284c1326b36e7a1b53dcbb" name="a75e24d1bc4284c1326b36e7a1b53dcbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75e24d1bc4284c1326b36e7a1b53dcbb">&#9670;&#160;</a></span>const_iterator</h2>
+<a id="a446bd4b1a3c0e14e8b58fcf1d893f68b" name="a446bd4b1a3c0e14e8b58fcf1d893f68b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a446bd4b1a3c0e14e8b58fcf1d893f68b">&#9670;&#160;</a></span>const_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::const_iterator =  <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a62404019d5f8ee73d145e03e5bde7c32">iterator</a></td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::const_iterator =  <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a53e0e8a755e7f48586692d906afea816">iterator</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a244bd0f32e88c9b55f29af97955f1b5a" name="a244bd0f32e88c9b55f29af97955f1b5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a244bd0f32e88c9b55f29af97955f1b5a">&#9670;&#160;</a></span>const_reference</h2>
+<a id="a521ea39ae9eac2c504fce35129a04735" name="a521ea39ae9eac2c504fce35129a04735"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a521ea39ae9eac2c504fce35129a04735">&#9670;&#160;</a></span>const_reference</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::const_reference =  const T&amp;</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::const_reference =  const T&amp;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a1f2c993fb7703d4d917139db6b12a5df" name="a1f2c993fb7703d4d917139db6b12a5df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f2c993fb7703d4d917139db6b12a5df">&#9670;&#160;</a></span>const_reverse_iterator</h2>
+<a id="a4299eef50011080f030e4c816897acbd" name="a4299eef50011080f030e4c816897acbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4299eef50011080f030e4c816897acbd">&#9670;&#160;</a></span>const_reverse_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::const_reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a75e24d1bc4284c1326b36e7a1b53dcbb">const_iterator</a>&gt;</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::const_reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a446bd4b1a3c0e14e8b58fcf1d893f68b">const_iterator</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a9d2e00d84051c3fc7c5ea667a71c518c" name="a9d2e00d84051c3fc7c5ea667a71c518c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d2e00d84051c3fc7c5ea667a71c518c">&#9670;&#160;</a></span>difference_type</h2>
+<a id="a2a6b28cac89b358d9073c85c041eb5f1" name="a2a6b28cac89b358d9073c85c041eb5f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a6b28cac89b358d9073c85c041eb5f1">&#9670;&#160;</a></span>difference_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::difference_type =  std::ptrdiff_t</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::difference_type =  std::ptrdiff_t</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a62404019d5f8ee73d145e03e5bde7c32" name="a62404019d5f8ee73d145e03e5bde7c32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62404019d5f8ee73d145e03e5bde7c32">&#9670;&#160;</a></span>iterator</h2>
+<a id="a53e0e8a755e7f48586692d906afea816" name="a53e0e8a755e7f48586692d906afea816"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53e0e8a755e7f48586692d906afea816">&#9670;&#160;</a></span>iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::iterator =  <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt;T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR&gt;</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::iterator =  <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIterator.html">FingerTreeIterator</a>&lt;T, MONOID, MEASURE_POLICY, ALLOCATOR&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a3e3e3bd033408e7b9a03eaca1d2d3c00" name="a3e3e3bd033408e7b9a03eaca1d2d3c00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e3e3bd033408e7b9a03eaca1d2d3c00">&#9670;&#160;</a></span>reference</h2>
+<a id="addf1fe0dd212d5b39c2177f8f00d01db" name="addf1fe0dd212d5b39c2177f8f00d01db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addf1fe0dd212d5b39c2177f8f00d01db">&#9670;&#160;</a></span>monoid_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::reference =  const T&amp;</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::monoid_type =  MONOID</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a6f10a464a4836c1ab3c6c243127fbeb4" name="a6f10a464a4836c1ab3c6c243127fbeb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f10a464a4836c1ab3c6c243127fbeb4">&#9670;&#160;</a></span>reverse_iterator</h2>
+<a id="a8a6bdc0fd2a81330c065d01fa59469d0" name="a8a6bdc0fd2a81330c065d01fa59469d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a6bdc0fd2a81330c065d01fa59469d0">&#9670;&#160;</a></span>reference</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a62404019d5f8ee73d145e03e5bde7c32">iterator</a>&gt;</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::reference =  const T&amp;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a510796e9996969424977e81083d75399" name="a510796e9996969424977e81083d75399"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a510796e9996969424977e81083d75399">&#9670;&#160;</a></span>size_type</h2>
+<a id="add748447e18a28cd2c20d84a9dd29470" name="add748447e18a28cd2c20d84a9dd29470"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add748447e18a28cd2c20d84a9dd29470">&#9670;&#160;</a></span>reverse_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::size_type =  std::size_t</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::reverse_iterator =  std::reverse_iterator&lt;<a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a53e0e8a755e7f48586692d906afea816">iterator</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a77f6d1ddedfa7e6068b6a256803edecb" name="a77f6d1ddedfa7e6068b6a256803edecb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77f6d1ddedfa7e6068b6a256803edecb">&#9670;&#160;</a></span>tag_type</h2>
+<a id="a5443502d3ce1b14f3e44e7405b667de7" name="a5443502d3ce1b14f3e44e7405b667de7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5443502d3ce1b14f3e44e7405b667de7">&#9670;&#160;</a></span>size_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::tag_type =  Tag</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::size_type =  std::size_t</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ade22f5208c56d2fd5765d1d80a8c9975" name="ade22f5208c56d2fd5765d1d80a8c9975"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade22f5208c56d2fd5765d1d80a8c9975">&#9670;&#160;</a></span>value_type</h2>
+<a id="ac1de5c40bfbbce6ab7ffed6946d3d478" name="ac1de5c40bfbbce6ab7ffed6946d3d478"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1de5c40bfbbce6ab7ffed6946d3d478">&#9670;&#160;</a></span>tag_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::value_type =  T</td>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::tag_type =  Tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2708e56115c8a992826a8dcad8d3e898" name="a2708e56115c8a992826a8dcad8d3e898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2708e56115c8a992826a8dcad8d3e898">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::value_type =  T</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -419,19 +443,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aef19d9f0179dd01f785e2a7f6a0289e6" name="aef19d9f0179dd01f785e2a7f6a0289e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef19d9f0179dd01f785e2a7f6a0289e6">&#9670;&#160;</a></span>FingerTree() <span class="overload">[1/5]</span></h2>
+<a id="a5b5352f676e394414c43e2c9ed7210a0" name="a5b5352f676e394414c43e2c9ed7210a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b5352f676e394414c43e2c9ed7210a0">&#9670;&#160;</a></span>FingerTree() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
+          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -446,23 +470,33 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a5459b128f243f3ea3a23c9b43893cf1e" name="a5459b128f243f3ea3a23c9b43893cf1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5459b128f243f3ea3a23c9b43893cf1e">&#9670;&#160;</a></span>FingerTree() <span class="overload">[2/5]</span></h2>
+<a id="a146a4206d0490e618bbb0987b65f2a4c" name="a146a4206d0490e618bbb0987b65f2a4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a146a4206d0490e618bbb0987b65f2a4c">&#9670;&#160;</a></span>FingerTree() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
+          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
           <td>(</td>
           <td class="paramtype">const ALLOCATOR &amp;&#160;</td>
-          <td class="paramname"><em>alloc</em></td><td>)</td>
+          <td class="paramname"><em>alloc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const MONOID &amp;&#160;</td>
+          <td class="paramname"><em>monoid</em> = <code>MONOID{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -474,21 +508,21 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a1901fec76ef11ad74e46cd01d7fbe704" name="a1901fec76ef11ad74e46cd01d7fbe704"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1901fec76ef11ad74e46cd01d7fbe704">&#9670;&#160;</a></span>FingerTree() <span class="overload">[3/5]</span></h2>
+<a id="af74f7f044550465dca63c3b2abe7f98a" name="af74f7f044550465dca63c3b2abe7f98a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af74f7f044550465dca63c3b2abe7f98a">&#9670;&#160;</a></span>FingerTree() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
+          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -502,21 +536,21 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a134fe9a39633df8d4a8db74ca105b2ab" name="a134fe9a39633df8d4a8db74ca105b2ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a134fe9a39633df8d4a8db74ca105b2ab">&#9670;&#160;</a></span>FingerTree() <span class="overload">[4/5]</span></h2>
+<a id="a1898feb5da61c4e4305b3e658f4e1782" name="a1898feb5da61c4e4305b3e658f4e1782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1898feb5da61c4e4305b3e658f4e1782">&#9670;&#160;</a></span>FingerTree() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
+          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -530,21 +564,21 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="acf882322422edfcbccf6449c98e57954" name="acf882322422edfcbccf6449c98e57954"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf882322422edfcbccf6449c98e57954">&#9670;&#160;</a></span>FingerTree() <span class="overload">[5/5]</span></h2>
+<a id="ad4e1fb5847ad9fb795ff7eca57edbaa0" name="ad4e1fb5847ad9fb795ff7eca57edbaa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4e1fb5847ad9fb795ff7eca57edbaa0">&#9670;&#160;</a></span>FingerTree() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
+          <td class="memname"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::FingerTree </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;&#160;</td>
           <td class="paramname"><em>other</em>, </td>
         </tr>
         <tr>
@@ -569,21 +603,21 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a25b7f547c0194f3c4e937b0197a4c46a" name="a25b7f547c0194f3c4e937b0197a4c46a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25b7f547c0194f3c4e937b0197a4c46a">&#9670;&#160;</a></span>append()</h2>
+<a id="a7e0ceb4cb0a7e1b67c50a35596dbec15" name="a7e0ceb4cb0a7e1b67c50a35596dbec15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e0ceb4cb0a7e1b67c50a35596dbec15">&#9670;&#160;</a></span>append()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::append </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::append </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>right</em></td><td>)</td>
           <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> </td>
         </tr>
@@ -597,22 +631,22 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a464d9fe66df8b5682ffb60a3caa0f809" name="a464d9fe66df8b5682ffb60a3caa0f809"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a464d9fe66df8b5682ffb60a3caa0f809">&#9670;&#160;</a></span>back()</h2>
+<a id="a5c697d8423f2a0de75c1e6ee780b7039" name="a5c697d8423f2a0de75c1e6ee780b7039"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c697d8423f2a0de75c1e6ee780b7039">&#9670;&#160;</a></span>back()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::back </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::back </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a244bd0f32e88c9b55f29af97955f1b5a">const_reference</a> </td>
+          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a521ea39ae9eac2c504fce35129a04735">const_reference</a> </td>
         </tr>
       </table>
   </td>
@@ -624,75 +658,75 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a2632de63bc2eb66da6b2e67a572d4daf" name="a2632de63bc2eb66da6b2e67a572d4daf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2632de63bc2eb66da6b2e67a572d4daf">&#9670;&#160;</a></span>begin()</h2>
+<a id="afff3e08310e83cea63209ac9705a5507" name="afff3e08310e83cea63209ac9705a5507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afff3e08310e83cea63209ac9705a5507">&#9670;&#160;</a></span>begin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::begin</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::begin</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a8ef25edbb8d53d9926edd7eba6897137" name="a8ef25edbb8d53d9926edd7eba6897137"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ef25edbb8d53d9926edd7eba6897137">&#9670;&#160;</a></span>cbegin()</h2>
+<a id="af80ade3c9c71c0ed3fb96abaa296a17f" name="af80ade3c9c71c0ed3fb96abaa296a17f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80ade3c9c71c0ed3fb96abaa296a17f">&#9670;&#160;</a></span>cbegin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::cbegin</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::cbegin</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a7d0f0e426a95bae93616639f0d4ead5b" name="a7d0f0e426a95bae93616639f0d4ead5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d0f0e426a95bae93616639f0d4ead5b">&#9670;&#160;</a></span>cend()</h2>
+<a id="a830be1d8fc7d9bc9511a313e99a6d295" name="a830be1d8fc7d9bc9511a313e99a6d295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830be1d8fc7d9bc9511a313e99a6d295">&#9670;&#160;</a></span>cend()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::cend</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::cend</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aacb45a924c3778eeb608abd169097e7b" name="aacb45a924c3778eeb608abd169097e7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacb45a924c3778eeb608abd169097e7b">&#9670;&#160;</a></span>concat()</h2>
+<a id="aa8ce43009015682a013cc84c9c528489" name="aa8ce43009015682a013cc84c9c528489"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ce43009015682a013cc84c9c528489">&#9670;&#160;</a></span>concat()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::concat </td>
+          <td class="memname">static auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::concat </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>left</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>right</em>&#160;</td>
         </tr>
         <tr>
@@ -710,19 +744,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="ad786cb7f72780e81195c230368d70ab1" name="ad786cb7f72780e81195c230368d70ab1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad786cb7f72780e81195c230368d70ab1">&#9670;&#160;</a></span>cons()</h2>
+<a id="acf952c3088e7a745f7bc80f6e7d65a62" name="acf952c3088e7a745f7bc80f6e7d65a62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf952c3088e7a745f7bc80f6e7d65a62">&#9670;&#160;</a></span>cons()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::cons </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::cons </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
@@ -738,51 +772,51 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a244a34edd3741431a9d6bd6395e49015" name="a244a34edd3741431a9d6bd6395e49015"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a244a34edd3741431a9d6bd6395e49015">&#9670;&#160;</a></span>crbegin()</h2>
+<a id="aacfee5e3ef6ad2660cc5ec68432ad17f" name="aacfee5e3ef6ad2660cc5ec68432ad17f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacfee5e3ef6ad2660cc5ec68432ad17f">&#9670;&#160;</a></span>crbegin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::crbegin</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::crbegin</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="accd9085c049e10c5f1f20e672a657c2c" name="accd9085c049e10c5f1f20e672a657c2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accd9085c049e10c5f1f20e672a657c2c">&#9670;&#160;</a></span>crend()</h2>
+<a id="aa6fdfe2176da140664c6aa4519312242" name="aa6fdfe2176da140664c6aa4519312242"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6fdfe2176da140664c6aa4519312242">&#9670;&#160;</a></span>crend()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::crend</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::crend</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="abcff0822db9c1364de3934ca97b67c64" name="abcff0822db9c1364de3934ca97b67c64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcff0822db9c1364de3934ca97b67c64">&#9670;&#160;</a></span>empty()</h2>
+<a id="abf843115b5fed2a9950daa6205a3c0a9" name="abf843115b5fed2a9950daa6205a3c0a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf843115b5fed2a9950daa6205a3c0a9">&#9670;&#160;</a></span>empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::empty </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::empty </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; bool </td>
@@ -797,35 +831,35 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a8b59ebf883c65b6f3ad527ef84ea569b" name="a8b59ebf883c65b6f3ad527ef84ea569b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b59ebf883c65b6f3ad527ef84ea569b">&#9670;&#160;</a></span>end()</h2>
+<a id="a09f555ebbf54feaf0dddde1dd4252409" name="a09f555ebbf54feaf0dddde1dd4252409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09f555ebbf54feaf0dddde1dd4252409">&#9670;&#160;</a></span>end()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::end</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::end</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5b604784d95bae0ea6e5c49b9083bc89" name="a5b604784d95bae0ea6e5c49b9083bc89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b604784d95bae0ea6e5c49b9083bc89">&#9670;&#160;</a></span>flatten()</h2>
+<a id="a0eed78bd70483af06b11ab72699f78fd" name="a0eed78bd70483af06b11ab72699f78fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eed78bd70483af06b11ab72699f78fd">&#9670;&#160;</a></span>flatten()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::flatten </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::flatten </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; std::vector&lt;T&gt; </td>
@@ -840,13 +874,13 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a52878521839b625d5114488645d27e37" name="a52878521839b625d5114488645d27e37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52878521839b625d5114488645d27e37">&#9670;&#160;</a></span>for_each()</h2>
+<a id="a76a0a24f467c1e8d88e7df9302247090" name="a76a0a24f467c1e8d88e7df9302247090"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a0a24f467c1e8d88e7df9302247090">&#9670;&#160;</a></span>for_each()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename F &gt; </div>
 <table class="mlabels">
@@ -854,7 +888,7 @@ template&lt;typename F &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::for_each </td>
+          <td class="memname">void <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::for_each </td>
           <td>(</td>
           <td class="paramtype">F &amp;&amp;&#160;</td>
           <td class="paramname"><em>fn</em></td><td>)</td>
@@ -870,47 +904,19 @@ template&lt;typename F &gt; </div>
 
 </div>
 </div>
-<a id="a0ee5cff660c393800bcf092dfe4b4e9a" name="a0ee5cff660c393800bcf092dfe4b4e9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ee5cff660c393800bcf092dfe4b4e9a">&#9670;&#160;</a></span>from_sequence() <span class="overload">[1/2]</span></h2>
+<a id="abe67455cd65fa4ed8a114253c6783404" name="abe67455cd65fa4ed8a114253c6783404"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe67455cd65fa4ed8a114253c6783404">&#9670;&#160;</a></span>from_sequence()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::from_sequence </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>values</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> </td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a54253fdb19ec9ec5553aa305d63f7351" name="a54253fdb19ec9ec5553aa305d63f7351"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54253fdb19ec9ec5553aa305d63f7351">&#9670;&#160;</a></span>from_sequence() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::from_sequence </td>
+          <td class="memname">static auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::from_sequence </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>values</em>, </td>
@@ -919,7 +925,13 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const ALLOCATOR &amp;&#160;</td>
-          <td class="paramname"><em>alloc</em>&#160;</td>
+          <td class="paramname"><em>alloc</em> = <code>ALLOCATOR{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const MONOID &amp;&#160;</td>
+          <td class="paramname"><em>monoid</em> = <code>MONOID{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -936,22 +948,22 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a1f16fb14a27ddd0e2bc5934d0c242b81" name="a1f16fb14a27ddd0e2bc5934d0c242b81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f16fb14a27ddd0e2bc5934d0c242b81">&#9670;&#160;</a></span>front()</h2>
+<a id="ae3e823446713f77786cc02c6911c4e53" name="ae3e823446713f77786cc02c6911c4e53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e823446713f77786cc02c6911c4e53">&#9670;&#160;</a></span>front()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::front </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::front </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a244bd0f32e88c9b55f29af97955f1b5a">const_reference</a> </td>
+          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a521ea39ae9eac2c504fce35129a04735">const_reference</a> </td>
         </tr>
       </table>
   </td>
@@ -963,22 +975,22 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a9e1898a61ecfa3e2a479ca8fd516f760" name="a9e1898a61ecfa3e2a479ca8fd516f760"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e1898a61ecfa3e2a479ca8fd516f760">&#9670;&#160;</a></span>get_allocator()</h2>
+<a id="a4f5e924d4e5b3ef3cc83429935e35bb3" name="a4f5e924d4e5b3ef3cc83429935e35bb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f5e924d4e5b3ef3cc83429935e35bb3">&#9670;&#160;</a></span>get_allocator()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::get_allocator </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::get_allocator </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a9e3a02d4e8ca84cf6b676121579dcd94">allocator_type</a> </td>
+          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#ad5f09c6bc54a2a30d462c37cbb5e2a44">allocator_type</a> </td>
         </tr>
       </table>
   </td>
@@ -990,19 +1002,46 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a900efc4f283fd3bf3a1ceff973938151" name="a900efc4f283fd3bf3a1ceff973938151"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a900efc4f283fd3bf3a1ceff973938151">&#9670;&#160;</a></span>head()</h2>
+<a id="ac1d0200f70ad89e2d7f152117792f51e" name="ac1d0200f70ad89e2d7f152117792f51e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1d0200f70ad89e2d7f152117792f51e">&#9670;&#160;</a></span>get_monoid()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::head </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::get_monoid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#addf1fe0dd212d5b39c2177f8f00d01db">monoid_type</a> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33493648cfa07b4c5dc7222f839e82f0" name="a33493648cfa07b4c5dc7222f839e82f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33493648cfa07b4c5dc7222f839e82f0">&#9670;&#160;</a></span>head()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::head </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; T </td>
@@ -1017,19 +1056,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="ac8e5afb086d58bee3e6951df9a455bb0" name="ac8e5afb086d58bee3e6951df9a455bb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8e5afb086d58bee3e6951df9a455bb0">&#9670;&#160;</a></span>head_ref()</h2>
+<a id="a315ab04a562a85eb888dca793c2b4459" name="a315ab04a562a85eb888dca793c2b4459"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a315ab04a562a85eb888dca793c2b4459">&#9670;&#160;</a></span>head_ref()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::head_ref </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::head_ref </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; const T&amp; </td>
@@ -1044,19 +1083,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a42bd8302642900c42b5503082dd8abc8" name="a42bd8302642900c42b5503082dd8abc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42bd8302642900c42b5503082dd8abc8">&#9670;&#160;</a></span>init()</h2>
+<a id="a477f4c0e7bce6fd348b0bd099e91024e" name="a477f4c0e7bce6fd348b0bd099e91024e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a477f4c0e7bce6fd348b0bd099e91024e">&#9670;&#160;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::init </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::init </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> </td>
@@ -1071,19 +1110,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="ade79d61c6048d3f5fcc68fc9488f4d31" name="ade79d61c6048d3f5fcc68fc9488f4d31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade79d61c6048d3f5fcc68fc9488f4d31">&#9670;&#160;</a></span>is_branch()</h2>
+<a id="a9f218f2b7d28e5b51d54dc7e68c32e64" name="a9f218f2b7d28e5b51d54dc7e68c32e64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f218f2b7d28e5b51d54dc7e68c32e64">&#9670;&#160;</a></span>is_branch()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::is_branch </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::is_branch </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; bool </td>
@@ -1098,19 +1137,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a035add839048a1dc7ffca7f4f243e794" name="a035add839048a1dc7ffca7f4f243e794"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a035add839048a1dc7ffca7f4f243e794">&#9670;&#160;</a></span>is_empty()</h2>
+<a id="a3fd178321d8a0a5f25be07462860a81a" name="a3fd178321d8a0a5f25be07462860a81a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fd178321d8a0a5f25be07462860a81a">&#9670;&#160;</a></span>is_empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::is_empty </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::is_empty </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; bool </td>
@@ -1125,19 +1164,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a91033049392a52d90d0907610719ebef" name="a91033049392a52d90d0907610719ebef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a91033049392a52d90d0907610719ebef">&#9670;&#160;</a></span>is_leaf()</h2>
+<a id="a73d740a900f102e84a4833e81fa37021" name="a73d740a900f102e84a4833e81fa37021"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d740a900f102e84a4833e81fa37021">&#9670;&#160;</a></span>is_leaf()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::is_leaf </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::is_leaf </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; bool </td>
@@ -1152,19 +1191,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a2e7d87008df6063bfafa44406c66ba33" name="a2e7d87008df6063bfafa44406c66ba33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e7d87008df6063bfafa44406c66ba33">&#9670;&#160;</a></span>last()</h2>
+<a id="a1a69bcb5fed8eed14c0893c3a87b8063" name="a1a69bcb5fed8eed14c0893c3a87b8063"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a69bcb5fed8eed14c0893c3a87b8063">&#9670;&#160;</a></span>last()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::last </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::last </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; T </td>
@@ -1179,19 +1218,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a1873b39ecaecf5e8193750b5002df74c" name="a1873b39ecaecf5e8193750b5002df74c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1873b39ecaecf5e8193750b5002df74c">&#9670;&#160;</a></span>last_ref()</h2>
+<a id="aff1e42f06cccb9c435f9c6c73bd4d38f" name="aff1e42f06cccb9c435f9c6c73bd4d38f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff1e42f06cccb9c435f9c6c73bd4d38f">&#9670;&#160;</a></span>last_ref()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::last_ref </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::last_ref </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; const T&amp; </td>
@@ -1206,19 +1245,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a32525b49bf05e6dd7077c3c1a7eb31bc" name="a32525b49bf05e6dd7077c3c1a7eb31bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32525b49bf05e6dd7077c3c1a7eb31bc">&#9670;&#160;</a></span>leaf()</h2>
+<a id="af07d2628cfac2e0e34f0ffbddb567f6e" name="af07d2628cfac2e0e34f0ffbddb567f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af07d2628cfac2e0e34f0ffbddb567f6e">&#9670;&#160;</a></span>leaf()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::leaf </td>
+          <td class="memname">static auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::leaf </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -1234,22 +1273,22 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="ac3ec8be206f2930ecd9f45eed1a53891" name="ac3ec8be206f2930ecd9f45eed1a53891"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3ec8be206f2930ecd9f45eed1a53891">&#9670;&#160;</a></span>max_size()</h2>
+<a id="a1ec4e33e6e365939ca7891fc3e6ab889" name="a1ec4e33e6e365939ca7891fc3e6ab889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ec4e33e6e365939ca7891fc3e6ab889">&#9670;&#160;</a></span>max_size()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::max_size </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::max_size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a510796e9996969424977e81083d75399">size_type</a> </td>
+          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5443502d3ce1b14f3e44e7405b667de7">size_type</a> </td>
         </tr>
       </table>
   </td>
@@ -1261,19 +1300,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a4cb2c2dcb1eaa26360528c5b0e16d0ed" name="a4cb2c2dcb1eaa26360528c5b0e16d0ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cb2c2dcb1eaa26360528c5b0e16d0ed">&#9670;&#160;</a></span>measure()</h2>
+<a id="a63119ba7d89162e8ad64d1344b410211" name="a63119ba7d89162e8ad64d1344b410211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63119ba7d89162e8ad64d1344b410211">&#9670;&#160;</a></span>measure()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::measure </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::measure </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; Tag </td>
@@ -1288,21 +1327,21 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="ae0db96c3bea1d6d3c1dda56f495b3e78" name="ae0db96c3bea1d6d3c1dda56f495b3e78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0db96c3bea1d6d3c1dda56f495b3e78">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="aa71b39ebdd7b660b1b7831fa93dbf98b" name="aa71b39ebdd7b660b1b7831fa93dbf98b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa71b39ebdd7b660b1b7831fa93dbf98b">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::operator= </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> &amp; -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&amp; </td>
         </tr>
@@ -1316,21 +1355,21 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a93d90d22aac0bcd4bc09876c56292ecd" name="a93d90d22aac0bcd4bc09876c56292ecd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93d90d22aac0bcd4bc09876c56292ecd">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a72e332164ff1e9f212471358d66a1927" name="a72e332164ff1e9f212471358d66a1927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72e332164ff1e9f212471358d66a1927">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::operator= </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> &amp; -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&amp; </td>
         </tr>
@@ -1344,54 +1383,54 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a12803f45dbdfb09b12528b843e3df3cd" name="a12803f45dbdfb09b12528b843e3df3cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12803f45dbdfb09b12528b843e3df3cd">&#9670;&#160;</a></span>rbegin()</h2>
+<a id="add96ac485aa0de31740f308c649ecc16" name="add96ac485aa0de31740f308c649ecc16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add96ac485aa0de31740f308c649ecc16">&#9670;&#160;</a></span>rbegin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::rbegin</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::rbegin</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aa6562efad1caf00b1b17c9ab7d5e9e87" name="aa6562efad1caf00b1b17c9ab7d5e9e87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6562efad1caf00b1b17c9ab7d5e9e87">&#9670;&#160;</a></span>rend()</h2>
+<a id="acff30c53bba3b06905a2aa7f3a2e68c9" name="acff30c53bba3b06905a2aa7f3a2e68c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acff30c53bba3b06905a2aa7f3a2e68c9">&#9670;&#160;</a></span>rend()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
+template&lt;typename T , typename MONOID , typename MEASURE_POLICY , typename ALLOCATOR &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::rend</td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::rend</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a27a6838cd2e81ec91a64016c9d28c5fd" name="a27a6838cd2e81ec91a64016c9d28c5fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27a6838cd2e81ec91a64016c9d28c5fd">&#9670;&#160;</a></span>reversed()</h2>
+<a id="acec73e2f3312d43f4f926a16dd8d4158" name="acec73e2f3312d43f4f926a16dd8d4158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec73e2f3312d43f4f926a16dd8d4158">&#9670;&#160;</a></span>reversed()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::reversed </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::reversed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt;T, <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1DualMonoid.html">beman::fingertree::typeclass::DualMonoid</a>&lt;Tag&gt;, <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1ReversedMeasure.html">ReversedMeasure</a>&lt;Meas&gt;, ALLOCATOR&gt; </td>
+          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt;T, <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1dual__monoid.html">beman::fingertree::typeclass::dual_monoid</a>&lt;MONOID&gt;, Meas, ALLOCATOR&gt; </td>
         </tr>
       </table>
   </td>
@@ -1403,13 +1442,13 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a2c252de015ce22bcbfc7849f1fc29c48" name="a2c252de015ce22bcbfc7849f1fc29c48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c252de015ce22bcbfc7849f1fc29c48">&#9670;&#160;</a></span>search()</h2>
+<a id="a753304b4a077064720fae9c08b9270ff" name="a753304b4a077064720fae9c08b9270ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a753304b4a077064720fae9c08b9270ff">&#9670;&#160;</a></span>search()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename PRED &gt; </div>
 <table class="mlabels">
@@ -1417,7 +1456,7 @@ template&lt;typename PRED &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::search </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::search </td>
           <td>(</td>
           <td class="paramtype">PRED &amp;&amp;&#160;</td>
           <td class="paramname"><em>pred</em></td><td>)</td>
@@ -1433,22 +1472,22 @@ template&lt;typename PRED &gt; </div>
 
 </div>
 </div>
-<a id="a06960e9971159c4d99b4900dad8256f2" name="a06960e9971159c4d99b4900dad8256f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06960e9971159c4d99b4900dad8256f2">&#9670;&#160;</a></span>size()</h2>
+<a id="aa27e478ffdb3fae79c605ef869a2b889" name="aa27e478ffdb3fae79c605ef869a2b889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa27e478ffdb3fae79c605ef869a2b889">&#9670;&#160;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::size </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::size </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a510796e9996969424977e81083d75399">size_type</a> </td>
+          <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html#a5443502d3ce1b14f3e44e7405b667de7">size_type</a> </td>
         </tr>
       </table>
   </td>
@@ -1460,19 +1499,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a711f8ad921b8df3dc222db4c47fe4acf" name="a711f8ad921b8df3dc222db4c47fe4acf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a711f8ad921b8df3dc222db4c47fe4acf">&#9670;&#160;</a></span>snoc()</h2>
+<a id="ae8c5a3b8ddf5f5d5e8e8648f5972ea94" name="ae8c5a3b8ddf5f5d5e8e8648f5972ea94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8c5a3b8ddf5f5d5e8e8648f5972ea94">&#9670;&#160;</a></span>snoc()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::snoc </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::snoc </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>x</em></td><td>)</td>
@@ -1488,19 +1527,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a9589f263a198deb1d4363582a44a8d91" name="a9589f263a198deb1d4363582a44a8d91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9589f263a198deb1d4363582a44a8d91">&#9670;&#160;</a></span>spine_depth()</h2>
+<a id="a864e574dc7fc3ff7061e32afeb9d49c6" name="a864e574dc7fc3ff7061e32afeb9d49c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a864e574dc7fc3ff7061e32afeb9d49c6">&#9670;&#160;</a></span>spine_depth()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::spine_depth </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::spine_depth </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; std::size_t </td>
@@ -1515,13 +1554,13 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a76e6db596e23999614b5a715e24a8a53" name="a76e6db596e23999614b5a715e24a8a53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76e6db596e23999614b5a715e24a8a53">&#9670;&#160;</a></span>split()</h2>
+<a id="ae8989cb46e0eb9e274ccec50b0e028ba" name="ae8989cb46e0eb9e274ccec50b0e028ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8989cb46e0eb9e274ccec50b0e028ba">&#9670;&#160;</a></span>split()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename PRED &gt; </div>
 <table class="mlabels">
@@ -1529,7 +1568,7 @@ template&lt;typename PRED &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::split </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::split </td>
           <td>(</td>
           <td class="paramtype">PRED &amp;&amp;&#160;</td>
           <td class="paramname"><em>pred</em></td><td>)</td>
@@ -1545,13 +1584,13 @@ template&lt;typename PRED &gt; </div>
 
 </div>
 </div>
-<a id="a7bdcfb8049f47d6bb18cb445aef2764f" name="a7bdcfb8049f47d6bb18cb445aef2764f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bdcfb8049f47d6bb18cb445aef2764f">&#9670;&#160;</a></span>split_at()</h2>
+<a id="ad4811b1140d03c4d1fce0ef62484ba46" name="ad4811b1140d03c4d1fce0ef62484ba46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4811b1140d03c4d1fce0ef62484ba46">&#9670;&#160;</a></span>split_at()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename PRED &gt; </div>
 <table class="mlabels">
@@ -1559,7 +1598,7 @@ template&lt;typename PRED &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::split_at </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::split_at </td>
           <td>(</td>
           <td class="paramtype">PRED &amp;&amp;&#160;</td>
           <td class="paramname"><em>pred</em></td><td>)</td>
@@ -1575,19 +1614,19 @@ template&lt;typename PRED &gt; </div>
 
 </div>
 </div>
-<a id="a82308686e2bda7654dd45f778352a335" name="a82308686e2bda7654dd45f778352a335"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a82308686e2bda7654dd45f778352a335">&#9670;&#160;</a></span>split_at_measure()</h2>
+<a id="a19b6baa5a7ade215443f2a7823b7ef38" name="a19b6baa5a7ade215443f2a7823b7ef38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19b6baa5a7ade215443f2a7823b7ef38">&#9670;&#160;</a></span>split_at_measure()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::split_at_measure </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::split_at_measure </td>
           <td>(</td>
           <td class="paramtype">const Tag &amp;&#160;</td>
           <td class="paramname"><em>threshold</em></td><td>)</td>
@@ -1604,21 +1643,21 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a08fb8336c12279d25a96670963ec901d" name="a08fb8336c12279d25a96670963ec901d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08fb8336c12279d25a96670963ec901d">&#9670;&#160;</a></span>swap()</h2>
+<a id="ae1039d3c53d2c0c13fcc85a0b3065485" name="ae1039d3c53d2c0c13fcc85a0b3065485"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1039d3c53d2c0c13fcc85a0b3065485">&#9670;&#160;</a></span>swap()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::swap </td>
+          <td class="memname">void <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::swap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1632,19 +1671,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="ab713db69c8686d2a8372eda1b0c05732" name="ab713db69c8686d2a8372eda1b0c05732"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab713db69c8686d2a8372eda1b0c05732">&#9670;&#160;</a></span>tail()</h2>
+<a id="a7e6dabafd13d30a43ba85f907e8a9e91" name="a7e6dabafd13d30a43ba85f907e8a9e91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e6dabafd13d30a43ba85f907e8a9e91">&#9670;&#160;</a></span>tail()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::tail </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::tail </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> </td>
@@ -1659,19 +1698,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a0141683231041f1bcfdc84ca4e36a25b" name="a0141683231041f1bcfdc84ca4e36a25b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0141683231041f1bcfdc84ca4e36a25b">&#9670;&#160;</a></span>value()</h2>
+<a id="a068d6f948f2721b5cc605a3e7aa4f1ad" name="a068d6f948f2721b5cc605a3e7aa4f1ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a068d6f948f2721b5cc605a3e7aa4f1ad">&#9670;&#160;</a></span>value()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::value </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::value </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; const T&amp; </td>
@@ -1686,19 +1725,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a0bf7f8308af3c8d3808f91b934a6a779" name="a0bf7f8308af3c8d3808f91b934a6a779"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bf7f8308af3c8d3808f91b934a6a779">&#9670;&#160;</a></span>view_l()</h2>
+<a id="a2b3f086b0c17b934184be413f1a7f077" name="a2b3f086b0c17b934184be413f1a7f077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3f086b0c17b934184be413f1a7f077">&#9670;&#160;</a></span>view_l()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::view_l </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::view_l </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; std::optional&lt;<a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1View.html">View</a>&gt; </td>
@@ -1713,19 +1752,19 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 
 </div>
 </div>
-<a id="a9326e4a4e554ca262ea07d4a7a5317b4" name="a9326e4a4e554ca262ea07d4a7a5317b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9326e4a4e554ca262ea07d4a7a5317b4">&#9670;&#160;</a></span>view_r()</h2>
+<a id="a4b50b4b5ae5169e2afa79af55a110657" name="a4b50b4b5ae5169e2afa79af55a110657"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b50b4b5ae5169e2afa79af55a110657">&#9670;&#160;</a></span>view_r()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt;::view_r </td>
+          <td class="memname">auto <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::view_r </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const -&gt; std::optional&lt;<a class="el" href="structbeman_1_1fingertree_1_1tree_1_1FingerTree_1_1View.html">View</a>&gt; </td>
@@ -1747,7 +1786,7 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename , typename , typename , typename &gt; </div>
 <table class="mlabels">
@@ -1773,7 +1812,7 @@ template&lt;typename , typename , typename , typename &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1781,13 +1820,13 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
         <tr>
           <td class="memname">auto operator== </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>lhs</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>rhs</em>&#160;</td>
         </tr>
         <tr>
@@ -1811,7 +1850,7 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1819,13 +1858,13 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
         <tr>
           <td class="memname">void swap </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt; &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -1841,6 +1880,34 @@ template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLI
 </table>
 </div><div class="memdoc">
 
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac2f89af086c01cedc724e969855d08ba" name="ac2f89af086c01cedc724e969855d08ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f89af086c01cedc724e969855d08ba">&#9670;&#160;</a></span>has_unit_count_measure</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;, typename ALLOCATOR  = std::allocator&lt;std::byte&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, ALLOCATOR &gt;::has_unit_count_measure</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        std::same_as&lt;MONOID, beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;&gt; &amp;&amp;</div>
+<div class="line">        std::same_as&lt;Meas, UnitMeasure&lt;T, std::size_t&gt;&gt;</div>
+</div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

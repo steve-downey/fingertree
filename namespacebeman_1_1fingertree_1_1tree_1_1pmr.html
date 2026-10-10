@@ -82,21 +82,21 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a576c64b52e9745e57fa809caa06d13e1"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;&gt; </td></tr>
-<tr class="memitem:a576c64b52e9745e57fa809caa06d13e1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html#a576c64b52e9745e57fa809caa06d13e1">FingerTree</a> = <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, TAG_TYPE, MEASURE_POLICY, std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;</td></tr>
-<tr class="separator:a576c64b52e9745e57fa809caa06d13e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d993592b0d1f6ab074e1a6f2851babe"><td class="memTemplParams" colspan="2">template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;&gt; </td></tr>
+<tr class="memitem:a5d993592b0d1f6ab074e1a6f2851babe"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html#a5d993592b0d1f6ab074e1a6f2851babe">FingerTree</a> = <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt; T, MONOID, MEASURE_POLICY, std::pmr::polymorphic_allocator&lt; std::byte &gt; &gt;</td></tr>
+<tr class="separator:a5d993592b0d1f6ab074e1a6f2851babe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a576c64b52e9745e57fa809caa06d13e1" name="a576c64b52e9745e57fa809caa06d13e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a576c64b52e9745e57fa809caa06d13e1">&#9670;&#160;</a></span>FingerTree</h2>
+<a id="a5d993592b0d1f6ab074e1a6f2851babe" name="a5d993592b0d1f6ab074e1a6f2851babe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d993592b0d1f6ab074e1a6f2851babe">&#9670;&#160;</a></span>FingerTree</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TAG_TYPE  = std::size_t, typename MEASURE_POLICY  = UnitMeasure&lt;T, TAG_TYPE&gt;&gt; </div>
+template&lt;typename T , typename MONOID  = beman::fingertree::typeclass::sum_monoid&lt;std::size_t&gt;, typename MEASURE_POLICY  = UnitMeasure&lt;T, ft::tag_t&lt;MONOID&gt;&gt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html#a576c64b52e9745e57fa809caa06d13e1">beman::fingertree::tree::pmr::FingerTree</a> = typedef <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt;T, TAG_TYPE, MEASURE_POLICY, std::pmr::polymorphic_allocator&lt;std::byte&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="namespacebeman_1_1fingertree_1_1tree_1_1pmr.html#a5d993592b0d1f6ab074e1a6f2851babe">beman::fingertree::tree::pmr::FingerTree</a> = typedef <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">beman::fingertree::tree::FingerTree</a>&lt;T, MONOID, MEASURE_POLICY, std::pmr::polymorphic_allocator&lt;std::byte&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">

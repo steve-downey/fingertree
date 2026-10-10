@@ -75,6 +75,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="structbeman_1_1fingertree_1_1FingerTreePriorityQueueFoldableImpl-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">beman::fingertree::FingerTreePriorityQueueFoldableImpl&lt; T, Tree &gt; Struct Template Reference</div></div>
@@ -93,22 +94,44 @@ Inheritance diagram for beman::fingertree::FingerTreePriorityQueueFoldableImpl&l
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a0be0de2407c8ca4b1102c3a062aebd28"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreePriorityQueueFoldableImpl.html#a0be0de2407c8ca4b1102c3a062aebd28">element_type</a> = T</td></tr>
+<tr class="separator:a0be0de2407c8ca4b1102c3a062aebd28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afb24a6be23bee06d3f77ce681858c216"><td class="memTemplParams" colspan="2">template&lt;class F &gt; </td></tr>
-<tr class="memitem:afb24a6be23bee06d3f77ce681858c216"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreePriorityQueueFoldableImpl.html#afb24a6be23bee06d3f77ce681858c216">fold_map</a> (this auto &amp;&amp;, F &amp;&amp;function, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreePriorityQueue.html">beman::fingertree::tree::FingerTreePriorityQueue</a>&lt; T, Tree &gt; &amp;queue) -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt; std::invoke_result_t&lt; F, const T &amp; &gt; &gt;</td></tr>
-<tr class="separator:afb24a6be23bee06d3f77ce681858c216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a258722d7048c7c2ee52c55edf8ea886a"><td class="memTemplParams" colspan="2">template&lt;class F , class RESULT_MONOID &gt; </td></tr>
+<tr class="memitem:a258722d7048c7c2ee52c55edf8ea886a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreePriorityQueueFoldableImpl.html#a258722d7048c7c2ee52c55edf8ea886a">fold_map</a> (this auto &amp;&amp;, F &amp;&amp;function, const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreePriorityQueue.html">beman::fingertree::tree::FingerTreePriorityQueue</a>&lt; T, Tree &gt; &amp;queue, RESULT_MONOID monoid) -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt; std::invoke_result_t&lt; F &amp;, const T &amp; &gt; &gt;</td></tr>
+<tr class="separator:a258722d7048c7c2ee52c55edf8ea886a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a0be0de2407c8ca4b1102c3a062aebd28" name="a0be0de2407c8ca4b1102c3a062aebd28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be0de2407c8ca4b1102c3a062aebd28">&#9670;&#160;</a></span>element_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , class Tree &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structbeman_1_1fingertree_1_1FingerTreePriorityQueueFoldableImpl.html">beman::fingertree::FingerTreePriorityQueueFoldableImpl</a>&lt; T, Tree &gt;::element_type =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="afb24a6be23bee06d3f77ce681858c216" name="afb24a6be23bee06d3f77ce681858c216"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb24a6be23bee06d3f77ce681858c216">&#9670;&#160;</a></span>fold_map()</h2>
+<a id="a258722d7048c7c2ee52c55edf8ea886a" name="a258722d7048c7c2ee52c55edf8ea886a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a258722d7048c7c2ee52c55edf8ea886a">&#9670;&#160;</a></span>fold_map()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;class T , class Tree &gt; </div>
 <div class="memtemplate">
-template&lt;class F &gt; </div>
+template&lt;class F , class RESULT_MONOID &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -129,12 +152,18 @@ template&lt;class F &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreePriorityQueue.html">beman::fingertree::tree::FingerTreePriorityQueue</a>&lt; T, Tree &gt; &amp;&#160;</td>
-          <td class="paramname"><em>queue</em>&#160;</td>
+          <td class="paramname"><em>queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RESULT_MONOID&#160;</td>
+          <td class="paramname"><em>monoid</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt;std::invoke_result_t&lt;F, const T&amp;&gt;&gt; </td>
+          <td></td><td> -&gt; <a class="el" href="namespacebeman_1_1fingertree.html#a9f8d839414c4dab79ac7ef64ee6d7582">remove_cvref_t</a>&lt;std::invoke_result_t&lt;F&amp;, const T&amp;&gt;&gt; </td>
         </tr>
       </table>
   </td>

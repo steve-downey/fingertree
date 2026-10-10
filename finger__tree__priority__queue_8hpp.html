@@ -76,7 +76,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">finger_tree_priority_queue.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -89,6 +90,7 @@ $(function() {
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;optional&gt;</code><br />
+<code>#include &lt;tuple&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
@@ -97,22 +99,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1MinTag.html">beman::fingertree::tree::MinTag&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__min__monoid.html">beman::fingertree::tree::optional_min_monoid&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1MaxTag.html">beman::fingertree::tree::MaxTag&lt; T &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1PriorityTag.html">beman::fingertree::tree::PriorityTag&lt; T &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1optional__max__monoid.html">beman::fingertree::tree::optional_max_monoid&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1tree_1_1PriorityMeasure.html">beman::fingertree::tree::PriorityMeasure&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreePriorityQueue.html">beman::fingertree::tree::FingerTreePriorityQueue&lt; T, Tree &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Persistent double-ended priority queue backed by a finger tree.  <a href="classbeman_1_1fingertree_1_1tree_1_1FingerTreePriorityQueue.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1tree_1_1MinTag_3_01T_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::tree::MinTag&lt; T &gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1tree_1_1MaxTag_3_01T_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::tree::MaxTag&lt; T &gt; &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1Monoid_3_01beman_1_1fingertree_1_1tree_1_1PriorityTag_3_01T_01_4_01_4.html">beman::fingertree::typeclass::Monoid&lt; beman::fingertree::tree::PriorityTag&lt; T &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbeman_1_1fingertree_1_1FingerTreePriorityQueueFoldableImpl.html">beman::fingertree::FingerTreePriorityQueueFoldableImpl&lt; T, Tree &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,8 +125,15 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespacebeman_1_1fingertree_1_1tree"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html">beman::fingertree::tree</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespacebeman_1_1fingertree_1_1typeclass"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1typeclass.html">beman::fingertree::typeclass</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a84720d6eef5effca4a233e391399071d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a84720d6eef5effca4a233e391399071d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#a84720d6eef5effca4a233e391399071d">beman::fingertree::tree::PriorityTag</a> = std::tuple&lt; std::size_t, std::optional&lt; T &gt;, std::optional&lt; T &gt; &gt;</td></tr>
+<tr class="separator:a84720d6eef5effca4a233e391399071d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7078e28f83644c48f78183e907aad45"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa7078e28f83644c48f78183e907aad45"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#aa7078e28f83644c48f78183e907aad45">beman::fingertree::tree::PriorityMonoid</a> = <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1tuple__monoid.html">beman::fingertree::typeclass::tuple_monoid</a>&lt; <a class="el" href="structbeman_1_1fingertree_1_1typeclass_1_1sum__monoid.html">beman::fingertree::typeclass::sum_monoid</a>&lt; std::size_t &gt;, optional_min_monoid&lt; T &gt;, optional_max_monoid&lt; T &gt; &gt;</td></tr>
+<tr class="separator:aa7078e28f83644c48f78183e907aad45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

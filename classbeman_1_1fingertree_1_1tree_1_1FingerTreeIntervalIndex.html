@@ -95,7 +95,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9800b4bc7a54f0897bb97e450d2f678e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf5976f1674100988168e617f9d78da9"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIntervalIndex.html#adf5976f1674100988168e617f9d78da9">query_point</a> (std::size_t point) const -&gt; std::vector&lt; PAYLOAD_TYPE &gt;</td></tr>
 <tr class="separator:adf5976f1674100988168e617f9d78da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac19046b4e62315ac4dd7cdc3b09eb0d3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIntervalIndex.html#ac19046b4e62315ac4dd7cdc3b09eb0d3">query_overlap</a> (std::size_t start, std::size_t <a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#a170b1a0ad1acedbc3782d2a3cb17d5db">end</a>) const -&gt; std::vector&lt; PAYLOAD_TYPE &gt;</td></tr>
+<tr class="memitem:ac19046b4e62315ac4dd7cdc3b09eb0d3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIntervalIndex.html#ac19046b4e62315ac4dd7cdc3b09eb0d3">query_overlap</a> (std::size_t start, std::size_t <a class="el" href="namespacebeman_1_1fingertree_1_1tree.html#a1e6fc642d1a43807407075590b44364a">end</a>) const -&gt; std::vector&lt; PAYLOAD_TYPE &gt;</td></tr>
 <tr class="separator:ac19046b4e62315ac4dd7cdc3b09eb0d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acef2bc5dc11b729a9656f3ddd651dfed"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTreeIntervalIndex.html#acef2bc5dc11b729a9656f3ddd651dfed">entries</a> () const -&gt; std::vector&lt; <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1Interval.html">Entry</a> &gt;</td></tr>
 <tr class="separator:acef2bc5dc11b729a9656f3ddd651dfed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,12 +106,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:aede35e1b061127f2f138248dd506e5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename PAYLOAD_TYPE, typename Tree = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMaxEndTag&lt;PAYLOAD_TYPE&gt;, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename PAYLOAD_TYPE, typename Tree = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMonoid, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt;<br />
 class beman::fingertree::tree::FingerTreeIntervalIndex&lt; PAYLOAD_TYPE, Tree &gt;</div><p>Persistent interval index supporting stabbing and overlap queries. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">PAYLOAD_TYPE</td><td>Arbitrary data associated with each interval. </td></tr>
-    <tr><td class="paramname">Tree</td><td>Backing finger tree type (must use <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1IntervalMaxEndTag.html">IntervalMaxEndTag</a> measure). Default: <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> — correct at all sizes.</td></tr>
+    <tr><td class="paramname">Tree</td><td>Backing finger tree type (must use IntervalMonoid over <a class="el" href="structbeman_1_1fingertree_1_1tree_1_1IntervalMeasure.html">IntervalMeasure</a>). Default: <a class="el" href="classbeman_1_1fingertree_1_1tree_1_1FingerTree.html">FingerTree</a> — correct at all sizes.</td></tr>
   </table>
   </dd>
 </dl>
@@ -128,7 +128,7 @@ class beman::fingertree::tree::FingerTreeIntervalIndex&lt; PAYLOAD_TYPE, Tree &g
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMaxEndTag&lt;PAYLOAD_TYPE&gt;, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
+template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMonoid, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -156,7 +156,7 @@ template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;P
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMaxEndTag&lt;PAYLOAD_TYPE&gt;, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
+template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMonoid, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -183,7 +183,7 @@ template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;P
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMaxEndTag&lt;PAYLOAD_TYPE&gt;, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
+template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMonoid, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -211,7 +211,7 @@ template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;P
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMaxEndTag&lt;PAYLOAD_TYPE&gt;, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
+template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMonoid, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -239,7 +239,7 @@ template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;P
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMaxEndTag&lt;PAYLOAD_TYPE&gt;, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
+template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMonoid, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -277,7 +277,7 @@ template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;P
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMaxEndTag&lt;PAYLOAD_TYPE&gt;, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
+template&lt;typename PAYLOAD_TYPE , typename Tree  = FingerTree&lt;Interval&lt;PAYLOAD_TYPE&gt;, IntervalMonoid, IntervalMeasure&lt;PAYLOAD_TYPE&gt;&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

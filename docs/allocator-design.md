@@ -50,15 +50,20 @@ mixed graphs unrepresentable through the public API.
 
 ```cpp
 template <typename T,
-          typename TAG_TYPE       = std::size_t,
-          typename MEASURE_POLICY = UnitMeasure<T, TAG_TYPE>,
+          typename MONOID         = typeclass::sum_monoid<std::size_t>,
+          typename MEASURE_POLICY = UnitMeasure<T, ft::tag_t<MONOID>>,
           typename ALLOCATOR      = std::allocator<std::byte>>
 class FingerTree;
 ```
 
+The monoid instance is stored on the tree beside the allocator, also under
+`[[no_unique_address]]`, and travels the same way: every tree a helper builds
+inherits the instance of the tree it was built from, so a stateful instance
+reaches every node it combines.
+
 `std::byte` as the `value_type` matches `std::pmr::polymorphic_allocator` and
 signals that the tree rebinds internally to the node types it actually allocates
-(`Elem<T,Tag>`, `Deep`, spine shells).
+(`Elem<T,Monoid>`, `Deep`, spine shells).
 
 Existing code using `FingerTree<int>` keeps working unchanged. The default
 `std::allocator<std::byte>` is stateless and, under `[[no_unique_address]]`,
@@ -66,7 +71,7 @@ adds no storage.
 
 ### 2. Which allocations use the custom allocator
 
-**Yes** — `Elem<T,Tag>` (leaf and node objects, 64 bytes each) and `Deep` (digit
+**Yes** — `Elem<T,Monoid>` (leaf and node objects, 64 bytes each) and `Deep` (digit
 + spine + measure, ~168 bytes each). These are the user-data nodes and the vast
 majority of the allocation cost.
 
@@ -221,10 +226,10 @@ auto t = pmr::FingerTree<int>::from_sequence({1, 2, 3}, &mr);
 ```cpp
 namespace beman::fingertree::tree::pmr {
 template <typename T,
-          typename TAG_TYPE       = std::size_t,
-          typename MEASURE_POLICY = UnitMeasure<T, TAG_TYPE>>
+          typename MONOID         = typeclass::sum_monoid<std::size_t>,
+          typename MEASURE_POLICY = UnitMeasure<T, ft::tag_t<MONOID>>>
 using FingerTree =
-    beman::fingertree::tree::FingerTree<T, TAG_TYPE, MEASURE_POLICY,
+    beman::fingertree::tree::FingerTree<T, MONOID, MEASURE_POLICY,
                                         std::pmr::polymorphic_allocator<std::byte>>;
 }
 ```

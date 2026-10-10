@@ -10,7 +10,6 @@ set(BEMAN_FINGERTREE_PUBLIC_HEADERS
     typeclass/foldable.hpp
     typeclass/traversable.hpp
     typeclass/monoid.hpp
-    typeclass/dual_monoid.hpp
     tree/finger_tree.hpp
     tree/finger_tree_iterator.hpp
     tree/finger_tree_pmr.hpp

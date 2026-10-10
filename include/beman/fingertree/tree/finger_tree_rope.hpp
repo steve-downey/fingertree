@@ -27,9 +27,8 @@ struct RopeChunkMeasure {
 /** @brief Persistent text buffer implemented as a rope over string chunks.
  *
  * @tparam Tree Backing finger tree type (must store std::string with a
- *              byte-count measure).  Default: FingerTree — correct at all
- *              sizes.  Pass FingerTree2<std::string, std::size_t,
- *              RopeChunkMeasure> explicitly if FT2 semantics are required.
+ *              byte-count measure: sum_monoid<std::size_t> over
+ *              RopeChunkMeasure).  Default: FingerTree — correct at all sizes.
  *
  * Complexity:
  * - from_text:              O(n / chunk_size)
@@ -37,7 +36,8 @@ struct RopeChunkMeasure {
  * - to_string / chunks:     O(n)
  * - insert / erase / replace: O(log n)
  */
-template <typename Tree = FingerTree<std::string, std::size_t, RopeChunkMeasure>>
+template <typename Tree =
+              FingerTree<std::string, beman::fingertree::typeclass::sum_monoid<std::size_t>, RopeChunkMeasure>>
 class FingerTreeRope {
     Tree d_tree;
 
@@ -137,23 +137,25 @@ namespace beman::fingertree {
 
 template <class Tree>
 struct FingerTreeRopeFoldableImpl {
-    template <class F>
-    auto fold_map(this auto&&, F&& function, const beman::fingertree::tree::FingerTreeRope<Tree>& rope)
-        -> remove_cvref_t<std::invoke_result_t<F, const std::string&>> {
-        using Result = remove_cvref_t<std::invoke_result_t<F, const std::string&>>;
-        return std::ranges::fold_left(rope.chunks(),
-                                      beman::fingertree::typeclass::monoid_v<Result>.identity(),
-                                      [&](Result acc, const auto& chunk) {
-                                          return beman::fingertree::typeclass::monoid_v<Result>.combine(
-                                              std::move(acc), std::invoke(function, chunk));
-                                      });
+    using element_type = std::string;
+
+    // The monoid is an instance object over the result type, passed by
+    // value; the Impl never chooses one (beman.transpose
+    // docs/decisions.md#monoid-selection).
+    template <class F, class RESULT_MONOID>
+    auto fold_map(this auto&&,
+                  F&&                                                  function,
+                  const beman::fingertree::tree::FingerTreeRope<Tree>& rope,
+                  RESULT_MONOID monoid) -> remove_cvref_t<std::invoke_result_t<F&, const std::string&>> {
+        using Result = remove_cvref_t<std::invoke_result_t<F&, const std::string&>>;
+        return std::ranges::fold_left(rope.chunks(), Result(monoid.identity()), [&](Result acc, const auto& value) {
+            return monoid.combine(std::move(acc), std::invoke(function, value));
+        });
     }
 };
 
 template <class Tree>
-struct FingerTreeRopeFoldableMap : Foldable<FingerTreeRopeFoldableImpl<Tree>> {
-    using FingerTreeRopeFoldableImpl<Tree>::fold_map;
-};
+struct FingerTreeRopeFoldableMap : Foldable<FingerTreeRopeFoldableImpl<Tree>> {};
 
 template <class Tree>
 inline constexpr auto foldable_typeclass<beman::fingertree::tree::FingerTreeRope<Tree>> =

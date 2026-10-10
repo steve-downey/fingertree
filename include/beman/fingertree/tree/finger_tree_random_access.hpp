@@ -5,11 +5,11 @@
 // Persistent random-access sequence backed by a finger tree.
 //
 // The Tree template parameter accepts any fully-specialised finger tree type
-// whose measure is an element count (size_t, UnitMeasure):
+// whose measure is an element count (sum_monoid<std::size_t> over
+// UnitMeasure):
 //
-//   FingerTreeRandomAccess<int>                  // -backed (default,
-//   correct at all sizes) FingerTreeRandomAccess<int, FingerTree2<int>> //
-//   FT2-backed (kMaxDepth hazard at N > ~2000)
+//   FingerTreeRandomAccess<int>                   // FingerTree<int>-backed (default)
+//   FingerTreeRandomAccess<int, SomeOtherTree<int>> // any tree with the same measure
 //
 // This mirrors std::stack<T, Container>: the element type T plus an optional
 // fully-specialised backing tree.  Reason for the full-specialisation approach
@@ -43,7 +43,9 @@ namespace beman::fingertree::tree {
  * - size / empty:                 O(1)
  * - to_vector:                    O(n)
  */
-template <typename T, typename Tree = FingerTree<T, std::size_t, UnitMeasure<T, std::size_t>>>
+template <typename T,
+          typename Tree =
+              FingerTree<T, beman::fingertree::typeclass::sum_monoid<std::size_t>, UnitMeasure<T, std::size_t>>>
 class FingerTreeRandomAccess {
     Tree d_tree;
 
@@ -131,23 +133,26 @@ namespace beman::fingertree {
 /** Foldable typeclass implementation for FingerTreeRandomAccess<T, Tree>. */
 template <class T, class Tree>
 struct FingerTreeRandomAccessFoldableImpl {
-    template <class F>
-    auto fold_map(this auto&&, F&& function, const beman::fingertree::tree::FingerTreeRandomAccess<T, Tree>& sequence)
-        -> remove_cvref_t<std::invoke_result_t<F, const T&>> {
-        using Result = remove_cvref_t<std::invoke_result_t<F, const T&>>;
-        return std::ranges::fold_left(sequence.to_vector(),
-                                      beman::fingertree::typeclass::monoid_v<Result>.identity(),
-                                      [&](Result acc, const auto& value) {
-                                          return beman::fingertree::typeclass::monoid_v<Result>.combine(
-                                              std::move(acc), std::invoke(function, value));
-                                      });
+    using element_type = T;
+
+    // The monoid is an instance object over the result type, passed by
+    // value; the Impl never chooses one (beman.transpose
+    // docs/decisions.md#monoid-selection).
+    template <class F, class RESULT_MONOID>
+    auto fold_map(this auto&&,
+                  F&&                                                             function,
+                  const beman::fingertree::tree::FingerTreeRandomAccess<T, Tree>& sequence,
+                  RESULT_MONOID monoid) -> remove_cvref_t<std::invoke_result_t<F&, const T&>> {
+        using Result = remove_cvref_t<std::invoke_result_t<F&, const T&>>;
+        return std::ranges::fold_left(
+            sequence.to_vector(), Result(monoid.identity()), [&](Result acc, const auto& value) {
+                return monoid.combine(std::move(acc), std::invoke(function, value));
+            });
     }
 };
 
 template <class T, class Tree>
-struct FingerTreeRandomAccessFoldableMap : Foldable<FingerTreeRandomAccessFoldableImpl<T, Tree>> {
-    using FingerTreeRandomAccessFoldableImpl<T, Tree>::fold_map;
-};
+struct FingerTreeRandomAccessFoldableMap : Foldable<FingerTreeRandomAccessFoldableImpl<T, Tree>> {};
 
 template <class T, class Tree>
 inline constexpr auto foldable_typeclass<beman::fingertree::tree::FingerTreeRandomAccess<T, Tree>> =

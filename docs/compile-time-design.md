@@ -17,7 +17,7 @@ it that way.
 ## What the nested type does to a C++ compiler
 
 Translate the nested type literally and each spine level is a *distinct*
-`FingerTree<Node<T,Tag>>` instantiation. One use of the tree instantiates the
+`FingerTree<Node<T,Monoid>>` instantiation. One use of the tree instantiates the
 whole ladder, and every operation that walks it --- `flatten`, `measure`,
 `search`, `split`, `split_at`, `split_at_measure` --- expands recursively through
 all of them.
@@ -47,9 +47,9 @@ the same `FingerTree` type at every depth --- `shared_ptr<const Deep>` all the
 way down --- and the element is a single self-recursive type:
 
 ```cpp
-template <typename T, typename Tag>
+template <typename T, typename MONOID>
 struct Elem {
-    Tag d_measure;
+    tag_t<MONOID> d_measure;   // the measure value type, derived from the instance
     struct Leaf  { T d_value; };
     struct Node2 { ElemPtr a, b; };
     struct Node3 { ElemPtr a, b, c; };
@@ -58,9 +58,12 @@ struct Elem {
 ```
 
 The 2-3 structure that the type system used to carry is now a runtime
-`variant`. Depth is data, not type. A single `FingerTree<T, Tag, Meas>` use
-produces one `FingerTree` instantiation and one `Elem<T,Tag>` instantiation, no
-matter how deep the tree grows at runtime. The recursion the compiler used to
+`variant`. Depth is data, not type. A single `FingerTree<T, Monoid, Meas>` use
+produces one `FingerTree` instantiation and one `Elem<T,Monoid>` instantiation,
+no matter how deep the tree grows at runtime. (`Elem` is keyed on the monoid
+*instance* type, not the measure value type: a cached measure is valid only
+under the monoid that computed it, so a count tree and a max tree over the same
+`std::size_t` must not share `Elem` instantiations.) The recursion the compiler used to
 chase now happens over values.
 
 The one further change from the earlier uniform-element design is the digit:
@@ -71,7 +74,7 @@ branch on `size()` instead of dispatching a four-way `std::visit` at every level
 ## The probe that guards it
 
 `tests/beman/fingertree/finger_tree_compile_probe.test.cpp` is the baseline. It
-instantiates `FingerTree<int>` and `FingerTree<int, WeightTag, WeightMeasure>`
+instantiates `FingerTree<int>` and `FingerTree<int, weight_monoid, WeightMeasure>`
 and exercises the whole API that used to fall off the cliff --- `flatten`,
 `measure`, `split`, `split_at_measure`, `search`, `append`, the views, `for_each`.
 
@@ -82,7 +85,7 @@ class-type entries in the probe's object file:
 readelf --debug-dump=info <probe>.o | grep -c DW_TAG_class_type
 ```
 
-A single `<T,Tag,Meas>` use should produce one `FingerTree` and one `Elem<T,Tag>`.
+A single `<T,Monoid,Meas>` use should produce one `FingerTree` and one `Elem<T,Monoid>`.
 A significant jump in that count against the baseline means a regression in the
 uniform-element design --- an accidental depth-typed specialization, or a new
 intermediate template on a hot path --- reintroducing the very expansion this

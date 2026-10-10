@@ -28,15 +28,15 @@ namespace beman::fingertree {
 /** Traversable typeclass implementation for FingerTree; materialises via
  * flatten() then reconstructs with from_sequence(); O(n).
  */
-template <class T, class TAG_TYPE, class MEASURE_POLICY, class ALLOCATOR>
+template <class T, class MONOID, class MEASURE_POLICY, class ALLOCATOR>
 struct FingerTreeTraversableImpl {
     using element_type = T;
 
     template <class APPLICATIVE, class F>
     auto traverse(this auto&&,
-                  const APPLICATIVE&                                                                 applicative,
-                  F&&                                                                                function,
-                  const beman::fingertree::tree::FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>& tree) {
+                  const APPLICATIVE&                                                               applicative,
+                  F&&                                                                              function,
+                  const beman::fingertree::tree::FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>& tree) {
         using Context = remove_cvref_t<std::invoke_result_t<F, const T&>>;
         using U       = beman::fingertree::applicative_value_t<Context>;
 
@@ -62,18 +62,18 @@ struct FingerTreeTraversableImpl {
 };
 
 /** Traversable typeclass map entry for FingerTree. */
-template <class T, class TAG_TYPE, class MEASURE_POLICY, class ALLOCATOR>
-struct FingerTreeTraversableMap : Traversable<FingerTreeTraversableImpl<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>> {
-    using FingerTreeTraversableImpl<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::traverse;
+template <class T, class MONOID, class MEASURE_POLICY, class ALLOCATOR>
+struct FingerTreeTraversableMap : Traversable<FingerTreeTraversableImpl<T, MONOID, MEASURE_POLICY, ALLOCATOR>> {
+    using FingerTreeTraversableImpl<T, MONOID, MEASURE_POLICY, ALLOCATOR>::traverse;
 };
 
-/** Registers FingerTree as a Traversable for all tag and measure
+/** Registers FingerTree as a Traversable for all monoid and measure
  * combinations.
  */
-template <class T, class TAG_TYPE, class MEASURE_POLICY, class ALLOCATOR>
+template <class T, class MONOID, class MEASURE_POLICY, class ALLOCATOR>
 inline constexpr auto
-    traversable_typeclass<beman::fingertree::tree::FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>> =
-        FingerTreeTraversableMap<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>{};
+    traversable_typeclass<beman::fingertree::tree::FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>> =
+        FingerTreeTraversableMap<T, MONOID, MEASURE_POLICY, ALLOCATOR>{};
 
 } // namespace beman::fingertree
 

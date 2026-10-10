@@ -12,7 +12,7 @@
 using PQ = beman::fingertree::tree::FingerTreePriorityQueue<
     int,
     beman::fingertree::tree::
-        FingerTree<int, beman::fingertree::tree::PriorityTag<int>, beman::fingertree::tree::PriorityMeasure<int>>>;
+        FingerTree<int, beman::fingertree::tree::PriorityMonoid<int>, beman::fingertree::tree::PriorityMeasure<int>>>;
 
 TEST_CASE("PriorityQueue - PushAndMinMax") {
     auto pq = PQ{};
@@ -33,6 +33,18 @@ TEST_CASE("PriorityQueue - PopMin") {
     auto r2 = r1->second.pop_min();
     REQUIRE(r2.has_value());
     CHECK(r2->first == 1);
+}
+
+TEST_CASE("PriorityQueue - SizeIsReadOffTheMeasure") {
+    // The count rides along in the tuple measure, so size() is O(1): it is
+    // the first component of what the tree already caches.
+    auto pq = PQ::from_values({3, 1, 4, 1, 5, 9, 2, 6});
+    CHECK(pq.size() == 8U);
+    CHECK(pq.push(7).size() == 9U);
+    auto r = pq.pop_min();
+    REQUIRE(r.has_value());
+    CHECK(r->second.size() == 7U);
+    CHECK(PQ{}.size() == 0U);
 }
 
 TEST_CASE("PriorityQueue - PopMax") {

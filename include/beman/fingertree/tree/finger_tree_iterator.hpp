@@ -10,7 +10,7 @@
 //   for (auto x : tree) { ... }           // range-based for via ADL
 //   auto it = beman::fingertree::tree::begin(tree);     // explicit free function
 //
-// Free functions begin(t)/end(t) work for any <T,Tag,Measure> combination.
+// Free functions begin(t)/end(t) work for any <T,Monoid,Measure> combination.
 // For the default measure <T, std::size_t, UnitMeasure<T,std::size_t>>,
 // tree size is computed in O(1) via measure().  For custom measures the size
 // is computed in O(N) by counting elements through for_each.
@@ -37,11 +37,11 @@
 
 namespace beman::fingertree::tree {
 
-template <typename T, typename Tag, typename MP, typename Alloc>
+template <typename T, typename MONOID, typename MP, typename Alloc>
 class FingerTreeIterator {
-    using FT = FingerTree<T, Tag, MP, Alloc>;
-    using EP = ft::ElemPtr<T, Tag>;
-    using E  = ft::Elem<T, Tag>;
+    using FT = FingerTree<T, MONOID, MP, Alloc>;
+    using EP = ft::ElemPtr<T, MONOID>;
+    using E  = ft::Elem<T, MONOID>;
 
     // -----------------------------------------------------------------------
     // State
@@ -410,27 +410,27 @@ class FingerTreeIterator {
 //                       FREE begin / end (ADL-findable)
 // ============================================================================
 
-template <typename T, typename Tag, typename MP, typename Alloc>
-auto begin(const FingerTree<T, Tag, MP, Alloc>& t) -> FingerTreeIterator<T, Tag, MP, Alloc> {
+template <typename T, typename MONOID, typename MP, typename Alloc>
+auto begin(const FingerTree<T, MONOID, MP, Alloc>& t) -> FingerTreeIterator<T, MONOID, MP, Alloc> {
     // Compute tree size: O(1) for default measure, O(N) otherwise.
     std::size_t n = 0;
-    if constexpr (std::same_as<Tag, std::size_t> && std::same_as<MP, UnitMeasure<T, std::size_t>>) {
+    if constexpr (FingerTree<T, MONOID, MP, Alloc>::has_unit_count_measure) {
         n = t.measure();
     } else {
         t.for_each([&](const T&) { ++n; });
     }
-    return FingerTreeIterator<T, Tag, MP, Alloc>::make_begin(t, n);
+    return FingerTreeIterator<T, MONOID, MP, Alloc>::make_begin(t, n);
 }
 
-template <typename T, typename Tag, typename MP, typename Alloc>
-auto end(const FingerTree<T, Tag, MP, Alloc>& t) -> FingerTreeIterator<T, Tag, MP, Alloc> {
+template <typename T, typename MONOID, typename MP, typename Alloc>
+auto end(const FingerTree<T, MONOID, MP, Alloc>& t) -> FingerTreeIterator<T, MONOID, MP, Alloc> {
     std::size_t n = 0;
-    if constexpr (std::same_as<Tag, std::size_t> && std::same_as<MP, UnitMeasure<T, std::size_t>>) {
+    if constexpr (FingerTree<T, MONOID, MP, Alloc>::has_unit_count_measure) {
         n = t.measure();
     } else {
         t.for_each([&](const T&) { ++n; });
     }
-    return FingerTreeIterator<T, Tag, MP, Alloc>::make_end(t, n);
+    return FingerTreeIterator<T, MONOID, MP, Alloc>::make_end(t, n);
 }
 
 } // namespace beman::fingertree::tree
@@ -443,48 +443,48 @@ auto end(const FingerTree<T, Tag, MP, Alloc>& t) -> FingerTreeIterator<T, Tag, M
 
 namespace beman::fingertree::tree {
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::begin() const
-    -> FingerTreeIterator<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR> {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::begin() const
+    -> FingerTreeIterator<T, MONOID, MEASURE_POLICY, ALLOCATOR> {
     return beman::fingertree::tree::begin(*this);
 }
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::end() const
-    -> FingerTreeIterator<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR> {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::end() const
+    -> FingerTreeIterator<T, MONOID, MEASURE_POLICY, ALLOCATOR> {
     return beman::fingertree::tree::end(*this);
 }
 
 // Const and reverse iterator accessors — defined here so FingerTreeIterator
 // is a complete type when std::reverse_iterator is instantiated.
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::cbegin() const -> const_iterator {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::cbegin() const -> const_iterator {
     return begin();
 }
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::cend() const -> const_iterator {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::cend() const -> const_iterator {
     return end();
 }
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::rbegin() const -> reverse_iterator {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::rbegin() const -> reverse_iterator {
     return reverse_iterator(end());
 }
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::rend() const -> reverse_iterator {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::rend() const -> reverse_iterator {
     return reverse_iterator(begin());
 }
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::crbegin() const -> const_reverse_iterator {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::crbegin() const -> const_reverse_iterator {
     return const_reverse_iterator(cend());
 }
 
-template <typename T, typename TAG_TYPE, typename MEASURE_POLICY, typename ALLOCATOR>
-auto FingerTree<T, TAG_TYPE, MEASURE_POLICY, ALLOCATOR>::crend() const -> const_reverse_iterator {
+template <typename T, typename MONOID, typename MEASURE_POLICY, typename ALLOCATOR>
+auto FingerTree<T, MONOID, MEASURE_POLICY, ALLOCATOR>::crend() const -> const_reverse_iterator {
     return const_reverse_iterator(cbegin());
 }
 

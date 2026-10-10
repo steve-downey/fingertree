@@ -12,52 +12,83 @@
 #include <cstddef>
 #include <functional>
 #include <optional>
+#include <tuple>
 #include <type_traits>
 #include <utility>
 #include <vector>
 
 namespace beman::fingertree::tree {
 
+/** Minimum monoid on `std::optional<T>` with an adjoined identity: `nullopt`
+ * is the identity, and two engaged operands combine to the smaller. Unlike
+ * `typeclass::min_monoid<T>`, which needs a saturating bound, this works for
+ * any totally ordered `T`.
+ */
 template <typename T>
-struct MinTag {
-    std::optional<T> d_value;
-    friend bool      operator==(const MinTag&, const MinTag&) = default;
+struct optional_min_monoid {
+    using value_type = std::optional<T>;
+
+    auto identity() const -> std::optional<T> { return std::nullopt; }
+
+    auto combine(const std::optional<T>& lhs, const std::optional<T>& rhs) const -> std::optional<T> {
+        if (!lhs.has_value())
+            return rhs;
+        if (!rhs.has_value())
+            return lhs;
+        return *lhs <= *rhs ? lhs : rhs;
+    }
 };
 
+/** Maximum monoid on `std::optional<T>` with an adjoined identity. */
 template <typename T>
-struct MaxTag {
-    std::optional<T> d_value;
-    friend bool      operator==(const MaxTag&, const MaxTag&) = default;
+struct optional_max_monoid {
+    using value_type = std::optional<T>;
+
+    auto identity() const -> std::optional<T> { return std::nullopt; }
+
+    auto combine(const std::optional<T>& lhs, const std::optional<T>& rhs) const -> std::optional<T> {
+        if (!lhs.has_value())
+            return rhs;
+        if (!rhs.has_value())
+            return lhs;
+        return *lhs >= *rhs ? lhs : rhs;
+    }
 };
 
+/** The priority queue's measure value: element count, minimum, maximum. A
+ * plain tuple; the monoid that combines it is `PriorityMonoid<T>`, a product
+ * of three instances, so adding the count cost one more tuple element and
+ * one more operand, not a new tag type and specialization.
+ */
 template <typename T>
-struct PriorityTag {
-    MinTag<T>   d_min;
-    MaxTag<T>   d_max;
-    friend bool operator==(const PriorityTag&, const PriorityTag&) = default;
-};
+using PriorityTag = std::tuple<std::size_t, std::optional<T>, std::optional<T>>;
+
+template <typename T>
+using PriorityMonoid =
+    beman::fingertree::typeclass::tuple_monoid<beman::fingertree::typeclass::sum_monoid<std::size_t>,
+                                               optional_min_monoid<T>,
+                                               optional_max_monoid<T>>;
 
 template <typename T>
 struct PriorityMeasure {
-    auto operator()(const T& value) const -> PriorityTag<T> {
-        return PriorityTag<T>{MinTag<T>{value}, MaxTag<T>{value}};
-    }
+    auto operator()(const T& value) const -> PriorityTag<T> { return PriorityTag<T>{1, value, value}; }
 };
 
 /** @brief Persistent double-ended priority queue backed by a finger tree.
  *
  * @tparam T    Element type; must be totally ordered.
- * @tparam Tree Backing finger tree type (must use PriorityTag<T> measure).
- *              Default: FingerTree — correct at all sizes.
+ * @tparam Tree Backing finger tree type (must use PriorityMonoid<T> over
+ *              PriorityMeasure<T>).  Default: FingerTree — correct at all
+ *              sizes.
  *
  * Complexity:
  * - push:       O(1) amortized
  * - min / max:  O(1)
  * - pop_min / pop_max: O(log n)
- * - size:       O(n) — the PriorityTag measure does not cache element count
+ * - size:       O(1) — the count is the first component of the measure
  * - to_vector:  O(n)
  */
-template <typename T, typename Tree = FingerTree<T, PriorityTag<T>, PriorityMeasure<T>>>
+template <typename T, typename Tree = FingerTree<T, PriorityMonoid<T>, PriorityMeasure<T>>>
 class FingerTreePriorityQueue {
     Tree d_tree;
 
@@ -72,35 +103,25 @@ class FingerTreePriorityQueue {
 
     auto empty() const -> bool { return d_tree.is_empty(); }
 
-    /** Returns the number of elements; O(n) — the PriorityTag measure does not
-     *  cache a count, so we fall back to for_each counting. */
-    auto size() const -> std::size_t {
-        std::size_t n = 0;
-        d_tree.for_each([&](const T&) { ++n; });
-        return n;
-    }
+    /** Returns the number of elements; O(1), read off the cached measure. */
+    auto size() const -> std::size_t { return std::get<0>(d_tree.measure()); }
 
-    auto min() const -> std::optional<T> {
-        auto m = d_tree.measure().d_min.d_value;
-        return m.has_value() ? std::optional<T>{*m} : std::nullopt;
-    }
+    auto min() const -> std::optional<T> { return std::get<1>(d_tree.measure()); }
 
-    auto max() const -> std::optional<T> {
-        auto m = d_tree.measure().d_max.d_value;
-        return m.has_value() ? std::optional<T>{*m} : std::nullopt;
-    }
+    auto max() const -> std::optional<T> { return std::get<2>(d_tree.measure()); }
 
     auto push(T value) const -> FingerTreePriorityQueue {
         return FingerTreePriorityQueue{d_tree.snoc(std::move(value))};
     }
 
     auto pop_min() const -> std::optional<std::pair<T, FingerTreePriorityQueue>> {
-        auto tag = d_tree.measure();
-        if (!tag.d_min.d_value.has_value())
+        auto current = min();
+        if (!current.has_value())
             return std::nullopt;
-        T    global_min = *tag.d_min.d_value;
+        T    global_min = *current;
         auto sp         = d_tree.split([global_min](const PriorityTag<T>& p) {
-            return p.d_min.d_value.has_value() && *p.d_min.d_value <= global_min;
+            const auto& m = std::get<1>(p);
+            return m.has_value() && *m <= global_min;
         });
         if (!sp.has_value())
             return std::nullopt;
@@ -109,12 +130,13 @@ class FingerTreePriorityQueue {
     }
 
     auto pop_max() const -> std::optional<std::pair<T, FingerTreePriorityQueue>> {
-        auto tag = d_tree.measure();
-        if (!tag.d_max.d_value.has_value())
+        auto current = max();
+        if (!current.has_value())
             return std::nullopt;
-        T    global_max = *tag.d_max.d_value;
+        T    global_max = *current;
         auto sp         = d_tree.split([global_max](const PriorityTag<T>& p) {
-            return p.d_max.d_value.has_value() && *p.d_max.d_value >= global_max;
+            const auto& m = std::get<2>(p);
+            return m.has_value() && *m >= global_max;
         });
         if (!sp.has_value())
             return std::nullopt;
@@ -127,70 +149,30 @@ class FingerTreePriorityQueue {
 
 } // namespace beman::fingertree::tree
 
-namespace beman::fingertree::typeclass {
-
-template <typename T>
-struct Monoid<beman::fingertree::tree::MinTag<T>> {
-    auto identity() const -> beman::fingertree::tree::MinTag<T> { return {std::nullopt}; }
-    auto combine(const beman::fingertree::tree::MinTag<T>& lhs, const beman::fingertree::tree::MinTag<T>& rhs) const
-        -> beman::fingertree::tree::MinTag<T> {
-        if (!lhs.d_value.has_value())
-            return rhs;
-        if (!rhs.d_value.has_value())
-            return lhs;
-        return lhs.d_value.value() <= rhs.d_value.value() ? lhs : rhs;
-    }
-};
-
-template <typename T>
-struct Monoid<beman::fingertree::tree::MaxTag<T>> {
-    auto identity() const -> beman::fingertree::tree::MaxTag<T> { return {std::nullopt}; }
-    auto combine(const beman::fingertree::tree::MaxTag<T>& lhs, const beman::fingertree::tree::MaxTag<T>& rhs) const
-        -> beman::fingertree::tree::MaxTag<T> {
-        if (!lhs.d_value.has_value())
-            return rhs;
-        if (!rhs.d_value.has_value())
-            return lhs;
-        return lhs.d_value.value() >= rhs.d_value.value() ? lhs : rhs;
-    }
-};
-
-template <typename T>
-struct Monoid<beman::fingertree::tree::PriorityTag<T>> {
-    auto identity() const -> beman::fingertree::tree::PriorityTag<T> {
-        return {Monoid<beman::fingertree::tree::MinTag<T>>{}.identity(),
-                Monoid<beman::fingertree::tree::MaxTag<T>>{}.identity()};
-    }
-    auto combine(const beman::fingertree::tree::PriorityTag<T>& lhs,
-                 const beman::fingertree::tree::PriorityTag<T>& rhs) const -> beman::fingertree::tree::PriorityTag<T> {
-        return {Monoid<beman::fingertree::tree::MinTag<T>>{}.combine(lhs.d_min, rhs.d_min),
-                Monoid<beman::fingertree::tree::MaxTag<T>>{}.combine(lhs.d_max, rhs.d_max)};
-    }
-};
-
-} // namespace beman::fingertree::typeclass
-
 namespace beman::fingertree {
 
 template <class T, class Tree>
 struct FingerTreePriorityQueueFoldableImpl {
-    template <class F>
-    auto fold_map(this auto&&, F&& function, const beman::fingertree::tree::FingerTreePriorityQueue<T, Tree>& queue)
-        -> remove_cvref_t<std::invoke_result_t<F, const T&>> {
-        using Result = remove_cvref_t<std::invoke_result_t<F, const T&>>;
-        return std::ranges::fold_left(queue.to_vector(),
-                                      beman::fingertree::typeclass::monoid_v<Result>.identity(),
-                                      [&](Result acc, const auto& value) {
-                                          return beman::fingertree::typeclass::monoid_v<Result>.combine(
-                                              std::move(acc), std::invoke(function, value));
-                                      });
+    using element_type = T;
+
+    // The monoid is an instance object over the result type, passed by
+    // value; the Impl never chooses one (beman.transpose
+    // docs/decisions.md#monoid-selection).
+    template <class F, class RESULT_MONOID>
+    auto fold_map(this auto&&,
+                  F&&                                                              function,
+                  const beman::fingertree::tree::FingerTreePriorityQueue<T, Tree>& queue,
+                  RESULT_MONOID monoid) -> remove_cvref_t<std::invoke_result_t<F&, const T&>> {
+        using Result = remove_cvref_t<std::invoke_result_t<F&, const T&>>;
+        return std::ranges::fold_left(
+            queue.to_vector(), Result(monoid.identity()), [&](Result acc, const auto& value) {
+                return monoid.combine(std::move(acc), std::invoke(function, value));
+            });
     }
 };
 
 template <class T, class Tree>
-struct FingerTreePriorityQueueFoldableMap : Foldable<FingerTreePriorityQueueFoldableImpl<T, Tree>> {
-    using FingerTreePriorityQueueFoldableImpl<T, Tree>::fold_map;
-};
+struct FingerTreePriorityQueueFoldableMap : Foldable<FingerTreePriorityQueueFoldableImpl<T, Tree>> {};
 
 template <class T, class Tree>
 inline constexpr auto foldable_typeclass<beman::fingertree::tree::FingerTreePriorityQueue<T, Tree>> =

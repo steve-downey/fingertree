@@ -10,11 +10,12 @@
 #include <vector>
 
 using Entry   = beman::fingertree::tree::Interval<std::string>;
-using Tag     = beman::fingertree::tree::IntervalMaxEndTag<std::string>;
+using Monoid  = beman::fingertree::tree::IntervalMonoid;
 using Measure = beman::fingertree::tree::IntervalMeasure<std::string>;
 
-using Idx = beman::fingertree::tree::FingerTreeIntervalIndex<std::string,
-                                                             beman::fingertree::tree::FingerTree<Entry, Tag, Measure>>;
+using Idx =
+    beman::fingertree::tree::FingerTreeIntervalIndex<std::string,
+                                                     beman::fingertree::tree::FingerTree<Entry, Monoid, Measure>>;
 
 TEST_CASE("IntervalIndex - QueryPoint") {
     auto idx = Idx{};
